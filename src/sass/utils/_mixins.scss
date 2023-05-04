@@ -1,0 +1,58 @@
+// Р О З М І Р И
+
+@mixin mobile {
+  @media screen and (min-width: 480px) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media screen and (min-width: 768px) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media screen and (min-width: 1200px) {
+    @content;
+  }
+}
+//
+
+// Р Е Т И Н А
+
+@mixin retina {
+  @media (min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi),
+    (min-resolution: 2dppx) {
+    @content;
+  }
+}
+//
+
+// Ф Л Е К С И
+
+@mixin centerFlex() {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin centerAlingn() {
+  display: flex;
+  align-items: center;
+
+}
+//
+
+// Т Е К С Т
+
+@mixin font($fw, $fs, $lh, $ls) {
+  font-weight: $fw;
+
+  font-size: $fs + px;
+
+  line-height: $lh;
+
+  letter-spacing: $ls + em;
+}

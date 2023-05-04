@@ -1,2 +1,15 @@
-@import './common';
-@import './example';
+// utls
+@import './utils/module';
+
+// base
+@import './base/module';
+
+// components
+@import './components/module';
+
+// layout
+@import './layout/module';
+
+// modal
+@import './modal/module';
+
