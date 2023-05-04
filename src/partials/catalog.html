@@ -1,0 +1,51 @@
+<main class="catalog">
+  <div class="search">
+    <form>
+      <input type="text" name="search" placeholder="Пошук фільмів..." />
+      <select name="year">
+        <option value="">Рік</option>
+
+        <option value="2023">2023</option>
+        <option value="2022">2022</option>
+        <option value="2021">2021</option>
+        <option value="2020">2020</option>
+        <option value="2019">2019</option>
+      </select>
+      <select name="genre">
+        <option value="">Жанр</option>
+        <option value="action">Бойовик</option>
+        <option value="comedy">Комедія</option>
+        <option value="drama">Драма</option>
+      </select>
+      <select name="country">
+        <option value="">Країна</option>
+        <option value="ua">Україна</option>
+        <option value="usa">США</option>
+        <option value="uk">Великобританія</option>
+        <option value="france">Франція</option>
+      </select>
+      <button type="submit">Шукати</button>
+    </form>
+  </div>
+
+  <div class="movies">
+    <div class="movie">
+      <img src="https://via.placeholder.com/150x200" alt="Movie poster" />
+      <h2>Назва фільму</h2>
+      <p>Рік: 2021</p>
+      <p>Жанр: бойовик</p>
+      <p>Країна: США</p>
+      <p>Опис фільму</p>
+    </div>
+
+    <!-- Repeat the movie div for each movie -->
+  </div>
+
+  <div class="pagination">
+    <a href="#">1</a>
+    <a href="#">2</a>
+    <a href="#">3</a>
+    <a href="#">4</a>
+    <a href="#">5</a>
+  </div>
+</main>
