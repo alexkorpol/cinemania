@@ -1,0 +1,126 @@
+// .container {
+//     margin: 0 auto;
+  
+//     @include mobile {
+//       width: 480px;
+//     }
+  
+//     @include tablet {
+//       width: 768px;
+//     }
+  
+//     @include desktop {
+//       width: 1200px;
+//     }
+//   }
+
+
+
+.hero{
+    height: 720px;
+     background-size: cover;
+     background-image:url(../img/dark-hero-desktop.png) , url("../img/hero-desktop-2x.jpg")  ;
+    //  background-image:  url(../img/dark-hero-desktop.png) ;
+
+    }
+
+
+    
+
+.hero__title{
+    margin-bottom: 18px;
+    font-family: Roboto;
+    font-size: 64px;
+    font-weight: 700;
+    line-height: 75px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: rgba(255, 255, 255, 1);
+}
+
+.hero__overview{
+    margin-bottom: 36px;
+    color: white;
+    max-width: 367px;
+}
+
+.hero__btn-trailer{
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+
+    padding: 12px 24px;
+    background: linear-gradient(141.22deg, #FFC226 9.4%, #F84119 91.91%);
+    border-radius: 74px;
+    
+    color: #111111;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);;
+}
+
+    .hero__trends{
+       
+        
+    margin-left: 134px;
+    padding-top: 118px;
+    }
+
+.rating {
+    display: flex;
+    align-items: flex-end;
+    font-size: 30px;
+    line-height: 1;
+}
+
+.rating__body{
+position: relative;
+margin-bottom: 28px;
+}
+
+
+.rating__body::before{
+    content: "★★★★★";
+    display: block;
+    color: hsla(0, 0%, 74%, 0.84);
+}
+.rating__active{
+position: absolute;
+width: 0%;
+height: 100%;
+top: 0;
+left: 0;
+overflow: hidden;
+}
+.rating__active::before{
+    content: "★★★★★";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    color: rgb(255, 102, 0);
+    ;
+}
+.rating__items{
+display: flex;
+position: absolute;
+
+
+width: 100%;
+height: 100%;
+top: 0;
+left: 0;
+
+}
+.rating__item {
+flex:  0 0 20%;
+height: 100%;
+opacity: 0;
+}
+.rating__value {
+    display: none;
+    font-size: 50%;
+    line-height: 1;
+    padding: 0px 0px 0px 10px;
+}
