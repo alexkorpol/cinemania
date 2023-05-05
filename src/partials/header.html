@@ -1,0 +1,97 @@
+<header class="header">
+  <div class="header__container container">
+    <a href="./index.html" class="header__logo link">
+      <div class="logo__container">
+        <picture>
+          <source
+            srcset="./img/logo-desktop-tablet.png 1x, ./img/logo-desktop-tablet-2x.png 2x"
+            media="(min-width:1200px)"
+          />
+          <source
+            srcset="./img/logo-desktop-tablet.png 1x, ./img/logo-desktop-tablet-2x.png 2x"
+            media="(min-width:768px)"
+          />
+          <source
+            srcset="./img/logo-mobile.png 1x, ./img/logo-mobile-2x.png 2x"
+            media="(min-width:480px)"
+          />
+          <img
+            class="logo-img"
+            srcset="./img/logo-desktop-tablet.png 1x, ./img/logo-desktop-tablet-2x.png 2x"
+            src="./img/logo-desktop-tablet.png"
+            alt="logo"
+          />
+        </picture>
+        <span class="logo-text">Cinemania</span>
+      </div>
+    </a>
+    <nav class="header__nav">
+      <ul class="header__list list">
+        <li class="header__item">
+          <a class="header__nav-link header__nav-link--current link" href="./index.html">HOME</a>
+        </li>
+        <li class="header__item">
+          <a class="header__nav-link link" href="">CATALOG</a>
+        </li>
+        <li class="header__item">
+          <a class="header__nav-link link" href="">MY LIBRARY</a>
+        </li>
+      </ul>
+
+      <!--* M O B I L E  M E N U  -->
+      <div class="mobile-menu">
+        <a href="./index.html" class="header__logo link">
+          <picture>
+            <source
+              srcset="./img/logo-desktop-tablet.png 1x, ./img/logo-desktop-tablet-2x.png 2x"
+              media="(min-width:1200px)"
+            />
+            <source
+              srcset="./img/logo-desktop-tablet.png 1x, ./img/logo-desktop-tablet-2x.png 2x"
+              media="(min-width:768px)"
+            />
+            <source
+              srcset="./img/logo-mobile.png 1x, ./img/logo-mobile-2x.png 2x"
+              media="(min-width:480px)"
+            />
+            <img
+              class="logo-img"
+              srcset="./img/logo-desktop-tablet.png 1x, ./img/logo-desktop-tablet-2x.png 2x"
+              src="./img/logo-desktop-tablet.png"
+              alt="logo"
+            />
+          </picture>
+        </a>
+        <ul class="mobile-menu__list">
+          <li class="mobile-menu__item"><a class="mobile-menu__link link" href="#">ДІМ</a></li>
+          <li class="mobile-menu__item"><a class="mobile-menu__link link" href="#">КАТАЛОГ</a></li>
+          <li class="mobile-menu__item">
+            <a class="mobile-menu__link link" href="#">БІБЛІОТЕКА</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <button id="menu-button">МЕНЮ</button>
+
+    <!--^ THEME TOGGLE -->
+    <div class="switcher">
+      <span></span>
+      <!-- <span><svg width="13" height="13" class="header-btn__icon-moon">
+                <use href="./img/symbol-defs.svg#icon-moon"></use></svg
+              ></span> -->
+      <p class="icoon">
+        <svg width="13" height="13" class="header-btn__icon-moon">
+          <use href="./img/symbol-defs.svg#icon-moon"></use>
+        </svg>
+      </p>
+      <p class="icoon">
+        <svg width="14" height="14" class="header-btn__icon-moon">
+          <use href="./img/symbol-defs.svg#icon-sun"></use>
+        </svg>
+      </p>
+    </div>
+  </div>
+
+  <!--* O V E R L A Y  -->
+  <div id="overlay"></div>
+</header>

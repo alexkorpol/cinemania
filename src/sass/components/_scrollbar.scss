@@ -1,0 +1,18 @@
+body {
+  overflow-y: scroll;
+}
+
+body::-webkit-scrollbar {
+  width: 8px;
+}
+
+body::-webkit-scrollbar-track {
+//   border-radius: 8px;
+  background-color: $text-light-background;
+}
+
+body::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: $linear-button;
+// background: linear-gradient(141.22deg, #F84119 9.4%, rgba(248, 159, 25, 0.68) 91.91%);
+}
