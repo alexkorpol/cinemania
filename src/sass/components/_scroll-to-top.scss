@@ -1,0 +1,61 @@
+#scroll-to-top {
+  @include centerFlex();
+  position: fixed;
+  flex-direction: column;
+  width: 50px;
+  height: 50px;
+  bottom: 50px;
+  right: 20px;
+
+  background: transparent;
+  opacity: 0;
+  z-index: 2;
+  padding: 0;
+  // border-radius: 50%;
+  border: none;
+  transform: translateY(30%);
+  transition: transform 1s ease-in-out, opacity 1s ease-in-out;
+
+  @include tablet {
+    right: 30px;
+    width: 60px;
+    height: 60px;
+  }
+  @include desktop {
+    right: 50px;
+  }
+}
+
+// A R R O W
+
+.arrow {
+  display: block;
+  width: 2vw;
+  height: 2vw;
+  border-bottom: 4px solid #f84119;
+  border-right: 4px solid #ffc226;
+  margin: -5px;
+  animation: animate 2s infinite;
+}
+
+.arrow:nth-child(2) {
+  animation-delay: -0.2s;
+}
+
+.arrow:nth-child(3) {
+  animation-delay: -0.4s;
+}
+
+@keyframes animate {
+  0% {
+    opacity: 0;
+    transform: rotate(-135deg) translate(-15px, -15px);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: rotate(-135deg) translate(15px, 15px);
+  }
+}
