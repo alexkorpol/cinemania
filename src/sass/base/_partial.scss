@@ -12,7 +12,7 @@ body {
   padding: 0 20px;
 
   @include mobile {
-    width: 480px;
+    width: 320px;
   }
 
   @include tablet {
@@ -21,6 +21,10 @@ body {
   }
 
   @include desktop {
-    width: 1200px;
+    width: 1280px;
   }
+}
+
+* {
+  transition: 0.7s;
 }
