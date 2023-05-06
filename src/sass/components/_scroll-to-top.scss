@@ -2,10 +2,8 @@
   @include centerFlex();
   position: fixed;
   flex-direction: column;
-  width: 50px;
-  height: 50px;
   bottom: 50px;
-  right: 20px;
+  right: 50px;
 
   background: transparent;
   opacity: 0;
@@ -17,33 +15,43 @@
   transition: transform 1s ease-in-out, opacity 1s ease-in-out;
 
   @include tablet {
-    right: 30px;
-    width: 60px;
-    height: 60px;
+    // right: 30px;
   }
   @include desktop {
-    right: 50px;
+    // right: 50px;
   }
 }
 
 // A R R O W
 
 .arrow {
-  display: block;
-  width: 2vw;
-  height: 2vw;
-  border-bottom: 4px solid #f84119;
+  width: 20px;
+  height: 20px;
+  border-bottom: 4px solid #ffc226;
   border-right: 4px solid #ffc226;
-  margin: -5px;
+  margin: -10px;
   animation: animate 2s infinite;
+  @include tablet {
+    width: 25px;
+    height: 25px;
+    margin: -5px;
+  }
+  @include desktop {
+    width: 30px;
+    height: 30px;
+  }
 }
 
 .arrow:nth-child(2) {
   animation-delay: -0.2s;
+  border-bottom: 4px solid #fb801f;
+  border-right: 4px solid #fb801f;
 }
 
 .arrow:nth-child(3) {
   animation-delay: -0.4s;
+  border-bottom: 4px solid #f84119;
+  border-right: 4px solid #f84119;
 }
 
 @keyframes animate {
