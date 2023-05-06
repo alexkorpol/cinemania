@@ -9,8 +9,12 @@ body.light {
   }
   & .header__nav-link {
     color: #595959;
+    &:hover,
+    &:focus {
+      color: #f87719;
+    }
   }
-  & .header__nav-link--current {
+  & .link__current {
     color: #f87719;
   }
   // mobile-menu
@@ -19,14 +23,22 @@ body.light {
       background-color: $text-secondary-color;
     }
   }
+  .mobile-menu__link.link__current {
+  color: #f87719;
+}
   & .mobile-menu__link {
     color: $text-light-background;
-  }
-  & .mobile-menu__link--current {
-    color: #f87719;
+    &:hover,
+    &:focus {
+      color: #f87719;
+    }
   }
   & #menu-button {
     color: #595959;
+    &:hover,
+    &:focus {
+      color: #f87719;
+    }
   }
   & #overlay {
     background: rgba(0, 0, 0, 0.2);

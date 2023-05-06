@@ -1,3 +1,5 @@
 import './js/header';
-import './js/scroll-to-top';
 import './js/mobile-menu';
+import './js/home';
+
+import './js/scroll-to-top';
