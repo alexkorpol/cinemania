@@ -6,7 +6,9 @@ const refs = {
 cardHeroContainer : document.querySelector('.card'),
 };
 
-fetchFilm().then(renderFilmCard).catch(error =>{
+fetchFilm()
+.then(renderFilmCard)
+.catch(error =>{
     console.log(error);
 });;
 
@@ -17,8 +19,6 @@ function fetchFilm (filmId){
 })
 
 }
-
-
 
 function renderFilmCard (films){
     const markup = filmCardTpl(films)
