@@ -1,0 +1,96 @@
+<header class="header">
+  <div class="header__container container">
+    <a href="./Home.html" class="header__logo link">
+      <div class="logo__container">
+        <picture>
+          <source
+            srcset="./img/logo-desktop-tablet.png 1x, ./img/logo-desktop-tablet-2x.png 2x"
+            media="(min-width:1200px)"
+          />
+          <source
+            srcset="./img/logo-desktop-tablet.png 1x, ./img/logo-desktop-tablet-2x.png 2x"
+            media="(min-width:768px)"
+          />
+          <source
+            srcset="./img/logo-mobile.png 1x, ./img/logo-mobile-2x.png 2x"
+            media="(min-width:480px)"
+          />
+          <img
+            class="logo-img"
+            srcset="./img/logo-desktop-tablet.png 1x, ./img/logo-desktop-tablet-2x.png 2x"
+            src="./img/logo-desktop-tablet.png"
+            alt="logo"
+          />
+        </picture>
+        <span class="logo-text">Cinemania</span>
+      </div>
+    </a>
+    <nav class="header__nav">
+      <ul class="header__list list">
+        <li class="header__item">
+          <a class="header__nav-link link" href="./Home.html">HOME</a>
+        </li>
+        <li class="header__item">
+          <a class="header__nav-link link" href="./Catalog.html">CATALOG</a>
+        </li>
+        <li class="header__item">
+          <a class="header__nav-link link" href="./My-library.html">MY LIBRARY</a>
+        </li>
+      </ul>
+
+      <!--^ M O B I L E  M E N U  -->
+      <div class="mobile-menu">
+        <a href="./Home.html" class="mobile-menu__logo link">
+          <picture>
+            <source
+              srcset="./img/logo-desktop-tablet.png 1x, ./img/logo-desktop-tablet-2x.png 2x"
+              media="(min-width:1200px)"
+            />
+            <source
+              srcset="./img/logo-desktop-tablet.png 1x, ./img/logo-desktop-tablet-2x.png 2x"
+              media="(min-width:768px)"
+            />
+            <source
+              srcset="./img/logo-mobile.png 1x, ./img/logo-mobile-2x.png 2x"
+              media="(min-width:480px)"
+            />
+            <img
+              class="logo-img"
+              srcset="./img/logo-desktop-tablet.png 1x, ./img/logo-desktop-tablet-2x.png 2x"
+              src="./img/logo-desktop-tablet.png"
+              alt="logo"
+            />
+          </picture>
+        </a>
+        <ul class="mobile-menu__list">
+          <li class="mobile-menu__item">
+            <a class="mobile-menu__link link" href="./Home.html">HOME</a>
+          </li>
+          <li class="mobile-menu__item"><a class="mobile-menu__link link" href="./Catalog.html">CATALOG</a></li>
+          <li class="mobile-menu__item">
+            <a class="mobile-menu__link link" href="./My-library.html">MY LIBRARY</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <button id="menu-button">MENU</button>
+
+    <!--* THEME TOGGLE -->
+    <div class="switcher">
+      <span class="switcher__ball"></span>
+      <span class="switcher__icon">
+        <svg width="13" height="13" class="switcher__icon--moon">
+          <use href="./img/symbol-defs.svg#icon-moon"></use>
+        </svg>
+      </span>
+      <span class="switcher__icon">
+        <svg width="14" height="14" class="switcher__icon--sun">
+          <use href="./img/symbol-defs.svg#icon-sun"></use>
+        </svg>
+      </span>
+    </div>
+  </div>
+
+  <!--* O V E R L A Y  -->
+  <div id="overlay"></div>
+</header>
