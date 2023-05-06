@@ -1,47 +1,117 @@
-.container {
-    margin: 0 auto;
-  
-    @include mobile {
-      width: 480px;
-    }
-  
-    @include tablet {
-      width: 768px;
-    }
-  
-    @include desktop {
-      width: 1200px;
-    }
-  }
-
-
 
 .hero{
-    height: 720px;
-     background-size: cover;
-     background-image:url(../img/dark-hero-desktop.png) , url("../img/hero-desktop-2x.jpg")  ;
-    //  background-image:  url(../img/dark-hero-desktop.png) ;
+    padding: 118px 0 118px;
+    
+    background-image: linear-gradient(87.8deg, #0E0E0E 15.61%, rgba(14, 14, 14, 0) 60.39%), url(../img/hero-mobile.jpg);
+   @include retina 
+   {background-image: linear-gradient(87.8deg, #0E0E0E 15.61%, rgba(14, 14, 14, 0) 60.39%), url(../img/hero-mobile-2x.jpg);
+   }
+    background-color: #2F303A;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    max-width: 1600px;
+    margin: 0  auto ;
+    margin-bottom: 60px;
 
+    @media screen  and (min-width: 768px){
+        margin-bottom: 0;
+        background-image:url(../img/dark-hero-tablet.png) , url(../img/hero-tablet.jpg);
+         
+         @include retina 
+         {background-image: url(../img/dark-hero-tablet-2x.png), url(../img/hero-tablet-2x.jpg);
+         }
     }
 
+    @media screen  and (min-width: 1200px){
+        margin-bottom: 0;
+        padding: 0 ;
+        height: 720px;
+        background-size: cover;
+        background-image:  url(../img/dark-hero-desktop.png), url(../img/hero-desktop.jpg);
+        
+        @include retina 
+         {background-image: url(../img/dark-hero-desktop-2x.png), url(../img/hero-desktop-2x.jpg);
+         }
+    }
 
-    
+}
+
+// .hero{
+    // height: 720px;
+    //  background-size: cover;
+    //  background-image:url(../img/dark-hero-desktop.png) , url("../img/hero-desktop-2x.jpg")  ;
+    // //  background-image:  url(../img/dark-hero-desktop.png) ;
+
+    // }
+
+
+
+
 
 .hero__title{
-    margin-bottom: 18px;
-    font-family: Roboto;
-    font-size: 64px;
-    font-weight: 700;
-    line-height: 75px;
-    letter-spacing: 0em;
+    margin-left: 20px;
+    margin-bottom: 8px;
+    max-width: 200px;
+    
+    font-weight: 900;
+    font-size: 32px;
+    
+    
+    letter-spacing: 0.06em;
+    
     text-align: left;
+    padding: 0 ;
+    
     color: rgba(255, 255, 255, 1);
+    
+    @media screen  and (min-width: 768px) and (max-width:1199px){
+        
+        margin-left: 32px;
+        max-width: 342px;
+        font-size: 32px;
+        letter-spacing: 0;
+        line-height: 51.56px;
+        
+    }
+
+    @media screen  and (min-width: 1200px){
+        padding-top: 169px;
+        margin-left: 32px;
+        max-width: 464px;
+        font-size: 58px;
+        letter-spacing: 0;
+        line-height: 75px;
+       
+        color: rgba(255, 255, 255, 1);
+    }
 }
 
 .hero__overview{
     margin-bottom: 36px;
     color: white;
     max-width: 367px;
+    font-size: 14px;
+    max-width: 180px;
+
+    @media screen  and (min-width: 768px) and (max-width:1199px){
+        
+        max-width: 357px;
+        font-size: 14px;
+        letter-spacing: 0;
+        
+    }
+
+    @media screen  and (min-width: 1200px){
+        
+        max-width: 464px;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 19px;
+        letter-spacing: 0em;
+        text-align: left;
+
+    }
 }
 
 .hero__btn-trailer{
@@ -57,20 +127,51 @@
     
     color: #111111;
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);;
-}
 
-    .hero__trends{
-       
+    @media screen  and (min-width: 768px) and (max-width:1199px){
         
-    margin-left: 134px;
-    padding-top: 118px;
+        
+        
     }
 
-.rating {
-    display: flex;
-    align-items: flex-end;
+    @media screen  and (min-width: 1200px){
+        
+       
+
+    }
+}
+
+
+.rating { 
+    display: flex;   
+    flex-direction: column;
+    align-items: flex-start;
+
+    margin-left: 20px;
     font-size: 30px;
     line-height: 1;
+
+    @media screen  and (min-width: 768px) and (max-width:1199px){
+        margin-left: 32px;
+        max-width: 342px;
+        font-size: 44px;
+        letter-spacing: 0;
+        
+    }
+
+    @media screen  and (min-width: 1200px){
+        margin-left: 32px;
+        max-width: 342px;
+        letter-spacing: 0;
+        margin-bottom: 18px;
+        
+        
+        font-weight: 700;
+        line-height: 75px;
+        letter-spacing: 0em;
+        text-align: left;
+        color: rgba(255, 255, 255, 1);
+    }
 }
 
 .rating__body{
