@@ -1,7 +1,6 @@
 
 .hero{
-    padding: 118px 0 118px;
-    
+    padding: 118px 0 118px; 
     background-image: linear-gradient(87.8deg, #0E0E0E 15.61%, rgba(14, 14, 14, 0) 60.39%), url(../img/hero-mobile.jpg);
    @include retina 
    {background-image: linear-gradient(87.8deg, #0E0E0E 15.61%, rgba(14, 14, 14, 0) 60.39%), url(../img/hero-mobile-2x.jpg);
@@ -34,19 +33,7 @@
          {background-image: url(../img/dark-hero-desktop-2x.png), url(../img/hero-desktop-2x.jpg);
          }
     }
-
 }
-
-// .hero{
-    // height: 720px;
-    //  background-size: cover;
-    //  background-image:url(../img/dark-hero-desktop.png) , url("../img/hero-desktop-2x.jpg")  ;
-    // //  background-image:  url(../img/dark-hero-desktop.png) ;
-
-    // }
-
-
-
 
 
 .hero__title{
@@ -68,14 +55,15 @@
     @media screen  and (min-width: 768px) and (max-width:1199px){
         
         margin-left: 32px;
-        max-width: 342px;
-        font-size: 32px;
+        max-width: 299px;
+        font-size: 35px;
         letter-spacing: 0;
         line-height: 51.56px;
         
     }
 
     @media screen  and (min-width: 1200px){
+        
         padding-top: 169px;
         margin-left: 32px;
         max-width: 464px;
@@ -84,26 +72,30 @@
         line-height: 75px;
        
         color: rgba(255, 255, 255, 1);
+        
     }
 }
 
+
+
 .hero__overview{
     margin-bottom: 36px;
+    margin-left: 20px;
     color: white;
     max-width: 367px;
     font-size: 14px;
     max-width: 180px;
 
     @media screen  and (min-width: 768px) and (max-width:1199px){
-        
-        max-width: 357px;
+        margin-left: 32px;
+        max-width: 307px;
         font-size: 14px;
         letter-spacing: 0;
         
     }
 
     @media screen  and (min-width: 1200px){
-        
+        margin-left: 32px;
         max-width: 464px;
         font-size: 16px;
         font-weight: 400;
@@ -114,30 +106,29 @@
     }
 }
 
-.hero__btn-trailer{
+
+.hero__btn{
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 500;
     font-size: 16px;
     line-height: 24px;
+    text-decoration: none;
 
+    margin-left: 20px;
     padding: 12px 24px;
+
     background: linear-gradient(141.22deg, #FFC226 9.4%, #F84119 91.91%);
     border-radius: 74px;
-    
     color: #111111;
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);;
 
     @media screen  and (min-width: 768px) and (max-width:1199px){
-        
-        
-        
+        margin-left: 32px; 
     }
 
     @media screen  and (min-width: 1200px){
-        
-       
-
+       margin-left: 32px;
     }
 }
 
@@ -225,3 +216,4 @@ opacity: 0;
     line-height: 1;
     padding: 0px 0px 0px 10px;
 }
+
