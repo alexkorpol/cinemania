@@ -83,7 +83,8 @@ header {
   }
 }
 
-.header__nav-link--current {
+.link__current {
+  @include transition(color);
   color: #f87719;
 }
 
@@ -216,7 +217,7 @@ header {
   }
 }
 
-.mobile-menu__link--current {
+.mobile-menu__link.link__current {
   color: #f87719;
 }
 
