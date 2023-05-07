@@ -55,10 +55,10 @@ export const users = [
     name: 'Tonya Vaissberg',
     role: 'Developer',
     img: 'https://avatars.githubusercontent.com/u/110049666?v=4',
-    ginHabLink: 'https://github.com/Tonya-Pronina-Vaissberg',
+    ginHabLink: 'https://github.com/Tonya-Pronina',
     LN_Link: 'https://www.linkedin.com/in/tonya-pronina-39386a275/',
     discription:
-      'Lorem Ipsum is simply dummy text of the printing and typesetting industry',
+      'Nothing is impossible',
   },
   {
     id: '7',
