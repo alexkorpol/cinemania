@@ -1,10 +1,14 @@
 body {
-  // background-color: $text-light-background;
-  // color: $text-dark-background;
+  background-color: $text-light-background;
+  color: $text-dark-background;
   font-family: 'Roboto', sans-serif;
   // font-size: 16px;
   // line-height: 1.2;
   // letter-spacing: 0.04em;
+}
+
+* {
+  transition: 0.7s;
 }
 
 .container {
@@ -23,8 +27,4 @@ body {
   @include desktop {
     width: 1280px;
   }
-}
-
-* {
-  transition: 0.7s;
 }

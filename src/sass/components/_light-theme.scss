@@ -1,46 +1,103 @@
-// HEADER
+//^ BODY
 body.light {
-  background-color: #f5f5f5;
-  & .header__container {
+  background-color: $text-dark-background;
+  color: $text-light-background;
+}
+
+//* HEADER
+body.light {
+  .header__container {
     background-color: #ffffff;
   }
-  & .logo-text {
+  .logo-text {
     color: $text-secondary-light;
   }
-  & .header__nav-link {
+  .header__nav-link {
     color: #595959;
     &:hover,
     &:focus {
       color: #f87719;
     }
   }
-  & .link__current {
+  .link__current {
     color: #f87719;
   }
   // mobile-menu
-  & .header__nav {
+  .header__nav {
     @media (max-width: 767px) {
       background-color: $text-secondary-color;
     }
   }
   .mobile-menu__link.link__current {
-  color: #f87719;
-}
-  & .mobile-menu__link {
+    color: #f87719;
+  }
+  .mobile-menu__link {
     color: $text-light-background;
     &:hover,
     &:focus {
       color: #f87719;
     }
   }
-  & #menu-button {
+  #menu-button {
     color: #595959;
     &:hover,
     &:focus {
       color: #f87719;
     }
   }
-  & #overlay {
+  #overlay {
     background: rgba(0, 0, 0, 0.2);
+  }
+}
+
+//* HERO
+body.light {
+  .hero {
+    background-color: $text-secondary-color;
+    @media screen and (min-width: 768px) {
+      background-image: url(../img/light-hero-tablet.png), url(../img/hero-tablet.jpg);
+      @include retina {
+        background-image: url(../img/light-hero-tablet-2x.png), url(../img/hero-tablet-2x.jpg);
+      }
+    }
+
+    @media screen and (min-width: 1200px) {
+      background-image: url(../img/light-hero-desktop.png), url(../img/hero-desktop.jpg);
+      @include retina {
+        background-image: url(../img/light-hero-desktop-2x.png), url(../img/hero-desktop-2x.jpg);
+      }
+    }
+  }
+  .hero__title {
+    color: $text-light-background;
+  }
+  .hero__overview {
+    color: $text-secondary-light;
+  }
+}
+
+//* FOOTER
+body.light {
+  .footer__copyright {
+    color: #595959;
+  }
+  .footer__desc {
+    color: #595959;
+  }
+  .footer__text {
+    color: #595959;
+  }
+  .footer__link {
+    color: #595959;
+    &--active:hover {
+      color: #f87719;
+    }
+    &--animation::before {
+      background-color: #595959;
+    }
+    &--animation:hover::before {
+      color: #595959;
+      background-color: #f87719;
+    }
   }
 }
