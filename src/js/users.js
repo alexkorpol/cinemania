@@ -90,7 +90,7 @@ export const users = [
   },
 ];
 
-//     id: '1',
+
 //     name: 'Гирич Роман',
 //     role: 'Лідер команди',
 //     img: 'https://avatars.githubusercontent.com/u/88936471?v=4',
