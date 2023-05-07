@@ -50,7 +50,7 @@ function fetchMovieOfTheDay() {
     <p class="rating__value">${film.vote_average}</p>
     <p class="hero__overview">${film.overview}</p>
     <button class="hero__btn ">Watch trailer</button></div>
-    <div class=""></div>
+    <div class="hero__background"></div>
     `
 
     
