@@ -69,10 +69,16 @@ body.light {
     }
   }
   .hero__title {
-    color: $text-light-background;
+    color: $text-dark-background;
+      @include tablet {
+   color: $text-light-background;
+  }
   }
   .hero__overview {
-    color: $text-secondary-light;
+     color: $text-secondary-color;
+    @include tablet {
+    color: $text-secondary-light; 
+  }
   }
 }
 
