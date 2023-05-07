@@ -1,151 +1,235 @@
-.team__backdrop {
+/* // Модалка */
+.backdrop.footer__backdrop {
+  @include centerFlex();
   position: fixed;
   top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
-  overflow-y: auto;
-  z-index: 998;
-  padding: 15px;
+  z-index: 1000;
   background-color: rgba(0, 0, 0, 0.7);
-  visibility: visible;
   opacity: 1;
-}
+  transition: opacity 500ms cubic-bezier(0.4, 0, 0.2, 1),
+    visibility 500ms cubic-bezier(0.4, 0, 0.2, 1);
+  @include tablet {
+    align-items: center;
+  }
 
-.is-hidden {
-  visibility: hidden;
-  pointer-events: none;
-  opacity: 0;
-
-  & .team__wrapper {
+  &.is-hidden {
+    opacity: 0;
     visibility: hidden;
     pointer-events: none;
-    opacity: 0.3;
-    transform: translate(-75%, -90%) scale(3);
+
+    .footer-modal {
+      transform: scale(1.5);
+      background-color: rgba(255, 255, 255, 0.788);
+    }
   }
 }
 
-.team__wrapper {
-  position: relative;
-  z-index: 999;
-  width: 320px;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 25px 15px 20px;
+.footer__backdrop {
+  z-index: 1000;
+}
 
-  @media screen and (min-width: 768px) {
-    width: 580px;
-  }
-
-  @media screen and (min-width: 1280px) {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(1);
-    width: 1200px;
-    padding: 30px;
-  }
-
-  visibility: visible;
-  opacity: 1;
- background: linear-gradient(45deg, #37177d 10%, #993232 50%);
+.footer-modal {
+  z-index: 1000;
+  width: 300px;
+  height: 430px;
+  background-color: rgb(177, 176, 176);
+  padding-top: 15px;
   border-radius: 10px;
-  box-shadow: 0 28px 42px rgba(0, 0, 0, 0.38), 0 20px 20px rgba(0, 0, 0, 0.33);
+  background: linear-gradient(135deg, #0d1330 20%, #552e0a 56%, #15156c 144%);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: 144% 62%;
+
+  transform: scale(1);
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0px 0px 100px 15px rgba(253, 254, 255, 0.2);
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(253, 254, 255, 0.2);
+    outline: none;
+    border-radius: 10px;
+  }
+  @include tablet {
+    width: 600px;
+    height: 500px;
+  }
+  @include desktop {
+    width: 800px;
+    height: 500px;
+  }
+  @media screen and (max-height: 430px) {
+    height: 90vh;
+    overflow-y: scroll;
+  }
 }
 
-.team__modal-close-btn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  padding: 0px;
+body.modal-open {
+  overflow: hidden;
+}
+
+.glide__slide {
   border: none;
+  width: 0.9vh;
+  @include tablet {
+    width: 350px;
+    background-position: 134% 62%;
+  }
+}
+
+.glide__track {
+  overflow: hidden;
+}
+
+.footer__sociallink {
+  margin-bottom: 15px;
+  padding-left: 10px;
+  &:first-child {
+    padding-left: 0px;
+  }
+}
+
+.footer-modal__card {
+  padding-left: 30px;
+  padding-right: 30px;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.fa-xl {
+  color: $text-secondary-color;
+  &:hover,
+  &:focus {
+    animation: Glow 0.5s ease infinite alternate;
+  }
+}
+
+.footer__social {
+  display: flex;
+}
+
+.footermodalbtn-close {
+  @include centerFlex();
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border: 1px solid;
+  border-color: #99a1ca;
+  color: #99a1ca;
+  top: 0;
+  right: 0;
   background-color: transparent;
   border-radius: 50%;
-  cursor: pointer;
-  color: #111111;
+  margin-top: 8px;
+  margin-right: 8px;
+  transform: scale(1);
+  transition: border-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    transform 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 
-  @media screen and (min-width: 768px) {
-    top: 10px;
-    right: 10px;
+  &:hover,
+  &:focus {
+    transform: scale(1.2);
+    border-color: $accent;
+    color: $accent;
   }
 
-  &:hover {
-    color: #f87719;
+  &__icon-close {
+    stroke: #000;
+    transition: stroke 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  &:hover &__icon-close,
+  &:focus &__icon-close {
+    stroke: $accent;
   }
 }
 
-.team__modal-close-icon {
-  fill: currentColor;
+.student__card {
+  @include centerFlex();
+  flex-direction: column;
 }
 
-.team__title {
+.student-foto {
+  width: 150px;
+  height: auto;
+  border-radius: 50%;
+}
+
+.border__outside {
+  padding: 7px;
+  margin: 0 auto;
+  width: 170px;
+  border-radius: 50%;
+  border-bottom: 2px solid #434362;
+  border-right: 2px solid #434362;
+  margin-bottom: 10px;
+  @include tablet {
+    margin-bottom: 15px;
+  }
+}
+
+.border__inside {
+  padding: 7px;
+  border-radius: 50%;
+  border: 1.5px solid $not-accent;
+}
+
+.student__name {
+  @include font(600, 18px, 1.15, 0.04);
+  color: #99a1ca;
+  font-family: 'Roboto';
+  padding-bottom: 8px;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #99a1ca;
+  @include tablet {
+    font-size: 25px;
+    margin-bottom: 15px;
+  }
+}
+
+.student__role {
+  @include font(400, 18px, 1.15, 0.04);
+  font-family: 'Roboto';
+  color: $text-secondary-color;
+  margin-bottom: 10px;
+  @include tablet {
+    font-size: 25px;
+    margin-bottom: 15px;
+  }
+}
+
+.student__about {
+  @include font(400, 14px, 1.15, 0.04);
+  font-family: 'Roboto';
+  color: $not-accent;
+  margin-bottom: 10px;
   text-align: center;
-  text-transform: uppercase;
-  color: #111111;
-  font-size: 24px;
-  margin-bottom: 20px;
+  @include tablet {
+    font-size: 20px;
+    margin-top: 25px;
+  }
 }
 
-.team__list {
+.glide__slides--footer {
   display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 1.2rem;
 }
 
-.team__item {
-  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
-    0px 2px 1px rgba(0, 0, 0, 0.2);
-  border-radius: 5px;
-  background: #ffffff;
-  position: relative;
-  border-radius: 10px;
-  padding-bottom: 5px;
-  overflow: hidden;
+.students--link:focus,
+.students--link:hover {
+  animation: Glow 0.5s ease infinite alternate;
 }
-
-.team__wrap {
-  overflow: hidden;
+.students--link {
+  margin-left: 3px;
+  text-decoration: underline;
 }
-
-.team__img {
-  overflow: hidden;
-  object-fit: cover;
-  margin-bottom: 5px;
-  width: 200px;
-  height: 180px;
-}
-
-.team__link-linkedin {
-  margin-right: 10px;
-}
-
-.team__link-github {
-  margin-left: 10px;
-}
-
-.team__box {
-  padding: 10px;
-  text-align: center;
-  font-weight: 500;
-  font-size: 16px;
-  margin-bottom: 3px;
-}
-
-.team__member {
-  font-weight: 500;
-  font-size: 16px;
-  color: #111111;
-  margin-bottom: 10px;
-}
-
-.team__role {
-  font-weight: 500;
-  font-size: 16px;
-  color: #f87719;
-  margin-bottom: 10px;
-}
-
+// ========
