@@ -80,3 +80,16 @@
     $type3 300ms cubic-bezier(0.4, 0, 0.2, 1),
     $type4 300ms cubic-bezier(0.4, 0, 0.2, 1);
 }
+
+@keyframes Glow {
+  from {
+    text-shadow: 0 0 10px $accent, 0 0 20px $accent,
+      0 0 30px $accent, 0 0 40px $accent, 0 0 70px $accent,
+      0 0 80px$accent, 0 0 100px$accent, 0 0 150px$accent;
+  }
+  to {
+    text-shadow: 0 0 5px $accent, 0 0 10px $accent,
+      0 0 15px $accent, 0 0 20px$accent, 0 0 35px $accent,
+      0 0 40px $accent, 0 0 50px $accent, 0 0 75px $accent;
+  }
+}

@@ -1,4 +1,5 @@
-//? H E A D E R
+//^ H E A D E R
+
 header {
   position: relative;
 }
@@ -75,7 +76,7 @@ header {
   &:focus {
     transition: color 0.75s, transform 0.75s;
     transform: scale(1.1);
-    color: #f87719;
+    color: $accent;
   }
   @include tablet {
     @include font(500, 12, 1.17, null);
@@ -85,7 +86,7 @@ header {
 
 .link__current {
   @include transition(color);
-  color: #f87719;
+  color: $accent;
 }
 
 //* D A R K / L I G H T   T H E M E   T O G G L E
@@ -213,12 +214,12 @@ header {
   &:hover,
   &:focus {
     transition: color 0.75s;
-    color: #f87719;
+    color: $accent;
   }
 }
 
 .mobile-menu__link.link__current {
-  color: #f87719;
+  color: $accent;
 }
 
 #menu-button {
@@ -234,7 +235,7 @@ header {
   &:hover,
   &:focus {
     transition: color 0.75s;
-    color: #f87719;
+    color: $accent;
   }
   @include tablet {
     display: none;
