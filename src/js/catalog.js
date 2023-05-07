@@ -80,6 +80,7 @@ async function searchMovies(event, currentPage = 1) {
 
 
   const searchForm = document.querySelector('.catalog__search form');
+  
   searchForm.addEventListener('submit', searchMovies);
 
   function movieTemplate(movie) {
