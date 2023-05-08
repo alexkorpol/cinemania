@@ -1,42 +1,11 @@
 import axios from 'axios';
-const moviesOfWeek = {
-  section: document.querySelector('home'),
-  page: 1,
-  moviesArray: [],
-  url: 'https://api.themoviedb.org/3/trending/movie/week?api_key=c4db8ccc58a0592251aa55d706d65408',
-  async getMovies() {
-    const response = (await axios.get(this.url)).data;
-    console.log(response.results);
-    return response;
-  },
-};
-moviesOfWeek.getMovies();
-
-
-import axios from 'axios';
-const moviesWeek = {
-  section: document.querySelector('home'),
-  page: 1,
-  moviesArray: [],
-  url: 'https://api.themoviedb.org/3/trending/movie/week?api_key=c4db8ccc58a0592251aa55d706d65408',
-  async getMovies() {
-    const response = (await axios.get(this.url)).data;
-    console.log(response.results);
-    return response;
-  },
-};
-moviesWeek.getMovies();
-
-
-
-import axios from 'axios';
 const section = document.querySelector('.home');
 // const BASE_URL = 'https://api.themoviedb.org/3/';
 // const PATH = '/trending/movie/week?';
 // const API_KEY = 'api_key=0d9ddfeb4636025259fcaee6725b8ad3';
-const movieCard = document.createElement('div');
-movieCard.classList.add('home__card');
-section.append(movieCard);
+// const movieCard = document.createElement('div');
+// movieCard.classList.add('home__card');
+// section.append(movieCard);
 async function getRandomMovie() {
   const apiKey = '0d9ddfeb4636025259fcaee6725b8ad3';
   const maxPages = 1; // maximum number of pages with movies in API
