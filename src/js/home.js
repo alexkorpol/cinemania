@@ -128,7 +128,7 @@ setTimeout(() => {
 
 
 
-
+//upcoming
 
 
 
@@ -194,7 +194,6 @@ async function callMovieCard() {
   const response = getRandomMovie();
   displayRandomMovie((await response).data);
 }
-
 callMovieCard();
 
 
