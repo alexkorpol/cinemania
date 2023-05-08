@@ -1,44 +1,33 @@
-<section class="hero container"> 
-   
-    <div class="hero__trends">
-        
-        <h2 class="hero__title">{{title}}</h2>
 
-        <div class="rating">
+
+
+<section class="hero  container "> 
+    
+  <ul>
+    <li>
+        <img src="{{poster_path}}">
+    </li>
+    <li>
+        <h2 class="hero__title">{{title}}</h2> 
+   </li>
+   <li>
+     <div class="rating">
             <div class="rating__body">
                 <div class="rating__active"></div>
                    <div class="rating__items">
                     <input type="radio" class="rating__item" value="1" name="rating">
-                    <!-- <svg width="18" height="18" class="rating__body-svg">
-                        <use href="./img/symbol-defs.svg#icon-star-rating"></use>
-                    </svg> -->
                     <input type="radio" class="rating__item" value="2" name="rating">
-                    <!-- <svg width="18" height="18" class="rating__body-svg">
-                        <use href="./img/symbol-defs.svg#icon-star-rating"></use>
-                    </svg> -->
                     <input type="radio" class="rating__item" value="3" name="rating">
-                    <!-- <svg width="18" height="18" class="rating__body-svg">
-                        <use href="./img/symbol-defs.svg#icon-star-rating"></use>
-                    </svg> -->
                     <input type="radio" class="rating__item" value="4" name="rating">
-                    <!-- <svg width="18" height="18" class="rating__body-svg">
-                        <use href="./img/symbol-defs.svg#icon-star-rating"></use>
-                    </svg> -->
                     <input type="radio" class="rating__item" value="5" name="rating">
-                    <!-- <svg width="18" height="18" class="rating__body-svg">
-                        <use href="./img/symbol-defs.svg#icon-star-rating"></use>
-                    </svg> -->
                    </div>
-            
-                <div class="rating__value ">7</div>
-        </div>
-        <p class="hero__overview">{{overview}} </p>
-                   
-                   <button class="hero__btn-trailer">
-                Watch trailer
-            </button>
-            
-            
- </div>
-</div>
-</section>
+        <div class="rating__value ">{{vote_average}}</div>
+   </li>
+    <li>
+        <p class="hero__overview">{{overview}}</p>
+    </li>
+    <li>
+        <a href="#" class="hero__btn">Watch trailer</a>
+    </li>
+  </ul> 
+ </section>
