@@ -106,7 +106,7 @@
 //   return paginationHtml;
 // }
 
-const KEY = '0d9ddfeb4636025259fcaee6725b8ad3';
+import { KEY } from './api-key';
 const BASE_URL = 'https://api.themoviedb.org/3';
 
 const API_URL_TRENDING = `${BASE_URL}/trending/movie/day?api_key=${KEY}`;
