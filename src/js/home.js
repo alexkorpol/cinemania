@@ -2,7 +2,7 @@ import axios from 'axios';
 import { KEY } from './api-key';
 import { renderModal } from './modal_film';
 /////My section weekly//////////////////////////////////////////
-const homeCards = document.querySelector('.home__cards');
+const homeCards = document.querySelector('.cards');
 const modal = document.querySelector('.modal');
 
 const modalOverlay = document.querySelector('.modal__overlay');
@@ -82,8 +82,6 @@ callCards();
 
 
 renderModal();
-
-//upcoming
 
 
 
