@@ -67,6 +67,14 @@
 .my-libr__container {
   display: flex;
   flex-direction: column;
+
+  @include tablet{
+    padding: 60px 32px;
+  }
+
+  @include desktop {
+    padding: 169px 117px;
+  }
 }
 
 .my-libr__title {
