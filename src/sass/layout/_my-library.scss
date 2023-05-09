@@ -67,6 +67,14 @@
 .my-libr__container {
   display: flex;
   flex-direction: column;
+
+  @include tablet{
+    padding: 60px 32px;
+  }
+
+  @include desktop {
+    padding: 169px 117px;
+  }
 }
 
 .my-libr__title {
@@ -99,6 +107,56 @@
     max-width: 460px;
     line-height: 1.4;
     letter-spacing: 0.8;
-    
+  }
+}
+
+//@at-root
+.libr-content {
+  width: 100%;
+  padding: 40px 20px;
+  @include tablet {
+    padding: 92px 32px 60px;
+  }
+  @include desktop {
+    padding: 117px 32px 96px;
+  }
+}
+.libr-content__text {
+  @include font(null, 20, 1.4, null);
+  text-align: center;
+  color: #ffffff;
+  margin-bottom: 20px;
+  @include tablet {
+    @include font(null, 24, 1.33, 0.06);
+    margin-bottom: 24px;
+  }
+  @include desktop {
+    @include font(null, 32, 1.2, null);
+    margin-bottom: 28px;
+  }
+}
+
+.libr-btn {
+  @include centerFlex();
+  @include font(500, 12, 1.15, null);
+  justify-content: center;
+  color: #111111;
+  background: linear-gradient(141.22deg, #ffc226 9.4%, #f84119 91.91%);
+  border-radius: 74px;
+  // border: 1px solid;
+  width: 123px;
+  padding: 12px 24px;
+  margin: 0 auto;
+  @include tablet {
+    @include font(null, 14, 1.14, null);
+    width: 135px;
+  }
+  @include desktop {
+    @include font(null, 18, 1.56, null);
+    width: 160px;
+  }
+  &:hover {
+    color: #f87719;
+    background: #ffffff;
   }
 }
