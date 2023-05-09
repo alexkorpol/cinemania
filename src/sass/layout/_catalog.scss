@@ -141,10 +141,20 @@ width: calc(33.33% - 20px);
   }
 }
 
+.movie__cover-inner {
+  z-index: 0;
+  border-radius: 10px;
+  flex-direction: column;
+  transition: all .2s cubic-bezier(.4, 0, .2, 1);
+  display: flex;
+  position: relative;
+
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 63.48%, rgba(0, 0, 0, 0.9) 92.16%);
+
   img{
     border-radius: inherit;
-    
   }
+}
 
 
 .movie__cover {

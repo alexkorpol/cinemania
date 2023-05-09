@@ -95,6 +95,8 @@ let totalMovies = 0;
 
 
 
+
+
 getMovies(API_URL_TRENDING);
 
 async function getMovies(url) {
