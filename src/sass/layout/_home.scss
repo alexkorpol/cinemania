@@ -454,6 +454,22 @@
     }
   }
 }
+.rating-star {
+  width: 86px;
+  height: 14px;
+  display: flex;
+  align-items: baseline;
+  margin-left: auto;
+  @media screen and (min-width: 768px) {
+    width: 66px;
+    height: 10px;
+    align-items: flex-start;
+  }
+  @media screen and (min-width: 1200px) {
+    width: 106px;
+    height: 18px;
+  }
+}
 .card {
   display: flex;
   position: relative;
@@ -516,6 +532,7 @@
     position: absolute;
     bottom: 0;
     display: inline-flex;
+    pointer-events: none;
     flex-direction: column;
     width: 100%;
     z-index: 55;
@@ -545,6 +562,10 @@
   }
   &__description {
     display: inline-flex;
+    align-items: baseline;
+    @media screen and (min-width: 768px) {
+      align-items: baseline;
+    }
   }
   &__genre,
   &__release,
@@ -567,6 +588,7 @@
 }
 .form {
   display: inline-flex;
+  pointer-events: none;
   width: 66px;
   align-items: center;
   margin-left: auto;
@@ -794,13 +816,8 @@
     top: 24;
     right: 24;
   }
-  @media screen and (min-width: 1200px) {
-    top: 40;
-    right: 40;
-  }
   &__icon {
-    fill: #f87719;
-    z-index: 999;
+    fill: #f84119;
   }
 }
 .button-send {
