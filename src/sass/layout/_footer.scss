@@ -12,8 +12,12 @@
 }
 
 .heart {
-  animation: beat 0.25s infinite alternate;
+  animation: beat 0.5s infinite alternate;
   transform-origin: center;
+  &:hover,
+  &:focus {
+    animation: beat 0.25s infinite alternate;
+  }
 }
 
 @keyframes beat {

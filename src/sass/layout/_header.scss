@@ -9,7 +9,7 @@ header {
   align-items: center;
   justify-content: space-between;
   min-height: 48px;
-  background-color: #000000;
+  background-color: $text-light-background;
   @include tablet {
     min-height: 60px;
   }
