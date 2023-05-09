@@ -171,6 +171,7 @@ async function renderModal(movie) {
     poster_path,
     original_title,
     vote_average,
+    title,
     vote_count,
     popularity,
     genres,
@@ -198,18 +199,17 @@ async function renderModal(movie) {
     const filmInfo = {
       id,
       poster_path,
-      original_title,
+      title,
       vote_average,
-      vote_count,
-      popularity,
       genres,
-      overview,
     };
     const sendButton = document.querySelector('.button-send');
-    const dataFilm = JSON.stringify(filmInfo);
     const collectionOfFilms = [];
+    homeCards;
     sendButton.addEventListener('click', () => {
+      const dataFilm = JSON.stringify(filmInfo);
       modal.classList.add('is-hidden');
+      console.log(dataFilm);
       modalPoster.innerHTML = '';
     });
   }, 0);
@@ -229,11 +229,9 @@ document.addEventListener('keydown', function (evt) {
     modalPoster.innerHTML = '';
   }
 });
-setTimeout(() => {
-  const closeButton = document.querySelector('.close');
-  homeCards.addEventListener('click', modalOpen);
-  closeButton.addEventListener('click', modalClose);
-}, 0);
+homeCards.addEventListener('click', modalOpen);
+closeButton.addEventListener('click', modalClose);
+
 /////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////
 async function getRandomMovie() {
