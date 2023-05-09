@@ -126,19 +126,39 @@
 
 .movies {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
 .movie {
-  width: 240px;
-  margin: 10px;
-  position: relative;
+width: calc(33.33% - 20px);
+  margin-bottom: 20px;
+
+}
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .movie {
+    width: calc(50% - 20px);
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .movies {
+    gap: 10px;
+  }
+  .movie {
+    width: 100%;
+    margin-bottom: 10px;
+   
+  }
+  .movie__cover {
+    width: 100%;
+
+  }
 }
 
 .movie__cover-inner {
   position: relative;
-  height: 360px;
+  width: 100%;
 }
 
 .movie__cover {
