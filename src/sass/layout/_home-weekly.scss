@@ -416,12 +416,9 @@
   background-color: transparent;
   border: none;
   position: absolute;
-  top: 20;
-  right: 16;
-  @media screen and (min-width: 768px) {
-    top: 24;
-    right: 24;
-  }
+  top: 5;
+  right: 5;
+
   &__icon {
     fill: #f84119;
   }

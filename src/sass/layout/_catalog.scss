@@ -549,18 +549,9 @@ width: calc(33.33% - 20px);
   position: absolute;
   background-color: transparent;
   border: none;
-  top: 20;
-  right: 16;
+  top: 5;
+  right: 5;
 
-  @media screen and (min-width: 768px) {
-    top: 24;
-    right: 24;
-  }
-
-  @media screen and (min-width: 1200px) {
-    top: 40;
-    right: 40;
-  }
 
   &__icon {
     fill: #f87719;
