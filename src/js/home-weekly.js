@@ -238,7 +238,6 @@ closeButton.addEventListener('click', () => {
 });
 
 // ВІДМАЛЬОВУЄ
-const libraryContainer = document.querySelector('.my-library__gallery');
 function renderMovieInLibrary(movie) {
   const libraryContainer = document.querySelector('.my-library__gallery');
 
@@ -263,4 +262,3 @@ console.log(library);
 library.forEach(movie => {
   renderMovieInLibrary(movie);
 });
-//

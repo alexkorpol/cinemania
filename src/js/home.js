@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 async function getRandomMovie() {
   const apiKey = '0d9ddfeb4636025259fcaee6725b8ad3';
   const maxPages = 1; // maximum number of pages with movies in API
@@ -11,9 +12,23 @@ async function getRandomMovie() {
     ];
   return randomMovie;
 }
+async function getGenres() {
+  const apiKey = '0d9ddfeb4636025259fcaee6725b8ad3';
+  const url = `https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}`;
+  const response = await axios.get(url);
+  return response.data.genres;
+}
 
 async function displayRandomMovie() {
   const movie = await getRandomMovie();
+  const genres = await getGenres();
+  const genreNames = movie.genre_ids
+    .map(id => {
+      const genre = genres.find(g => g.id === id);
+      return genre ? genre.name : '';
+    })
+    .join(', ');
+
   const movieCard = `
     <div class="container movie-card">
     <h2 class="movie-card-title">upcoming this mounth</h2>
@@ -41,6 +56,11 @@ async function displayRandomMovie() {
       <p class="movie-genre">Genre:<span> ${movie.genre_ids.join(
         ', '
       )} </span></p>
+      <p class="movie-popularity">Popularity:<span> ${
+        movie.popularity
+      } </span></p>
+      <p class="movie-genre">Genre:<span> ${genreNames} </span></p>
+
       </div>
       </div>
       <p class="movie-about"> ABOUT </p>
@@ -58,5 +78,4 @@ async function callMovieCard() {
   const response = getRandomMovie();
   displayRandomMovie((await response).data);
 }
-
 callMovieCard();
