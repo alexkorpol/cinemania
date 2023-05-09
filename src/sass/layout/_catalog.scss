@@ -157,8 +157,17 @@ width: calc(33.33% - 20px);
 }
 
 .movie__cover-inner {
+  z-index: 0;
+  border-radius: 10px;
+  flex-direction: column;
+  transition: all .2s cubic-bezier(.4, 0, .2, 1);
+  display: flex;
   position: relative;
-  width: 100%;
+
+  img{
+    border-radius: inherit;
+    box-shadow: 0 3px 4px 1px rgba(44, 133, 200, .2);
+  }
 }
 
 .movie__cover {
@@ -185,6 +194,20 @@ width: calc(33.33% - 20px);
 
 .movie__info {
   padding: 10px 0px;
+  z-index: 2;
+    align-items: baseline;
+    padding: 12px 12px 0;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    display: flex;
+    position: absolute;
+    bottom: 12px;
+}
+
+.movie__info_wrapper {
+  max-width: 100%;
+    margin-right: -30%;
 }
 
 .movie__title {

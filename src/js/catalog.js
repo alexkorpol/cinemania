@@ -135,16 +135,11 @@ function showMovies(data) {
         <div class="movie__cover--darkened"></div>
       </div>
       <div class="movie__info">
+        <div class='movie__info_wrapper'>
         <div class="movie__title">${movie.title}</div>
         <div class="movie__category">${movie.genre_ids}</div>
-        ${
-          movie.vote_average &&
-          `
-          <div class="movie__average movie__average--${getClassByRate(
-            movie.vote_average
-          )}">${movie.vote_average}</div>
-        `
-        }
+      <div/>
+        <div class="movie__average movie__average--${getClassByRate(movie.vote_average)}">${movie.vote_average}</div>
       </div>
     `;
     moviesEl.appendChild(movieEl);
