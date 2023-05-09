@@ -54,56 +54,103 @@ body.light {
 body.light {
   .hero {
     background-color: $text-secondary-color;
+  }
+  .hero__background {
     @media screen and (min-width: 768px) {
-      background-image: url(../img/light-hero-tablet.png), url(../img/hero-tablet.jpg);
+      background-image: url('../img/light-hero-tablet.png');
       @include retina {
-        background-image: url(../img/light-hero-tablet-2x.png), url(../img/hero-tablet-2x.jpg);
+        background-image: url('../img/light-hero-tablet-2x.png');
       }
     }
 
     @media screen and (min-width: 1200px) {
-      background-image: url(../img/light-hero-desktop.png), url(../img/hero-desktop.jpg);
+      background-image: url('../img/light-hero-desktop.png');
       @include retina {
-        background-image: url(../img/light-hero-desktop-2x.png), url(../img/hero-desktop-2x.jpg);
+        background-image: url('../img/light-hero-desktop-2x.png');
       }
     }
   }
   .hero__title {
     color: $text-dark-background;
-      @include tablet {
-   color: $text-light-background;
-  }
+    @include tablet {
+      color: $text-light-background;
+    }
   }
   .hero__overview {
-     color: $text-secondary-color;
+    color: $text-secondary-color;
     @include tablet {
-    color: $text-secondary-light; 
+      color: $text-secondary-light;
+    }
   }
+}
+
+// * HOME WEEKLY
+body.light {
+  .home-weekly {
+  background-color: #ffffff;
+  &__title {
+    color: #111111;
+  }
+}
+.close {
+  &__icon {
+    fill: #282828;
+  }
+}
+.button-send {
+  color: #111111;
+  border-color: orange;
+}
+}
+
+// * HOME WEEKLY MODAL
+// * HOME
+body.light {
+  .movie-card {
+    background-color: $text-dark-background;
+  }
+  .movie-card-title {
+    color: $text-light-background;
+  }
+  .movie-title {
+    color: $text-light-background;
+  }
+  .movie-date,
+  .movie-vote,
+  .movie-popularity,
+  .movie-genre {
+    color: $text-light-background;
+  }
+  .movie-about {
+    color: $text-light-background;
+  }
+
+  .movie-vote span {
+    background-color: $text-secondary-color;
+  }
+  .movie-popularity span {
+    color: $text-light-background;
+  }
+
+  .movie-genre span {
+    color: $text-light-background;
+  }
+
+  .movie-about__descr {
+    color: $text-secondary-light;
+  }
+}
+
+// * MY LIBRARY
+body.light {
+  .libr-content__text {
+    color: $text-light-background;
   }
 }
 
 //* FOOTER
 body.light {
-  .footer__copyright {
+  .footer--copyright {
     color: #595959;
-  }
-  .footer__desc {
-    color: #595959;
-  }
-  .footer__text {
-    color: #595959;
-  }
-  .footer__link {
-    color: #595959;
-    &--active:hover {
-      color: #f87719;
-    }
-    &--animation::before {
-      background-color: #595959;
-    }
-    &--animation:hover::before {
-      color: #595959;
-      background-color: #f87719;
-    }
   }
 }
