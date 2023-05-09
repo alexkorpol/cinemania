@@ -2,7 +2,7 @@ import axios from 'axios';
 import { KEY } from './api-key';
 import { renderModal } from './modal_film';
 /////My section weekly//////////////////////////////////////////
-const homeCards = document.querySelector('.cards');
+const cards = document.querySelector('.cards');
 const modal = document.querySelector('.modal');
 
 const modalOverlay = document.querySelector('.modal__overlay');
@@ -72,7 +72,7 @@ async function renderMovieCard(cards) {
       }
     )
     .join('');
-  homeCards.insertAdjacentHTML('beforeend', movieArray);
+  cards.insertAdjacentHTML('beforeend', movieArray);
 }
 async function callCards() {
   const response = getMovies();
