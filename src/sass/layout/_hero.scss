@@ -27,9 +27,9 @@
   @media screen and (min-width: 1200px) {
     background-position: 0px top, calc(184px / 2) 0;
     background-image: url('../img/dark-hero-desktop.png');
-    @include retina 
-   {background-image: url('../img/dark-hero-desktop-2x.png');
-   }
+    @include retina {
+      background-image: url('../img/dark-hero-desktop-2x.png');
+    }
     z-index: 0;
     background-size: contain;
     position: absolute;
@@ -84,8 +84,7 @@
   @media screen and (min-width: 768px) {
     margin-bottom: 0;
     background-position: 5px top, calc(184px / 2) 0;
-    background-image: 
-      url(../img/hero-tablet.jpg);
+    background-image: url(../img/hero-tablet.jpg);
 
     @include retina {
       background-image: url(../img/dark-hero-tablet-2x.png),
@@ -109,8 +108,6 @@
   }
 }
 
-
-
 // .hero__default{
 //     background-color: #2f303a;
 //   background-position: center;
@@ -126,7 +123,6 @@
 //     background-image: linear-gradient(87.8deg, #0e0e0e 15.61%, rgba(14, 14, 14, 0) 60.39%),
 //       url(../img/hero-mobile-2x.jpg);
 //   }
-  
 
 //   @media screen and (min-width: 768px ) and (max-width: 1199px) {
 //     margin-bottom: 0;
@@ -142,7 +138,6 @@
 //         url(../img/hero-tablet-2x.jpg);
 //     }
 //   }
-  
 
 //   @media screen and (min-width: 1200px) {
 //     margin-bottom: 0;
@@ -158,11 +153,9 @@
 //         url(../img/hero-desktop-2x.jpg);
 //     }
 //   }
-  
+
 // }
 
-
-  
 .hero__title {
   margin-left: 20px;
   margin-bottom: 8px;
@@ -213,23 +206,23 @@
 //     font-size: 16px;
 //     line-height: 24px;
 //     text-decoration: none;
-  
+
 //     margin-left: 20px;
 //     padding: 12px 24px;
-  
+
 //     background: linear-gradient(141.22deg, #ffc226 9.4%, #f84119 91.91%);
 //     border-radius: 74px;
 //     color: #111111;
 //     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  
+
 //     @media screen and (min-width: 768px) and (max-width: 1199px) {
 //       margin-left: 32px;
 //     }
-  
+
 //     @media screen and (min-width: 1200px) {
 //       margin-left: 32px;
 //     }
-  
+
 .hero__overview {
   margin-bottom: 36px;
   margin-left: 20px;
@@ -281,8 +274,6 @@
   }
 }
 
-
-
 // .hero-film_rating {
 //     margin-bottom: 36px;
 //     margin-left: 36px;
@@ -290,7 +281,6 @@
 //     max-width: 367px;
 //     font-size: 18px;
 //   }
-
 
 // .rating {
 //   display: flex;
