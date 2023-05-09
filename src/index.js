@@ -1,4 +1,5 @@
 import './js/header';
+import './js/home-weekly';
 import './js/mobile-menu';
 import './js/home';
 import './js/hero';
