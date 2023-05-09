@@ -231,28 +231,27 @@ closeButton.addEventListener('click', () => {
 });
 
 // ВІДМАЛЬОВУЄ
-const libraryContainer = document.querySelector('.my-library__gallery');
-function renderMovieInLibrary(movie) {
-  const libraryContainer = document.querySelector('.my-library__gallery');
+// function renderMovieInLibrary(movie) {
+//   const libraryContainer = document.querySelector('.my-library__gallery');
 
-  const movieMarkup = `
-  <div class="movie">
-          <img src="${movie.poster_path}" alt="${movie.original_title}">
-          <h2>${movie.original_title}</h2>
-          <p>Vote Average: ${movie.vote_average}</p>
-          <p>Vote Count: ${movie.vote_count}</p>
-          <p>Popularity: ${movie.popularity}</p>
-          <p>Genres: ${movie.genres}</p>
-          <p>${movie.overview}</p>
-        </div>`;
+//   const movieMarkup = `
+//   <div class="movie">
+//           <img src="${movie.poster_path}" alt="${movie.original_title}">
+//           <h2>${movie.original_title}</h2>
+//           <p>Vote Average: ${movie.vote_average}</p>
+//           <p>Vote Count: ${movie.vote_count}</p>
+//           <p>Popularity: ${movie.popularity}</p>
+//           <p>Genres: ${movie.genres}</p>
+//           <p>${movie.overview}</p>
+//         </div>`;
 
-  libraryContainer.insertAdjacentHTML('beforeend', movieMarkup);
-}
+//   libraryContainer.insertAdjacentHTML('beforeend', movieMarkup);
+// }
 
 // Отримати масив фільмів з локального сховища
-const library = JSON.parse(localStorage.getItem('movieLibrary')) || [];
-console.log(library);
-// Пройтись по кожному фільму в бібліотеці та відмалювати його
-library.forEach(movie => {
-  renderMovieInLibrary(movie);
-});
+// const library = JSON.parse(localStorage.getItem('movieLibrary')) || [];
+// console.log(library);
+// // Пройтись по кожному фільму в бібліотеці та відмалювати його
+// library.forEach(movie => {
+//   renderMovieInLibrary(movie);
+// });
