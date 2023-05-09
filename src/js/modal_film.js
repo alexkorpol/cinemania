@@ -1,12 +1,13 @@
-import axios from 'axios';
-import { KEY } from './api-key';
-import getDetailFilm from './home';
-
 const modalPoster = document.querySelector('.modal__poster');
 const homeCards = document.querySelector('.home__cards');
 const modal = document.querySelector('.modal');
 
-
+async function getDetailFilm(movie_id) {
+  const response = await axios.get(
+    `${BASE_URL}movie/${movie_id}?api_key=${KEY}&language=en-US`
+  );
+  return response.data;
+}
 
 export async function renderModal(movie) {
   const {
