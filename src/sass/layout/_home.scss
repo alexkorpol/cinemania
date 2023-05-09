@@ -17,12 +17,12 @@
   }
 
   .card__picture {
-    max-width: 100%;
-    height: auto;
+
     margin-bottom: 20px;
 
-    width: 280px;
-    height: 402px;
+object-fit: cover;
+  width: 280px;
+  height: 402px;
     border-radius: 5px;
   }
 
@@ -134,7 +134,7 @@
   }
 
   .card__picture {
-    max-width: 100%;
+  max-width: 704px;
     height: auto;
     margin-bottom: 32px;
     width: 704px;
@@ -269,7 +269,7 @@
   }
 
   .card__picture {
-    max-width: 100%;
+    max-width: 805px;
     height: auto;
     // margin-bottom: 32px;
     width: 805px;
