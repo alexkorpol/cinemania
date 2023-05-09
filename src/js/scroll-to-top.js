@@ -3,8 +3,8 @@ function hasScrollBehavior() {
 }
 
 function smoothScroll() {
-  var currentY = window.scrollY;
-  var int = setInterval(function () {
+  let currentY = window.scrollY;
+  const scrollInterval = setInterval(() => {
     window.scrollTo(0, currentY);
 
     if (currentY > 500) {
@@ -15,8 +15,10 @@ function smoothScroll() {
       currentY -= 10;
     }
 
-    if (currentY <= 0) clearInterval(int);
-  }, 1000 / 2); // 60fps
+    if (currentY <= 0) {
+      clearInterval(scrollInterval);
+    }
+  }, 1000 / 60); // Змінено на 60fps
 }
 
 function scrollToTop() {
@@ -28,26 +30,22 @@ function scrollToTop() {
 }
 
 function toggleScrollUpButton() {
-  var y = window.scrollY;
-  var e = document.getElementById('scroll-to-top');
+  const y = window.scrollY;
+  const e = document.getElementById('scroll-to-top');
   if (y >= 200) {
     e.style.transform = 'translateY(-30%)';
-    e.style.opacity = 1;
+    e.style.opacity = '1';
   } else {
-    e.style.opacity = 0;
+    e.style.opacity = '0';
     e.style.transform = 'translateY(30%)';
   }
 }
 
-document.addEventListener(
-  'DOMContentLoaded',
-  function () {
-    document.removeEventListener('DOMContentLoaded', arguments.callee, false);
+document.addEventListener('DOMContentLoaded', () => {
+  window.removeEventListener('DOMContentLoaded', arguments.callee, false);
 
-    window.addEventListener('scroll', toggleScrollUpButton);
+  window.addEventListener('scroll', toggleScrollUpButton);
 
-    var e = document.getElementById('scroll-to-top');
-    e.addEventListener('click', scrollToTop, false);
-  },
-  false
-);
+  const e = document.getElementById('scroll-to-top');
+  e.addEventListener('click', scrollToTop, false);
+});
