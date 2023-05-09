@@ -206,7 +206,7 @@ async function searchMovies(event, currentPage = 1) {
 
     if (movies.length === 0) {
       movieList.innerHTML = '<p>OOPS...We are very sorry!We don’t have any results due to your search.</p>';
-      pagination.innerHTML = '';
+      paginationEl.innerHTML = '';
     } else {
       const start = (currentPage - 1) * moviesPerPage; // Индекс первого отображаемого фильма
       const end = start + moviesPerPage; // Индекс последнего отображаемого фильма
@@ -227,9 +227,9 @@ async function searchMovies(event, currentPage = 1) {
       await Promise.all(promises);
 
       const paginationHtml = generatePagination(totalPages, currentPage);
-      pagination.innerHTML = paginationHtml;
+      paginationEl.innerHTML = paginationHtml;
 
-      pagination.addEventListener('click', function(event) {
+      paginationEl.addEventListener('click', function(event) {
         if (event.target.tagName === 'A') {
           const pageNumber = event.target.dataset.page;
           searchMovies(event, pageNumber);
