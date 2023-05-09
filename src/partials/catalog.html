@@ -8,11 +8,13 @@
 <div class="pagination"></div> -->
 <div class="container">
   <div class="catalog__content">
-    <form>
-
-      <input type="text" class="catalog__search" placeholder="Search" />
-      <button type="submit">Search</button>
-
+    <form class="search__form">
+      <input type="text" class="catalog__search--input" placeholder="Search" />
+      <button type="submit">
+        <svg class="search__form--icon" width="20" height="20">
+        <use href="/src/img/sprite.svg#icon-search"></use>
+      </svg>
+     </button>
     </form>
   </div>
   <div class="movies home__cards"></div>
@@ -20,6 +22,8 @@
     <ul class="pagination__list"></ul>
   </div>
 </div>
+
+
 
 <div class="modal">
   <div class="modal__overlay">

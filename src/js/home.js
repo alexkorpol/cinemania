@@ -4,7 +4,7 @@ import { renderModal } from './modal_film';
 /////My section weekly//////////////////////////////////////////
 const homeCards = document.querySelector('.home__cards');
 const modal = document.querySelector('.modal');
-modal.classList.add('is-hidden');
+
 const modalOverlay = document.querySelector('.modal__overlay');
 const modalPoster = document.querySelector('.modal__poster');
 const closeButton = document.querySelector('.close');

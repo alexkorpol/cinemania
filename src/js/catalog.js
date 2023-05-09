@@ -126,21 +126,27 @@ function showMovies(data) {
     const movieEl = document.createElement('div');
     movieEl.classList.add('movie');
     movieEl.innerHTML = `
-      <div class="movie__cover-inner ">
+    <li class=' cards-list__item'>
         <img
           src="https://image.tmdb.org/t/p/w500${movie.poster_path}"
           class="movie__cover"
           alt="${movie.title}"
         />
         <div class="movie__cover--darkened"></div>
-      </div>
-      <div class="movie__info">
-        <div class='movie__info_wrapper'>
+    <div class="movie__info">
+      <div class='movie__info_wrapper'>
         <div class="movie__title">${movie.title}</div>
-        <div class="movie__category">${movie.genre_ids}</div>
+          <div class='cards-list_second_line'>
+              <div class='cards-list__text'>
+                <p>${movie.genre_ids} | ${movie.release_date}</p>
+              </div>
+          </div>
       <div/>
+      <div class='star-rate'>
         <div class="movie__average movie__average--${getClassByRate(movie.vote_average)}">${movie.vote_average}</div>
       </div>
+    </div>
+    </li>
     `;
     moviesEl.appendChild(movieEl);
   });

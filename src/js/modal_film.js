@@ -1,6 +1,10 @@
 const modalPoster = document.querySelector('.modal__poster');
 const homeCards = document.querySelector('.home__cards');
 const modal = document.querySelector('.modal');
+modal.classList.add('is-hidden');
+
+
+
 
 async function getDetailFilm(movie_id) {
   const response = await axios.get(
