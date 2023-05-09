@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { KEY } from './api-key';
+import { renderModal } from './modal_film';
 //upcoming
 
 async function getRandomMovie() {
@@ -32,7 +34,7 @@ async function displayRandomMovie() {
     .join(', ');
 
   const movieCard = `
-    <div class="container movie-card">
+    <div class="container movie-card ">
     <h2 class="movie-card-title">upcoming this mounth</h2>
 <div class="mo">
       <div class="movie-card__image">
