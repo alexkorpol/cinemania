@@ -90,7 +90,7 @@
 }
 
 @media screen and (min-width: 768px) {
-  .catalog__search {
+  .catalog__search--input {
     width: 204px;
     height: 44px;
     padding-left: 20px;
@@ -98,7 +98,7 @@
 }
 
 @media screen and (min-width: 1200px) {
-  .catalog__search {
+  .catalog__search--input {
       width: 334px;
       height: 48px;
       padding-left: 24px;
