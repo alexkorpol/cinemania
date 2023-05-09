@@ -209,11 +209,13 @@ homeCards.addEventListener('click', async evt => {
 function addToLibrary(movie) {
   // Отримати масив фільмів з локального сховища
   const library = JSON.parse(localStorage.getItem('movieLibrary')) || [];
-
   // Перевірити, чи фільм вже присутній в бібліотеці
   const existingMovie = library.find(item => item.id === movie.id);
+  const existingIndex = library.indexOf(existingMovie);
   if (existingMovie) {
     console.log('Фільм вже присутній в бібліотеці');
+    library.splice(existingIndex, 1);
+    localStorage.setItem('movieLibrary', JSON.stringify(library));
     return;
   }
 
@@ -231,6 +233,7 @@ closeButton.addEventListener('click', () => {
 });
 
 // ВІДМАЛЬОВУЄ
+
 // function renderMovieInLibrary(movie) {
 //   const libraryContainer = document.querySelector('.my-library__gallery');
 
