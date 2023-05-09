@@ -79,12 +79,7 @@ async function callCards() {
   renderMovieCard(await response);
 }
 callCards();
-async function getDetailFilm(movie_id) {
-  const response = await axios.get(
-    `${BASE_URL}movie/${movie_id}?api_key=${KEY}&language=en-US`
-  );
-  return response.data;
-}
+
 
 renderModal();
 
