@@ -43,7 +43,6 @@ const closeButton = document.querySelector('.close');
 const BASE_URL = 'https://api.themoviedb.org/3/';
 async function getMovies() {
   const PATH = '/trending/movie/week?';
-  // const API_KEY = 'api_key=0d9ddfeb4636025259fcaee6725b8ad3';
   const totalPages = 1000;
   const randomPage = Math.floor(Math.random() * (totalPages - 1) + 1);
   const response = await axios.get(
@@ -87,10 +86,10 @@ async function renderMovieCard(cards) {
         const chopped = release_date.slice(0, 4);
         let ratingStars = '';
 
-        if (!vote_average) {
-          ratingStars = `${emptyStar.repeat(5)}`;
-          return `<div>${ratingStars}</div>`;
-        }
+        // if (!vote_average) {
+        //   ratingStars = `${emptyStar.repeat(5)}`;
+        //   return `<div>${ratingStars}</div>`;
+        // }
 
         const rating = Math.round(vote_average);
 
@@ -158,7 +157,6 @@ async function callCards() {
   renderMovieCard(await response);
 }
 callCards();
-/////////////////////////////
 async function getDetailFilm(movie_id) {
   const response = await axios.get(
     `${BASE_URL}movie/${movie_id}?api_key=${KEY}&language=en-US`
@@ -199,11 +197,6 @@ async function renderModal(movie) {
     const addButton = document.querySelector('.button-send');
     addButton.addEventListener('click', () => {
       addToLibrary(movie);
-    });
-
-    closeButton.addEventListener('click', () => {
-      modal.classList.add('is-hidden');
-      modalPoster.innerHTML = '';
     });
   }, 0);
 }
