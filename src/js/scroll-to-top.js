@@ -16,7 +16,7 @@ function smoothScroll() {
     }
 
     if (currentY <= 0) clearInterval(int);
-  }, 1000 / 2); // 60fps
+  }, 1000 / 60); // Змінено на 60fps
 }
 
 function scrollToTop() {
@@ -32,9 +32,9 @@ function toggleScrollUpButton() {
   var e = document.getElementById('scroll-to-top');
   if (y >= 200) {
     e.style.transform = 'translateY(-30%)';
-    e.style.opacity = 1;
+    e.style.opacity = '1'; // Додано лапки для значення
   } else {
-    e.style.opacity = 0;
+    e.style.opacity = '0'; // Додано лапки для значення
     e.style.transform = 'translateY(30%)';
   }
 }
@@ -42,7 +42,7 @@ function toggleScrollUpButton() {
 document.addEventListener(
   'DOMContentLoaded',
   function () {
-    document.removeEventListener('DOMContentLoaded', arguments.callee, false);
+    window.removeEventListener('DOMContentLoaded', arguments.callee, false); // Змінено на window.removeEventListener
 
     window.addEventListener('scroll', toggleScrollUpButton);
 
