@@ -107,6 +107,8 @@
 // }
 
 import { KEY } from './api-key';
+import { renderModal } from './modal_film';
+import getDetailFilm from './home';
 const BASE_URL = 'https://api.themoviedb.org/3';
 
 const API_URL_TRENDING = `${BASE_URL}/trending/movie/day?api_key=${KEY}`;
@@ -115,6 +117,8 @@ const API_URL_SEARCH = `${BASE_URL}/search/movie?api_key=${KEY}&query=`;
 let currentPage = 1;
 const moviesPerPage = 10;
 let totalMovies = 0;
+
+
 
 getMovies(API_URL_TRENDING);
 
@@ -147,7 +151,7 @@ function showMovies(data) {
     const movieEl = document.createElement('div');
     movieEl.classList.add('movie');
     movieEl.innerHTML = `
-      <div class="movie__cover-inner">
+      <div class="movie__cover-inner ">
         <img
           src="https://image.tmdb.org/t/p/w500${movie.poster_path}"
           class="movie__cover"
@@ -202,7 +206,7 @@ function displayPagination() {
 }
 
 const form = document.querySelector('form');
-const search = document.querySelector('.header__search');
+const search = document.querySelector('.catalog__search');
 
 form.addEventListener('submit', e => {
   e.preventDefault();
@@ -215,3 +219,47 @@ form.addEventListener('submit', e => {
     search.value = '';
   }
 });
+
+renderModal();
+
+// async function renderModal(movie) {
+//   const {
+//     poster_path,
+//     original_title,
+//     vote_average,
+//     vote_count,
+//     popularity,
+//     genres,
+//     overview,
+//   } = await movie;
+//   const genreName = genres.map(genre => genre.name);
+//   const genresList = genreName.slice(0, 2);
+//   const modalMarkup = `
+//     <div class="modal__thumb">
+//       <img src="https://image.tmdb.org/t/p/original/${poster_path}" alt=${original_title} class="modal__img">
+//     </div>
+//     <div class="modal__info">
+//       <h2 class="modal__title">${original_title}</h2>
+//       <ul class="modal__list">
+//       <li class="modal__list-item"><p class="modal__list-vote">Vote / Votes</p><span class="modal__list-values"><span class="modal__list-evalue">${vote_average}</span><span class="modal__list-sign"> / </span><span class="modal__list-evalue">${vote_count}</span></span></li>
+//       <li class="modal__list-item"><p class="modal__list-popularity">Popularity</p><span class="modal__list-count">${popularity}</span></li>
+//       <li class="modal__list-item"><p class="modal__list-genre">Genre</p><span class="modal__list-genres">${genresList}</span></li>
+//       </ul>
+//       <strong class="modal__about">About</strong>
+//       <p class="modal__description">${overview}</p>
+//       <button type="button" class="button-send">Add to my library</button>
+//     </div>`;
+//   modalPoster.insertAdjacentHTML('beforeend', modalMarkup);
+// }
+// setTimeout(() => {
+//   const closeButton = document.querySelector('.close');
+//   movieList.addEventListener('click', evt => {
+//     modal.classList.remove('is-hidden');
+//     const id = evt.target.dataset.id;
+//     renderModal(getDetailFilm(id));
+//   });
+//   closeButton.addEventListener('click', () => {
+//     modal.classList.add('is-hidden');
+//     modalPoster.innerHTML = '';
+//   });
+// }, 0);
