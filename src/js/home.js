@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { KEY } from './api-key';
 import { renderModal } from './modal_film';
-/////My section weekly//////////////////////////////////////////
+//upcoming
 
 async function getRandomMovie() {
   const apiKey = '0d9ddfeb4636025259fcaee6725b8ad3';
@@ -68,4 +68,3 @@ async function callMovieCard() {
   displayRandomMovie((await response).data);
 }
 callMovieCard();
-
