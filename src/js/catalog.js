@@ -196,7 +196,7 @@ function renderMarkupList(data) {
       <li class='cards-list__item hover-cursor' data-id='${id}'>
         <img
           class='cards-list__img'
-          src='${poster_path}'
+          src='https://image.tmdb.org/t/p/w500${poster_path}'
           alt='${original_title}'
           width
           loading='lazy'
@@ -221,7 +221,7 @@ function renderMarkupList(data) {
    
   }
 
-  cards.insertAdjacentHTML('beforeend', movieArray.join(''));
+  cards.insertAdjacentHTML('afterbegin', movieArray.join(''));
 };
 
 
