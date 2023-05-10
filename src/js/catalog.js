@@ -5,6 +5,7 @@ import Pagination from 'tui-pagination';
 import { renderModal } from './global-modal';
 // import { getDetailFilm } from './home-weekly';
 
+
 const emptyStar = `<svg class="star" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M16.875 7.3125H10.8281L9 1.6875L7.17188 7.3125H1.125L6.04688 10.6875L4.14844 16.3125L9 12.7969L13.8516 16.3125L11.9531 10.6875L16.875 7.3125Z" stroke="url(#paint0_linear_405_766)" stroke-linejoin="round"/>
 <defs>
@@ -92,15 +93,6 @@ async function getGenres() {
   return { genres };
 }
 
- async function getDetailFilm(movie_id) {
-  const response = await axios.get(
-    `${BASE_URL}movie/${movie_id}?api_key=${KEY}&language=en-US`
-  );
-
-  console.log(response.data)
-  return response.data;
-}
-
 function renderMarkupList(data) {
   getGenres().then(({ genres }) => {
     saveSerialized('genresList', genres);
@@ -124,18 +116,6 @@ function renderMarkupList(data) {
     const markupList = createListMarkup(data.results);
     if (cards) {
       cards.innerHTML = markupList;
-
-      cards.addEventListener('click', async evt => {
-    modal.classList.remove('is-hidden');
-    const id = evt.target.dataset.id;
-    const movie = await getDetailFilm(id);
-    renderModal(movie);
-    closeButton.addEventListener('click', () => {
-      modal.classList.add('is-hidden');
-      modalPoster.innerHTML = '';
-    });
-  });
-
     }
   });
 }
@@ -354,15 +334,20 @@ pagination.on('afterMove', event => {
 });
 
 
+cards.addEventListener('click', async evt => {
+  modal.classList.remove('is-hidden');
+  const id = evt.target.dataset.id;
+  const movie = await getDetailFilm(id);
+  renderModal(movie);
+  closeButton.addEventListener('click', () => {
+    modal.classList.add('is-hidden');
+    modalPoster.innerHTML = '';
+  });
+});
 
-
-// cards.addEventListener('click', async evt => {
-//   modal.classList.remove('is-hidden');
-//   const id = evt.target.dataset.id;
-//   const movie = await getDetailFilm(id);
-//   renderModal(movie);
-//   closeButton.addEventListener('click', () => {
-//     modal.classList.add('is-hidden');
-//     modalPoster.innerHTML = '';
-//   });
-// });
+async function getDetailFilm(movie_id) {
+  const response = await axios.get(
+    `${BASE_URL}/movie/${movie_id}?api_key=${KEY}&language=en-US`
+  );
+  return response.data;
+}
