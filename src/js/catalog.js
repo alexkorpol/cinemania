@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { KEY } from './api-key';
 import Pagination from 'tui-pagination';
+import { renderModal } from './modal_film';
+
 
 
 
@@ -51,6 +53,7 @@ let searchPage = 1;
 let query = '';
 let searchFilms = true;
 let totalItems = 0;
+
 
   function moviesDataUpdate(data) {
     localStorage.setItem('moviesData', JSON.stringify(data.results));
@@ -221,6 +224,7 @@ function renderMarkupList(data) {
   cards.insertAdjacentHTML('beforeend', movieArray.join(''));
 };
 
+
 const cards = document.querySelector('#cards__list');
 
 const form = document.querySelector('.search__form');
@@ -337,3 +341,4 @@ pagination.on('afterMove', event => {
     });
   }
 })
+

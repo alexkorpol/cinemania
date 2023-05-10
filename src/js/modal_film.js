@@ -1,5 +1,9 @@
+
+import axios from 'axios';
+import { KEY } from './api-key';
+const BASE_URL = 'https://api.themoviedb.org/3';
 const modalPoster = document.querySelector('.modal__poster');
-const homeCards = document.querySelector('.home__cards');
+const films = document.querySelector('.films');
 const modal = document.querySelector('.modal');
 
 async function getDetailFilm(movie_id) {
@@ -41,7 +45,7 @@ export async function renderModal(movie) {
 setTimeout(() => {
   const closeButton = document.querySelector('.close');
   
-  homeCards.addEventListener('click', evt => {
+  films.addEventListener('click', evt => {
     modal.classList.remove('is-hidden');
     const id = evt.target.dataset.id;
     renderModal(getDetailFilm(id));
