@@ -99,30 +99,51 @@ img {
   }
 }
 
-.catalog__stars-wrap {
-  margin-right: 0px;
-  width: 200px;
-  font-size: 18px;
-  position: relative;
-  padding-bottom: 20px;
+.start-rate__hero {
+  margin-top: 12px;
+    margin-bottom: 21px;
+    margin-left: auto;
+    font-size: 18px;
 
-  &::before {
-    content: ' ★ ★ ★ ★ ★';
-    display: block;
+@include tablet {
+  margin-top: 14px;
+  margin-bottom: 22px;
+  font-size: 22px;
+  line-height: 1.2;
   }
 
-  @include tablet {
-    width: 66px;
-    height: 10px;
-    font-size: 10px;
-  }
-
-  @include desktop {
-    width: 106px;
-    height: 18px;
-    font-size: 16px;
-  }
+@include desktop {
+  margin-top: 18px;
+  margin-bottom: 30px;
+  font-size: 24px;
+  line-height: 1.2;
+ }
 }
+
+// .catalog__stars-wrap {
+//   margin-right: 0px;
+//   width: 200px;
+//   font-size: 18px;
+//   position: relative;
+//   padding-bottom: 20px;
+
+//   &::before {
+//     content: ' ★ ★ ★ ★ ★';
+//     display: block;
+//   }
+
+//   @include tablet {
+//     width: 66px;
+//     height: 10px;
+//     font-size: 10px;
+//   }
+
+//   @include desktop {
+//     width: 106px;
+//     height: 18px;
+//     font-size: 16px;
+//   }
+// }
 
 
 

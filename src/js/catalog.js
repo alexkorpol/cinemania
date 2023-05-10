@@ -2,6 +2,8 @@ import axios from 'axios';
 import { KEY } from './api-key';
 import { renderModal } from './global-modal';
 import Pagination from 'tui-pagination';
+import { renderModal } from './global-modal';
+// import { getDetailFilm } from './home-weekly';
 
 const emptyStar = `<svg class="star" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M16.875 7.3125H10.8281L9 1.6875L7.17188 7.3125H1.125L6.04688 10.6875L4.14844 16.3125L9 12.7969L13.8516 16.3125L11.9531 10.6875L16.875 7.3125Z" stroke="url(#paint0_linear_405_766)" stroke-linejoin="round"/>
@@ -41,6 +43,10 @@ const halfStar = `<svg class="star" width="18" height="18" viewBox="0 0 18 18" f
 const BASE_URL = 'https://api.themoviedb.org/3';
 const TREND_URL = `${BASE_URL}/trending/movie/week`;
 const SEARCH_URL = `${BASE_URL}/search/movie`;
+const modal = document.querySelector('.modal-weekly');
+const closeButton = document.querySelector('.close');
+const modalPoster = document.querySelector('.modal-weekly__poster');
+
 
 let searchPage = 1;
 let query = '';
@@ -65,7 +71,7 @@ async function fetchMovieSearcher(text, page) {
     const { data } = await axios.get(
       `${SEARCH_URL}?api_key=${KEY}&query=${text}&page=${page}`
     );
-
+  data.results = data.results.slice(0, 10);
     return data;
   } catch (error) {
     console.error(error);
@@ -84,6 +90,15 @@ async function getGenres() {
   const genres = await getMovieGenres().then(({ genres }) => genres);
 
   return { genres };
+}
+
+ async function getDetailFilm(movie_id) {
+  const response = await axios.get(
+    `${BASE_URL}movie/${movie_id}?api_key=${KEY}&language=en-US`
+  );
+
+  console.log(response.data)
+  return response.data;
 }
 
 function renderMarkupList(data) {
@@ -109,9 +124,22 @@ function renderMarkupList(data) {
     const markupList = createListMarkup(data.results);
     if (cards) {
       cards.innerHTML = markupList;
+
+      cards.addEventListener('click', async evt => {
+    modal.classList.remove('is-hidden');
+    const id = evt.target.dataset.id;
+    const movie = await getDetailFilm(id);
+    renderModal(movie);
+    closeButton.addEventListener('click', () => {
+      modal.classList.add('is-hidden');
+      modalPoster.innerHTML = '';
+    });
+  });
+
     }
   });
 }
+
 
 async function createListMarkup(data) {
   const { genres: genreName } = await getGenres();
@@ -127,7 +155,6 @@ async function createListMarkup(data) {
       title,
       id,
     } = data[i];
-
     let genres = [];
 
     for (let j = 0; j < genreName.length; j++) {
@@ -209,6 +236,7 @@ async function createListMarkup(data) {
   }
 
   cards.insertAdjacentHTML('afterbegin', movieArray.join(''));
+
 }
 
 const cards = document.querySelector('#cards__list');
@@ -257,9 +285,10 @@ async function getTrendData(page) {
     const { data } = await axios.get(
       `${TREND_URL}?api_key=${KEY}&page=${page}`
     );
+    data.results = data.results.slice(0, 10);
     return data;
   } catch (error) {
-    console.error('Smth wrong with api get full trends' + error);
+    console.error(error);
   }
 }
 
@@ -323,3 +352,17 @@ pagination.on('afterMove', event => {
     });
   }
 });
+
+
+
+
+// cards.addEventListener('click', async evt => {
+//   modal.classList.remove('is-hidden');
+//   const id = evt.target.dataset.id;
+//   const movie = await getDetailFilm(id);
+//   renderModal(movie);
+//   closeButton.addEventListener('click', () => {
+//     modal.classList.add('is-hidden');
+//     modalPoster.innerHTML = '';
+//   });
+// });
