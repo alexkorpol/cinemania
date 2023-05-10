@@ -42,7 +42,7 @@ function toggleScrollUpButton() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  window.removeEventListener('DOMContentLoaded', arguments.callee, false);
+  window.removeEventListener('DOMContentLoaded', toggleScrollUpButton, false);
 
   window.addEventListener('scroll', toggleScrollUpButton);
 

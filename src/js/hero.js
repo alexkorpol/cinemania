@@ -2,8 +2,8 @@ import { getDayTrending, getVideos } from './api.js';
 import * as basicLightbox from 'basiclightbox';
 
 
-import black from '../img/dark-hero-desktop.png';
-import white from '../img/light-hero-desktop.png';
+import black from '../img/hero-mask-dark/dark-hero-desktop.png';
+import white from '../img/hero-mask-light/light-hero-desktop.png';
 
 const hero = document.querySelector('.hero');
 const LightSwitcher = document.querySelector('.switcher');
