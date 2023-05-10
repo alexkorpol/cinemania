@@ -9,7 +9,8 @@ export async function renderModal(movie) {
     overview,
   } = await movie;
   const modalPoster = document.querySelector('.modal-weekly__poster');
-  const genreName = genres.map(genre => genre.name);
+  const genreName = genres ? genres.map(genre => genre.name) : [];
+  // const genreName = genres.map(genre => genre.name);
   const genresList = genreName.slice(0, 2);
   const modalMarkup = `
     <div class="modal-weekly__thumb">

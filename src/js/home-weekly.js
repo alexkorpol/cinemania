@@ -164,6 +164,7 @@ async function getDetailFilm(movie_id) {
   );
   return response.data;
 }
+
 homeCards.addEventListener('click', async evt => {
   modal.classList.remove('is-hidden');
   const id = evt.target.dataset.id;
@@ -174,3 +175,5 @@ homeCards.addEventListener('click', async evt => {
     modalPoster.innerHTML = '';
   });
 });
+
+
