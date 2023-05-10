@@ -1,102 +1,91 @@
-import { KEY } from './api-key';
+import { getDayTrending, getVideos } from './api.js';
+import * as basicLightbox from 'basiclightbox';
+import 'basiclightbox/dist/basiclightbox.min.css';
 
-const BASE_URL = `https://api.themoviedb.org/3/trending/movie/day?api_key=${KEY}&page=1`;
-const IMG_URL = 'https://image.tmdb.org/t/p/original/';
+import black from '../img/dark-hero-desktop.png';
+import white from '../img/light-hero-desktop.png';
 
-fetchMovieOfTheDay();
+const hero = document.querySelector('.hero');
+const LightSwitcher = document.querySelector('.switcher');
 
-function fetchMovieOfTheDay() {
-  return fetch(BASE_URL)
-    .then(response => response.json())
-    .then(data => {
-      makeMovieOfTheDay(data);
-    })
-    .catch(error => console.log(error));
+LightSwitcher.addEventListener('click', switchPhoto);
+
+function switchPhoto() {
+  const blackImage = document.querySelector('.black');
+  const currentImageSrc = blackImage.getAttribute('src');
+  const newImageSrc = currentImageSrc === black ? white : black;
+  blackImage.setAttribute('src', newImageSrc);
+
+  localStorage.setItem('imageColor', newImageSrc);
 }
 
-const heroEl = document.body.querySelector('.hero');
-const heroContainer = document.body.querySelector('.hero__container');
-const heroFilm = document.body.querySelector('.hero__with-film');
-
-function makeMovieOfTheDay(data) {
+async function displayTrendingMovie() {
   try {
-    if (data) {
-      console.log(data);
-      const valueOfElements = data.results.length - 1;
-      console.log(valueOfElements);
+    const { results } = await getDayTrending(1);
+    const movieOfDay = results[Math.floor(Math.random() * results.length)];
 
-      const movieNumber = Math.round(getRandomNumber(0, valueOfElements));
-      console.log(movieNumber);
+    createTrendingMarkup(movieOfDay);
 
-      const film = data.results[movieNumber];
-      console.log(film);
+    const trailerBtn = document.getElementById('trailer-btn');
+    trailerBtn.addEventListener('click', async () => {
+      try {
+        const videos = await getVideos(movieOfDay.id);
+        const infoTr = videos.find(el => el.name === 'Official Trailer');
 
-      heroContainer.innerHTML = '';
-      makeMarkup(film);
-    }
+        if (!infoTr) {
+          throw new Error('Trailer not found');
+        }
+
+        const keyTr = infoTr.key;
+        const instance = basicLightbox.create(`
+          <iframe class="iframe" src="https://www.youtube.com/embed/${keyTr}" width="560" height="315" frameborder="0"></iframe>
+        `);
+
+        instance.show(() => console.log('lightbox now visible'));
+      } catch (error) {
+        const instance = basicLightbox.create(`
+          <div class="notification-trailer-fail">
+            <p class="notification-trailer-fail-text">OOPS...<br/> We are very sorry!<br /> But we couldn’t find the trailer.</p>
+            <button type="button" class="btn-close"><svg class="btn-close--svg" width=24 height=24>
+            <use href='../../img/sprite.svg#icon-x-button'></use>
+        </svg>
+      </button>
+            <div class="bg-box"></div>
+          </div>
+        `);
+
+        instance.show(() => console.log('lightbox now visible'));
+      }
+    });
   } catch (error) {
     console.log(error);
-    heroEl.classList.remove('hero__with-film');
-    heroEl.classList.add('hero__default');
   }
 }
 
-function getRandomNumber(min, max) {
-  return Math.random() * (max - min) + min;
+function createTrendingMarkup(movieOfDay) {
+  const markup = `
+    <div class="hero-wrap">
+      <div class="thumb">
+        <div class="background-image">
+          <img src="https://image.tmdb.org/t/p/original${
+            movieOfDay.backdrop_path
+          }" alt="Hero image" class="backend" />
+          <img src="${black}" class="black" />
+        </div>
+        <div class="hero-wrap__content">
+          <h1 class="title">${movieOfDay.title || movieOfDay.name}</h1>
+          <div class="catalog__stars-wrap">
+            <div class="catalog__rating-active" style="width:${
+              movieOfDay.vote_average / 2 / 0.05
+            }%"></div>
+          </div>
+          <p class="description">${movieOfDay.overview}</p>
+          <button class="watch-trailer__btn" id="trailer-btn" data-btn="trailer-fail">Watch trailer</button>
+        </div>
+      </div>
+    </div>
+  `;
+  hero.innerHTML = markup;
 }
 
-function makeMarkup(film) {
-  heroContainer.innerHTML = `<div class="hero__box">
-    <h2 class="hero__title">${film.title}</h2>
-    <p class="rating__value">${film.vote_average}</p>
-    <p class="hero__overview">${film.overview}</p>
-    <button class="hero__btn ">Watch trailer</button></div>
-    <div class="hero__background"></div>
-    `;
-
-  window.addEventListener('load', setHeroBackground(film));
-  window.addEventListener('resize', setHeroBackground(film));
-}
-
-function setHeroBackground(film) {
-  const windowWidth = window.innerWidth;
-
-  if (windowWidth <= 768) {
-    heroFilm.style.backgroundImage = `linear-gradient(87.8deg, #0e0e0e 15.61%, rgba(14, 14, 14, 0) 60.39%), url('${IMG_URL}${film.backdrop_path}')`;
-  } else if (windowWidth >= 769) {
-    heroFilm.style.backgroundImage = `url('${IMG_URL}${film.backdrop_path}')`;
-  } else if (windowWidth >= 1200) {
-    heroFilm.style.backgroundImage = ` url('${IMG_URL}${film.backdrop_path}')`;
-  }
-}
-
-// ================== rating ==================
-
-// const ratings = document.querySelectorAll('.rating');
-// if (ratings.length > 0) {
-//     initRatings();
-// }
-
-// function initRatings() {
-//     let ratingActive, ratingValue;
-//     for ( let i = 0; i <ratings.length; i ++){
-//         const rating = ratings[i];
-//         initRatings(rating);
-
-// }function initRatings(rating){
-// initRatingsCons(rating);
-
-// setRatingActiveWidth();
-// }
-
-// function initRatingsCons(rating) {
-//     ratingActive = rating.querySelector('.rating__active');
-//     ratingValue = rating.querySelector('.rating__value');
-
-// }
-
-// function setRatingActiveWidth(i = ratingValue.innerHTML){
-//     const ratingActiveWidth = i /0.10;
-//     ratingActive.style.width = `${ratingActiveWidth}%`;
-// }
-// }
+displayTrendingMovie();

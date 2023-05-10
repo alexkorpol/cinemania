@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cinemania</title>
     <link rel="stylesheet" href="./sass/index.scss" />
-    <script type="module" src="./index.js"></script>
     <!-- Favicon -->
     <link
       rel="apple-touch-icon"
@@ -38,48 +37,17 @@
 
   <body>
     <!-- ❗️❗️❗️ Add partials like so for every page -->
+
     <include src="./partials/header.html"></include>
-
     <main>
-      <!-- <include src="./partials/hero.html"></include>
-        
-      <include src="./partials/home.html"></include>
-
-      <include src="./partials/modal.html"></include> -->
-      <section class="cards">
-        <h2 class="visually-hidden" aria-label="film cards">Film cards</h2>
-        <div class="container container__catalog">
-          <div class="search__form--container">
-            <form class="search__form" id="search-form">
-              <div class="search__form--wrapper">
-                <input class="search__form--input" type="text" name="search" id="searchQuery" placeholder="Search"
-                  autocomplete="off" />
-              </div>
-              <button type="submit" class="search__form--button">
-                <svg class="search__form--icon" width="20" height="20">
-                  <use href="./img/sprite.svg#icon-search"></use>
-                </svg>
-              </button>
-            </form>
-          </div>
-          <ul class="cards__list films" id="cards__list"></ul>
-        </div>
-      </section>
-      <div id="tui-pagination-container" class="tui-pagination"></div>
+      <include src="./partials/catalog-list.html"></include>
     </main>
-    <include src="./partials/catalog-list.html"></include>
 
     <include src="./partials/footer.html"></include>
     <include src="./partials/footer-modal-team.html"></include>
     <include src="./partials/scroll-to-top.html"></include>
 
     <!-- JS -->
-    <script type="module" src="./js/header.js"></script>
-    <script type="module" src="./js/hero.js"></script>
-    <script type="module" src="./js/catalog.js"></script>
-    <script type="module" src="./js/mobile-menu.js"></script>
-    <script type="module" src="./js/home.js"></script>
-    <script type="module" src="./js/render_footer_modal.js"></script>
-    <script type="module" src="./js/scroll-to-top.js"></script>
+    <script type="module" src="./index-catalog.js"></script>
   </body>
 </html>
