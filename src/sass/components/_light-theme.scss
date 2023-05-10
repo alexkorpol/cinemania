@@ -52,21 +52,21 @@ body.light {
 
 //* HERO
 body.light {
-  // .hero__background {
-  //   @media screen and (min-width: 768px) {
-  //     background-image: url('../img/hero-mask-light/light-hero-tablet.png');
-  //     @include retina {
-  //       background-image: url('../img/hero-mask-light/light-hero-tablet-2x.png');
-  //     }
-  //   }
+  .hero__background {
+    @media screen and (min-width: 768px) {
+      background-image: url('../img/hero-mask-light/light-hero-tablet.png');
+      @include retina {
+        background-image: url('../img/hero-mask-light/light-hero-tablet-2x.png');
+      }
+    }
 
-  //   @media screen and (min-width: 1200px) {
-  //     background-image: url('../img/hero-mask-light/light-hero-desktop.png');
-  //     @include retina {
-  //       background-image: url('../img/hero-mask-light/light-hero-desktop-2x.png');
-  //     }
-  //   }
-  // }
+    @media screen and (min-width: 1200px) {
+      background-image: url('../img/hero-mask-light/light-hero-desktop.png');
+      @include retina {
+        background-image: url('../img/hero-mask-light/light-hero-desktop-2x.png');
+      }
+    }
+  }
   .title {
     color: $text-dark-background;
     @include tablet {
