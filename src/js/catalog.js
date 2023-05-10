@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { KEY } from './api-key';
+import { renderModal } from './global-modal';
 import Pagination from 'tui-pagination';
 
 const emptyStar = `<svg class="star" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">

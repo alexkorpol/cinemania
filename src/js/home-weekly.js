@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { KEY } from './api-key';
+import { renderModal } from './global-modal';
 const emptyStar = `<svg class="star" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M16.875 7.3125H10.8281L9 1.6875L7.17188 7.3125H1.125L6.04688 10.6875L4.14844 16.3125L9 12.7969L13.8516 16.3125L11.9531 10.6875L16.875 7.3125Z" stroke="url(#paint0_linear_405_766)" stroke-linejoin="round"/>
 <defs>
@@ -168,29 +169,8 @@ homeCards.addEventListener('click', async evt => {
   const id = evt.target.dataset.id;
   const movie = await getDetailFilm(id);
   renderModal(movie);
-});
-function addToLibrary(movie) {
-  // Отримати масив фільмів з локального сховища
-  const library = JSON.parse(localStorage.getItem('movieLibrary')) || [];
-  // Перевірити, чи фільм вже присутній в бібліотеці
-  const existingMovie = library.find(item => item.id === movie.id);
-  const existingIndex = library.indexOf(existingMovie);
-  if (existingMovie) {
-    console.log('Фільм вже присутній в бібліотеці');
-    library.splice(existingIndex, 1);
-    localStorage.setItem('movieLibrary', JSON.stringify(library));
-    return;
-  }
-
-  // Додати фільм до масиву
-  library.push(movie);
-
-  // Зберегти оновлений масив у локальне сховище
-  localStorage.setItem('movieLibrary', JSON.stringify(library));
-
-  console.log('Фільм додано до бібліотеки');
-}
-closeButton.addEventListener('click', () => {
-  modal.classList.add('is-hidden');
-  modalPoster.innerHTML = '';
+  closeButton.addEventListener('click', () => {
+    modal.classList.add('is-hidden');
+    modalPoster.innerHTML = '';
+  });
 });
