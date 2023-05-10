@@ -4,7 +4,7 @@ import { KEY } from './api-key';
 const BASE_URL = 'https://api.themoviedb.org/3';
 const modalPoster = document.querySelector('.modal__poster');
 const films = document.querySelector('.films');
-const modal = document.querySelector('.modal');
+const modal = document.querySelector('.modal-weekly_overlay');
 
 async function getDetailFilm(movie_id) {
   const response = await axios.get(
