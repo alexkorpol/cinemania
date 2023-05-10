@@ -36,7 +36,7 @@ const halfStar = `<svg class="star" width="18" height="18" viewBox="0 0 18 18" f
 </svg>`;
 const homeCards = document.querySelector('.home-weekly__cards');
 const modal = document.querySelector('.modal-weekly');
-modal.classList.add('is-hidden');
+// modal.classList.add('is-hidden');
 const modalOverlay = document.querySelector('.modal-weekly__overlay');
 const modalPoster = document.querySelector('.modal-weekly__poster');
 const closeButton = document.querySelector('.close');
@@ -163,43 +163,6 @@ async function getDetailFilm(movie_id) {
   );
   return response.data;
 }
-async function renderModal(movie) {
-  const {
-    poster_path,
-    original_title,
-    vote_average,
-    vote_count,
-    popularity,
-    genres,
-    overview,
-  } = await movie;
-  const genreName = genres.map(genre => genre.name);
-  const genresList = genreName.slice(0, 2);
-  const modalMarkup = `
-    <div class="modal-weekly__thumb">
-      <img src="https://image.tmdb.org/t/p/original/${poster_path}" alt=${original_title} class="modal-weekly__img">
-    </div>
-    <div class="modal-weekly__info">
-      <h2 class="modal-weekly__title">${original_title}</h2>
-      <ul class="modal-weekly__list">
-      <li class="modal-weekly__list-item"><p class="modal-weekly__list-vote">Vote / Votes</p><span class="modal-weekly__list-values"><span class="modal-weekly__list-evalue">${vote_average}</span><span class="modal-weekly__list-sign"> / </span><span class="modal-weekly__list-evalue">${vote_count}</span></span></li>
-      <li class="modal-weekly__list-item"><p class="modal-weekly__list-popularity">Popularity</p><span class="modal-weekly__list-count">${popularity}</span></li>
-      <li class="modal-weekly__list-item"><p class="modal-weekly__list-genre">Genre</p><span class="modal-weekly__list-genres">${genresList}</span></li>
-      </ul>
-      <strong class="modal-weekly__about">About</strong>
-      <p class="modal-weekly__description">${overview}</p>
-      <button type="button" class="button-send">Add to my library</button>
-    </div>`;
-  modalPoster.insertAdjacentHTML('beforeend', modalMarkup);
-
-  setTimeout(() => {
-    const closeButton = document.querySelector('.close');
-    const addButton = document.querySelector('.button-send');
-    addButton.addEventListener('click', () => {
-      addToLibrary(movie);
-    });
-  }, 0);
-}
 homeCards.addEventListener('click', async evt => {
   modal.classList.remove('is-hidden');
   const id = evt.target.dataset.id;
@@ -231,30 +194,3 @@ closeButton.addEventListener('click', () => {
   modal.classList.add('is-hidden');
   modalPoster.innerHTML = '';
 });
-
-// ВІДМАЛЬОВУЄ
-
-// function renderMovieInLibrary(movie) {
-//   const libraryContainer = document.querySelector('.my-library__gallery');
-
-//   const movieMarkup = `
-//   <div class="movie">
-//           <img src="${movie.poster_path}" alt="${movie.original_title}">
-//           <h2>${movie.original_title}</h2>
-//           <p>Vote Average: ${movie.vote_average}</p>
-//           <p>Vote Count: ${movie.vote_count}</p>
-//           <p>Popularity: ${movie.popularity}</p>
-//           <p>Genres: ${movie.genres}</p>
-//           <p>${movie.overview}</p>
-//         </div>`;
-
-//   libraryContainer.insertAdjacentHTML('beforeend', movieMarkup);
-// }
-
-// Отримати масив фільмів з локального сховища
-// const library = JSON.parse(localStorage.getItem('movieLibrary')) || [];
-// console.log(library);
-// // Пройтись по кожному фільму в бібліотеці та відмалювати його
-// library.forEach(movie => {
-//   renderMovieInLibrary(movie);
-// });

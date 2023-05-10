@@ -2,9 +2,13 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 40px;
+  padding-left: 20px;
   @include mobile {
     min-height: 380px;
+    width: 320px;
   }
 
   background-image: linear-gradient(
@@ -24,8 +28,10 @@
   }
 
   @include tablet {
+    padding-top: 62px;
+    padding-left: 32px;
     min-height: 370px;
-
+    width: 768px;
     background-image: linear-gradient(
         83.48deg,
         #0e0e0e 25.78%,
@@ -45,7 +51,9 @@
 
   @include desktop {
     min-height: 660px;
-
+    width: 1280px;
+    padding-top: 169px;
+    padding-left: 117px;
     background-image: linear-gradient(
         83.48deg,
         #0e0e0e 25.78%,
@@ -67,21 +75,21 @@
 .my-libr__container {
   display: flex;
   flex-direction: column;
+  padding: 0;
+  // @include tablet {
+  //   padding: 60px 32px;
+  // }
 
-  @include tablet{
-    padding: 60px 32px;
-  }
-
-  @include desktop {
-    padding: 169px 117px;
-  }
+  // @include desktop {
+  //   padding: 169px 117px;
+  // }
 }
 
 .my-libr__title {
   @include font(700, 32, 1.18, null);
   display: inline-block;
   max-width: 235px;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   color: $text-dark-background;
   @include tablet {
     @include font(null, 44, 1.18, null);
@@ -158,5 +166,121 @@
   &:hover {
     color: #f87719;
     background: #ffffff;
+  }
+}
+
+/////////////////////////////////////// Embed cards from localStorage
+////////////////////////////////////
+#is-hidden.libr-content {
+  display: none;
+  opacity: 0;
+  appearance: none;
+  visibility: hidden;
+  pointer-events: none;
+}
+.my-library {
+  width: 320px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 40px 20px;
+  @include tablet {
+    width: 768px;
+    padding: 92px 32px 60px;
+  }
+  @include desktop {
+    width: 1280px;
+    padding: 117px 32px 96px;
+  }
+  &__list {
+    @include tablet {
+      display: flex;
+      flex-wrap: wrap;
+      row-gap: 28px;
+      column-gap: 16px;
+    }
+  }
+  &__item {
+    width: 280px;
+    height: 406px;
+    position: relative;
+    display: flex;
+    &:not(:last-child) {
+      margin-bottom: 16px;
+      @include tablet {
+        margin-bottom: 0;
+      }
+    }
+    @include tablet {
+      max-width: 224px;
+      height: 325px;
+      flex-basis: calc(100% / 3);
+    }
+    @include desktop {
+      width: 394px;
+      height: 574px;
+    }
+  }
+  &__thumb {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+  }
+  &__img {
+    background-image: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0) 63%,
+      rgba(0, 0, 0, 0.9) 92%
+    );
+    z-index: 50;
+    border-radius: 5px;
+    height: 100%;
+    width: 100%;
+    display: block;
+  }
+  &__info {
+    margin-top: auto;
+    bottom: 12;
+    left: 12;
+    display: inline-block;
+    width: 100%;
+    position: absolute;
+    & > span {
+      display: inline-flex;
+      align-items: baseline;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      font-weight: 500;
+      font-size: 12px;
+      line-height: calc(20px / 12px);
+      color: #b7b7b7;
+      @include tablet {
+        line-height: calc(18px / 12px);
+      }
+    }
+  }
+  &__title {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: calc(20px / 12px);
+    text-transform: uppercase;
+    display: block;
+    color: #ffffff;
+    display: flex;
+    @include tablet {
+      line-height: calc(18px / 12px);
+    }
+  }
+  &__rating {
+    display: flex;
+    position: absolute;
+    bottom: 8;
+    right: 24;
+    align-items: baseline;
+    width: 86px;
+    height: 14px;
+    @include tablet {
+      width: 66px;
+      height: 10px;
+    }
   }
 }
