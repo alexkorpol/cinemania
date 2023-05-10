@@ -1,6 +1,6 @@
 const KEY = '0d9ddfeb4636025259fcaee6725b8ad3';
-export const BASE_URL = 'https://api.themoviedb.org/3';
-export { KEY };
+const BASE_URL = 'https://api.themoviedb.org/3';
+export { KEY,BASE_URL };
   
 //  Підказка для посилань з ТЗ
 // https://api.themoviedb.org/3/trending/ - Трендові фільми дня/тижня

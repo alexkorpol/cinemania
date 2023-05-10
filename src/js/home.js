@@ -1,13 +1,12 @@
 import axios from 'axios';
-import { KEY } from './api-key';
-import { renderModal } from './modal_film';
-//upcoming
+import { KEY,BASE_URL } from './api-key';
+
+
 
 async function getRandomMovie() {
-  const apiKey = '0d9ddfeb4636025259fcaee6725b8ad3';
   const maxPages = 1; // maximum number of pages with movies in API
   const randomPage = Math.floor(Math.random() * maxPages) + 1;
-  const url = `https://api.themoviedb.org/3/movie/upcoming?api_key=${apiKey}&page=${randomPage}`;
+  const url = `${BASE_URL}/movie/upcoming?api_key=${KEY}&page=${randomPage}`;
   const response = await axios.get(url);
   const randomMovie =
     response.data.results[
@@ -17,8 +16,7 @@ async function getRandomMovie() {
 }
 
 async function getGenres() {
-  const apiKey = '0d9ddfeb4636025259fcaee6725b8ad3';
-  const url = `https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}`;
+  const url = `${BASE_URL}/genre/movie/list?api_key=${KEY}`;
   const response = await axios.get(url);
   return response.data.genres;
 }
@@ -68,3 +66,5 @@ async function callMovieCard() {
   displayRandomMovie((await response).data);
 }
 callMovieCard();
+
+// LOCAL
