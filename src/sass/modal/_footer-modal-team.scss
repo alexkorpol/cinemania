@@ -185,9 +185,8 @@ body.modal-open {
 }
 
 .student__name {
-  @include font(600, 18px, 1.15, 0.04);
+  @include font(600, 18, 1.15, 0.04);
   color: #99a1ca;
-  font-family: 'Roboto';
   padding-bottom: 8px;
   margin-bottom: 10px;
   border-bottom: 2px solid #99a1ca;
@@ -198,8 +197,7 @@ body.modal-open {
 }
 
 .student__role {
-  @include font(400, 18px, 1.15, 0.04);
-  font-family: 'Roboto';
+  @include font(400, 18, 1.15, 0.04);
   color: $text-secondary-color;
   margin-bottom: 10px;
   @include tablet {
@@ -209,8 +207,7 @@ body.modal-open {
 }
 
 .student__about {
-  @include font(400, 14px, 1.15, 0.04);
-  font-family: 'Roboto';
+  @include font(400, 14, 1.15, 0.04);
   color: $not-accent;
   margin-bottom: 10px;
   text-align: center;

@@ -30,17 +30,5 @@ navLinks.forEach(function(link) {
   }
 });
 
-// var currentPath = window.location.pathname;
-// var navLinks = document.querySelectorAll('.header__nav-link, .mobile-menu__link');
-// var homeLink = document.querySelector('.header__nav-link[href="./index.html"]');
 
-// navLinks.forEach(function (link) {
-//   if (link.getAttribute('href') === currentPath) {
-//     link.classList.add('link__current');
-//   }
-// });
-
-// if (currentPath === '/index.html') {
-//   homeLink.classList.add('link__current');
-// }
-
+console.log('gff');

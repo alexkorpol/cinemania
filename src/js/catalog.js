@@ -1,9 +1,6 @@
 import axios from 'axios';
 import { KEY } from './api-key';
 import Pagination from 'tui-pagination';
-import { renderModal } from './modal_film';
-
-
 
 
 
@@ -47,7 +44,7 @@ const emptyStar = `<svg class="star" width="18" height="18" viewBox="0 0 18 18" 
 const BASE_URL = 'https://api.themoviedb.org/3';
 const TREND_URL = `${BASE_URL}/trending/movie/week`;
 const SEARCH_URL = `${BASE_URL}/search/movie`;
-// const IMG_URL = `https://image.tmdb.org/t/p`;
+
 
 let searchPage = 1;
 let query = '';
