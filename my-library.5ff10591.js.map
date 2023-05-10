@@ -1,1 +1,0 @@
-{"mappings":"oeAAAA,EAAA,S","sources":["src/index-library.js"],"sourcesContent":["import './js/switcher-theme.js';\nimport './js/render_footer_modal';\nimport './js/mobile-menu';\nimport './js/scroll-to-top';"],"names":["parcelRequire"],"version":3,"file":"my-library.5ff10591.js.map"}
