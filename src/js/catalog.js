@@ -1,8 +1,7 @@
 import axios from 'axios';
 import { KEY } from './api-key';
+import { renderModal } from './global-modal';
 import Pagination from 'tui-pagination';
-
-
 
 const emptyStar = `<svg class="star" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M16.875 7.3125H10.8281L9 1.6875L7.17188 7.3125H1.125L6.04688 10.6875L4.14844 16.3125L9 12.7969L13.8516 16.3125L11.9531 10.6875L16.875 7.3125Z" stroke="url(#paint0_linear_405_766)" stroke-linejoin="round"/>
@@ -14,7 +13,7 @@ const emptyStar = `<svg class="star" width="18" height="18" viewBox="0 0 18 18" 
 </defs>
 </svg>`;
 
- const fullStar = `<svg class="star" width="18" height="18" viewBox="0 0 18 18" fill="rgba(248, 65, 25, 1)" xmlns="http://www.w3.org/2000/svg">
+const fullStar = `<svg class="star" width="18" height="18" viewBox="0 0 18 18" fill="rgba(248, 65, 25, 1)" xmlns="http://www.w3.org/2000/svg">
 <path d="M16.875 7.3125H10.8281L9 1.6875L7.17188 7.3125H1.125L6.04688 10.6875L4.14844 16.3125L9 12.7969L13.8516 16.3125L11.9531 10.6875L16.875 7.3125Z" stroke="url(#paint0_linear_405_766)" stroke-linejoin="round"/>
 <defs>
 <linearGradient id="paint0_linear_405_766" x1="3.375" y1="2.625" x2="13.5" y2="16.5" gradientUnits="userSpaceOnUse">
@@ -24,7 +23,7 @@ const emptyStar = `<svg class="star" width="18" height="18" viewBox="0 0 18 18" 
 </defs>
 </svg>`;
 
- const halfStar = `<svg class="star" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+const halfStar = `<svg class="star" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M16.875 7.3125H10.8281L9 1.6875L7.17188 7.3125H1.125L6.04688 10.6875L4.14844 16.3125L9 12.7969L13.8516 16.3125L11.9531 10.6875L16.875 7.3125Z" stroke="url(#paint0_linear_148_6991)" stroke-linejoin="round"/>
 <path d="M9 1.6875V12.7969L4.14844 16.3125L6.04688 10.6875L1.125 7.3125H7.17188L9 1.6875Z" fill="url(#paint1_linear_148_6991)"/>
 <defs>
@@ -39,33 +38,29 @@ const emptyStar = `<svg class="star" width="18" height="18" viewBox="0 0 18 18" 
 </defs>
 </svg>`;
 
-
- 
 const BASE_URL = 'https://api.themoviedb.org/3';
 const TREND_URL = `${BASE_URL}/trending/movie/week`;
 const SEARCH_URL = `${BASE_URL}/search/movie`;
-
 
 let searchPage = 1;
 let query = '';
 let searchFilms = true;
 let totalItems = 0;
 
-
-  function moviesDataUpdate(data) {
-    localStorage.setItem('moviesData', JSON.stringify(data.results));
-  }
+function moviesDataUpdate(data) {
+  localStorage.setItem('moviesData', JSON.stringify(data.results));
+}
 
 const saveSerialized = (key, value) => {
-    try {
-      const serializedState = JSON.stringify(value);
-      localStorage.setItem(key, serializedState);
-    } catch (error) {
-      console.error(error.message);
-    }
-  };
+  try {
+    const serializedState = JSON.stringify(value);
+    localStorage.setItem(key, serializedState);
+  } catch (error) {
+    console.error(error.message);
+  }
+};
 
-  async function fetchMovieSearcher(text, page) {
+async function fetchMovieSearcher(text, page) {
   try {
     const { data } = await axios.get(
       `${SEARCH_URL}?api_key=${KEY}&query=${text}&page=${page}`
@@ -81,7 +76,7 @@ async function getMovieGenres() {
   const { data } = await axios.get(
     `${BASE_URL}/genre/movie/list?api_key=${KEY}`
   );
-  
+
   return data;
 }
 
@@ -90,7 +85,6 @@ async function getGenres() {
 
   return { genres };
 }
-
 
 function renderMarkupList(data) {
   getGenres().then(({ genres }) => {
@@ -119,8 +113,7 @@ function renderMarkupList(data) {
   });
 }
 
-
- async function createListMarkup(data) {
+async function createListMarkup(data) {
   const { genres: genreName } = await getGenres();
   let movieArray = [];
 
@@ -145,7 +138,7 @@ function renderMarkupList(data) {
 
     const sliced = genres.slice(0, 2);
     const slicedGenres = sliced.join(', ');
-    
+
     let ratingStars = '';
 
     const rating = Math.round(vote_average);
@@ -167,9 +160,7 @@ function renderMarkupList(data) {
         ratingStars = `${fullStar.repeat(2)}${emptyStar.repeat(3)}`;
         break;
       case 5:
-        ratingStars = `${fullStar.repeat(2)}${halfStar}${emptyStar.repeat(
-          2
-        )}`;
+        ratingStars = `${fullStar.repeat(2)}${halfStar}${emptyStar.repeat(2)}`;
         break;
       case 6:
         ratingStars = `${fullStar.repeat(3)}${emptyStar.repeat(2)}`;
@@ -188,7 +179,7 @@ function renderMarkupList(data) {
         break;
       default:
         throw new Error('Invalid rating');
-    };
+    }
     movieArray.push(`
       <li class='cards-list__item hover-cursor' data-id='${id}'>
         <img
@@ -215,25 +206,23 @@ function renderMarkupList(data) {
         </div>
       </li>
     `);
-   
   }
 
   cards.insertAdjacentHTML('afterbegin', movieArray.join(''));
-};
-
+}
 
 const cards = document.querySelector('#cards__list');
 
 const form = document.querySelector('.search__form');
 
 const loadSerialized = key => {
-    try {
-      const serializedState = localStorage.getItem(key);
-      return serializedState === null ? undefined : JSON.parse(serializedState);
-    } catch (error) {
-      console.error(error.message);
-    }
-  };
+  try {
+    const serializedState = localStorage.getItem(key);
+    return serializedState === null ? undefined : JSON.parse(serializedState);
+  } catch (error) {
+    console.error(error.message);
+  }
+};
 
 const container = document.getElementById('tui-pagination-container');
 
@@ -263,7 +252,6 @@ const options = {
 };
 const pagination = new Pagination(container, options);
 
-
 async function getTrendData(page) {
   try {
     const { data } = await axios.get(
@@ -275,17 +263,15 @@ async function getTrendData(page) {
   }
 }
 
-getTrendData(searchPage).then((data) => {
-	renderMarkupList(data);
-	saveSerialized('totalItems', data.total_results);
-	saveSerialized("moviesData", data.results);
+getTrendData(searchPage).then(data => {
+  renderMarkupList(data);
+  saveSerialized('totalItems', data.total_results);
+  saveSerialized('moviesData', data.results);
 });
 
-
- if (form) {
+if (form) {
   form.addEventListener('submit', search);
 }
-
 
 function search(event) {
   event.preventDefault();
@@ -316,7 +302,6 @@ function search(event) {
   });
 }
 
-
 pagination.on('afterMove', event => {
   const currentPage = event.page;
   if (searchFilms) {
@@ -337,5 +322,4 @@ pagination.on('afterMove', event => {
       }
     });
   }
-})
-
+});

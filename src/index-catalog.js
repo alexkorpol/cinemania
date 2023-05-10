@@ -1,3 +1,4 @@
+import './js/global-modal';
 import './js/catalog';
 import './js/switcher-theme.js';
 import './js/render_footer_modal';
