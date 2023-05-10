@@ -51,32 +51,30 @@ body.light {
 }
 
 //* HERO
+
 body.light {
-  .hero {
-    background-color: $text-secondary-color;
-  }
   .hero__background {
     @media screen and (min-width: 768px) {
-      background-image: url('../img/light-hero-tablet.png');
+      background-image: url('../img/hero-mask-light/light-hero-tablet.png');
       @include retina {
-        background-image: url('../img/light-hero-tablet-2x.png');
+        background-image: url('../img/hero-mask-light/light-hero-tablet-2x.png');
       }
     }
 
     @media screen and (min-width: 1200px) {
-      background-image: url('../img/light-hero-desktop.png');
+      background-image: url('../img/hero-mask-light/light-hero-desktop.png');
       @include retina {
-        background-image: url('../img/light-hero-desktop-2x.png');
+        background-image: url('../img/hero-mask-light/light-hero-desktop-2x.png');
       }
     }
   }
-  .hero__title {
+  .title {
     color: $text-dark-background;
     @include tablet {
       color: $text-light-background;
     }
   }
-  .hero__overview {
+  .description {
     color: $text-secondary-color;
     @include tablet {
       color: $text-secondary-light;
@@ -87,20 +85,50 @@ body.light {
 // * HOME WEEKLY
 body.light {
   .home-weekly {
-  background-color: #ffffff;
-  &__title {
+    background-color: #ffffff;
+    &__title {
+      color: #111111;
+    }
+  }
+  .modal-weekly {
+    &__overlay {
+      background-color: #ffffff;
+    }
+    &__list-vote,
+    &__list-popularity,
+    &__list-genre {
+      color: #111111;
+    }
+    &__list-count {
+      color: #111111;
+    }
+    &__list-genres {
+      color: #111111;
+    }
+    &__list-evalue {
+      background: #F8F8F8;
+      color: #111111;
+    }
+    &__about {
+      color: #111111;
+    }
+    &__description {
+      color: #282828;
+    }
+    &__title {
+      color: #111111;
+    }
+  }
+  .close {
+    &__icon {
+      fill: #282828;
+    }
+  }
+
+  .button-send {
     color: #111111;
+    border-color: #f87719;
   }
-}
-.close {
-  &__icon {
-    fill: #282828;
-  }
-}
-.button-send {
-  color: #111111;
-  border-color: orange;
-}
 }
 
 // * HOME WEEKLY MODAL
@@ -145,6 +173,39 @@ body.light {
 body.light {
   .libr-content__text {
     color: $text-light-background;
+  }
+}
+
+// * CATALOG
+body.light {
+  .search__form {
+    color: #595959;
+  }
+  .search__form--input {
+    border: 1px solid #595959;
+    &:focus {
+      &::placeholder {
+        color: transparent;
+      }
+      box-shadow: 0 0 20px #f87719;
+    }
+  }
+  .search__form--button {
+    background: linear-gradient(141.22deg, #ffc226 9.4%, #f84119 91.91%);
+    color: #111111;
+    &:hover {
+      border: 2px solid #f87719;
+      background: transparent;
+      color: #f87719;
+    }
+  }
+  .tui-page-btn {
+    border: 1px solid #595959;
+    color: #595959;
+  }
+  .tui-page-btn.tui-is-selected {
+    border: none;
+    color: #282828;
   }
 }
 

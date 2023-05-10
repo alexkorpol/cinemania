@@ -22,13 +22,13 @@
 .bg-box {
   width: 150px;
   height: 150px;
-  background-image: url(../img/err-modal/err-mod-mob-min.png);
+  background-image: url('../img/err-modal/err-mod-mob-min.png');
   background-repeat: no-repeat;
   background-size: contain;
   margin-left: auto;
   margin-right: auto;
   @include tablet {
-    background-image: url(../img/err-modal/err-mod-tab-min.png);
+    background-image: url('../img/err-modal/err-mod-tab-min.png');
     position: fixed;
     right: 10px;
     bottom: 16px;
@@ -38,7 +38,7 @@
     height: 260px;
   }
   @include desktop {
-    background-image: url(../img/err-modal/err-mod-dsct-min.png);
+    background-image: url('../img/err-modal/err-mod-dsct-min.png');
     position: fixed;
     right: 10px;
     bottom: 16px;
@@ -52,7 +52,7 @@
   position: absolute;
   top: 20px;
   right: 20px;
-  // background-image: url(../img/sprite.svg#icon-x-button);
+  // background-image: url('../img/sprite.svg#icon-x-button');
   background-color: transparent;
   display: block;
   width: 24px;

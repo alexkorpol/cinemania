@@ -349,10 +349,11 @@
   border: none;
   border-radius: 50%;
   color: white;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 
   &:hover {
     border: 2px solid #f87719;
-    background: white;
+    background: transparent;
     color: #f87719;
   }
 }
@@ -378,6 +379,7 @@
   fill: transparent;
   stroke-width: 0;
   stroke: currentColor;
+  transition: none;
 }
 
 @media screen and (min-width: 1200px) {
@@ -425,7 +427,7 @@
 .tui-page-btn.tui-first {
   margin: 0;
   border: none;
-  background-image: url(/src/img/left-arrow.png.png);
+  background-image: url('../img/catalog-pagination/left-arrow.png');
   background-repeat: no-repeat;
   background-position: 50% 50%;
 }
@@ -433,7 +435,7 @@
 .tui-page-btn.tui-last {
   border: none;
   fill: #b7b7b7; 
-  background-image: url(/src/img/right-arrow.png.png);
+  background-image: url('../img/catalog-pagination/right-arrow.png');
   background-position: 50% 50%;
 }
 
@@ -444,7 +446,7 @@
 
 .tui-page-btn.tui-next {
   fill: #b7b7b7;
-  background-image: url(/src/img/right-arrow.png.png);
+  background-image: url('../img/catalog-pagination/right-arrow.png');
   background-position: 50%;
   background-repeat: no-repeat;
   border: none;
@@ -453,7 +455,7 @@
 
 .tui-page-btn.tui-prev {
   fill: #b7b7b7;
-  background-image: url(/src/img/left-arrow.png.png);
+  background-image: url('../img/catalog-pagination/left-arrow.png');
   background-position: 50%;
   background-repeat: no-repeat;
   border: none;

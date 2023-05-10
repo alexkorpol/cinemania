@@ -16,7 +16,7 @@
       #0e0e0e 25.78%,
       rgba(14, 14, 14, 0) 60.07%
     ),
-    url(../img/library-mobile.jpg);
+    url('../img/library-hero/library-mobile.jpg');
 
   @include retina {
     background-image: linear-gradient(
@@ -24,7 +24,7 @@
         #0e0e0e 25.78%,
         rgba(14, 14, 14, 0) 60.07%
       ),
-      url(../img/library-mobile-2x.jpg);
+      url('../img/library-hero/library-mobile-2x.jpg');
   }
 
   @include tablet {
@@ -37,7 +37,7 @@
         #0e0e0e 25.78%,
         rgba(14, 14, 14, 0) 60.07%
       ),
-      url(../img/library-tablet.jpg);
+      url('../img/library-hero/library-tablet.jpg');
 
     @include retina {
       background-image: linear-gradient(
@@ -45,7 +45,7 @@
           #0e0e0e 25.78%,
           rgba(14, 14, 14, 0) 60.07%
         ),
-        url(../img/library-tablet-2x.jpg);
+        url('../img/library-hero/library-tablet-2x.jpg');
     }
   }
 
@@ -59,7 +59,7 @@
         #0e0e0e 25.78%,
         rgba(14, 14, 14, 0) 60.07%
       ),
-      url(../img/library-desktop.jpg);
+      url('../img/library-hero/library-desktop.jpg');
 
     @include retina {
       background-image: linear-gradient(
@@ -67,7 +67,7 @@
           #0e0e0e 25.78%,
           rgba(14, 14, 14, 0) 60.07%
         ),
-        url(../img/library-desktop-2x.jpg);
+        url('../img/library-hero/library-desktop-2x.jpg');
     }
   }
 }

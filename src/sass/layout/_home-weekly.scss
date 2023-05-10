@@ -91,7 +91,7 @@
   cursor: pointer;
   max-width: 280px;
   height: 406px;
-  z-index: 50;
+  z-index: 4;
   background: linear-gradient(
     180deg,
     rgba(0, 0, 0, 0) 63.48%,
@@ -420,7 +420,7 @@
   right: 5;
 
   &__icon {
-    fill: #f84119;
+    fill: #F8F8F8;
   }
 }
 .button-send {
@@ -438,7 +438,7 @@
   flex-direction: row;
   text-align: center;
   color: #ffffff;
-  border-color: orange;
+  border-color: #f87719;
   @media screen and (min-width: 1200px) {
     line-height: calc(16px / 12px);
   }
