@@ -1,288 +1,344 @@
-
-// import axios from 'axios';
-//   import { KEY } from "./api-key";
-
-
-//   const BASE_URL = 'https://api.themoviedb.org/3/';
-//   const searchInput = document.getElementById('searchInput');
-//   const movieList = document.querySelector('#movie-list');
-//   const pagination = document.querySelector('.pagination')
-
-
-// <<<<<<< Updated upstream
-//     if (movies.length === 0) {
-//       movieList.innerHTML = '<p>OOPS...We are very sorry!We don’t have any results due to your search.</p>';
-//       pagination.innerHTML = '';
-//     } else {
-//       const start = (currentPage - 1) * moviesPerPage; // Индекс первого отображаемого фильма
-//       const end = start + moviesPerPage; // Индекс последнего отображаемого фильма
-//       const displayedMovies = movies.slice(start, end); // Отображаемые фильмы
-
-//       movieList.innerHTML = '';
-//       const promises = displayedMovies.map(async (movie) => {
-//         try {
-//           const { data: movieDetails } = await axios.get(
-//             `${BASE_URL}movie/${movie.id}?api_key=${KEY}`
-//           );
-//           const movieHtml = movieTemplate({ ...movie, ...movieDetails });
-//           movieList.insertAdjacentHTML('beforeend', movieHtml);
-//         } catch (error) {
-//           console.error(error);
-//         }
-//       });
-//       await Promise.all(promises);
-
-//       const paginationHtml = generatePagination(totalPages, currentPage);
-//       pagination.innerHTML = paginationHtml;
-
-//       pagination.addEventListener('click', function(event) {
-//         if (event.target.tagName === 'A') {
-//           const pageNumber = event.target.dataset.page;
-//           searchMovies(event, pageNumber);
-//         }
-//       });
-
-//       searchInput.value = '';
-//     }
-//   } catch (error) {
-//     console.error(error);
-//   }
-// }
-
-//   const searchForm = document.querySelector('.catalog__search form');
-
-//   searchForm.addEventListener('submit', searchMovies);
-
-//   function movieTemplate(movie) {
-//   return `<li>
-//             <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}">
-//             <h3>${movie.title}</h3>
-//             <p>${movie.overview}</p>
-//             <span>${movie.vote_average}</span>
-//             <span>${movie.genres.slice(0, 2).map(genre => genre.name).join(', ')}</span>
-//           </li>`;
-// }
-
-//   fetchTrendingMovies();
-
-// function generatePagination(totalPages, currentPage) {
-//   if (totalPages <= 1) {
-//     return '';
-//   }
-//   let paginationHtml = '<div class="pagination">';
-//   for (let i = 1; i <= totalPages; i++) {
-//     if (i === currentPage) {
-//       paginationHtml += `<span>${i}</span>`;
-//     } else {
-//       paginationHtml += `<a href="#" data-page="${i}">${i}</a>`;
-//     }
-//   }
-//   paginationHtml += '</div>';
-//   return paginationHtml;
-// }
-
+import axios from 'axios';
 import { KEY } from './api-key';
+import Pagination from 'tui-pagination';
 import { renderModal } from './modal_film';
 
+
+
+
+
+const emptyStar = `<svg class="star" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M16.875 7.3125H10.8281L9 1.6875L7.17188 7.3125H1.125L6.04688 10.6875L4.14844 16.3125L9 12.7969L13.8516 16.3125L11.9531 10.6875L16.875 7.3125Z" stroke="url(#paint0_linear_405_766)" stroke-linejoin="round"/>
+<defs>
+<linearGradient id="paint0_linear_405_766" x1="3.375" y1="2.625" x2="13.5" y2="16.5" gradientUnits="userSpaceOnUse">
+<stop stop-color="#F84119"/>
+<stop offset="1" stop-color="#F89F19" stop-opacity="0.68"/>
+</linearGradient>
+</defs>
+</svg>`;
+
+ const fullStar = `<svg class="star" width="18" height="18" viewBox="0 0 18 18" fill="rgba(248, 65, 25, 1)" xmlns="http://www.w3.org/2000/svg">
+<path d="M16.875 7.3125H10.8281L9 1.6875L7.17188 7.3125H1.125L6.04688 10.6875L4.14844 16.3125L9 12.7969L13.8516 16.3125L11.9531 10.6875L16.875 7.3125Z" stroke="url(#paint0_linear_405_766)" stroke-linejoin="round"/>
+<defs>
+<linearGradient id="paint0_linear_405_766" x1="3.375" y1="2.625" x2="13.5" y2="16.5" gradientUnits="userSpaceOnUse">
+<stop stop-color="#F84119"/>
+<stop offset="1" stop-color="#F89F19" stop-opacity="0.68"/>
+</linearGradient>
+</defs>
+</svg>`;
+
+ const halfStar = `<svg class="star" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M16.875 7.3125H10.8281L9 1.6875L7.17188 7.3125H1.125L6.04688 10.6875L4.14844 16.3125L9 12.7969L13.8516 16.3125L11.9531 10.6875L16.875 7.3125Z" stroke="url(#paint0_linear_148_6991)" stroke-linejoin="round"/>
+<path d="M9 1.6875V12.7969L4.14844 16.3125L6.04688 10.6875L1.125 7.3125H7.17188L9 1.6875Z" fill="url(#paint1_linear_148_6991)"/>
+<defs>
+<linearGradient id="paint0_linear_148_6991" x1="3.04877" y1="2.73251" x2="13.478" y2="16.7124" gradientUnits="userSpaceOnUse">
+<stop stop-color="#F84119"/>
+<stop offset="1" stop-color="#F89F19" stop-opacity="0.68"/>
+</linearGradient>
+<linearGradient id="paint1_linear_148_6991" x1="2.08688" y1="2.73251" x2="12.1506" y2="9.47748" gradientUnits="userSpaceOnUse">
+<stop stop-color="#F84119"/>
+<stop offset="1" stop-color="#F89F19" stop-opacity="0.68"/>
+</linearGradient>
+</defs>
+</svg>`;
+
+
+ 
 const BASE_URL = 'https://api.themoviedb.org/3';
+const TREND_URL = `${BASE_URL}/trending/movie/week`;
+const SEARCH_URL = `${BASE_URL}/search/movie`;
+// const IMG_URL = `https://image.tmdb.org/t/p`;
 
-const API_URL_TRENDING = `${BASE_URL}/trending/movie/day?api_key=${KEY}`;
-const API_URL_SEARCH = `${BASE_URL}/search/movie?api_key=${KEY}&query=`;
-
-let currentPage = 1;
-const moviesPerPage = 10;
-let totalMovies = 0;
+let searchPage = 1;
+let query = '';
+let searchFilms = true;
+let totalItems = 0;
 
 
+  function moviesDataUpdate(data) {
+    localStorage.setItem('moviesData', JSON.stringify(data.results));
+  }
 
-getMovies(API_URL_TRENDING);
+const saveSerialized = (key, value) => {
+    try {
+      const serializedState = JSON.stringify(value);
+      localStorage.setItem(key, serializedState);
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
 
-async function getMovies(url) {
-  const resp = await fetch(url);
-  const respData = await resp.json();
-  totalMovies = respData.total_results;
-  showMovies(respData.results);
-  displayPagination();
-  currentPage = 1; // Reset currentPage to 1 after fetching new movies
-}
+  async function fetchMovieSearcher(text, page) {
+  try {
+    const { data } = await axios.get(
+      `${SEARCH_URL}?api_key=${KEY}&query=${text}&page=${page}`
+    );
 
-function getClassByRate(vote) {
-  if (vote >= 7) {
-    return 'green';
-  } else if (vote > 5) {
-    return 'orange';
-  } else {
-    return 'red';
+    return data;
+  } catch (error) {
+    console.error(error);
   }
 }
 
-function showMovies(data) {
-  const moviesEl = document.querySelector('.movies');
+async function getMovieGenres() {
+  const { data } = await axios.get(
+    `${BASE_URL}/genre/movie/list?api_key=${KEY}`
+  );
+  
+  return data;
+}
 
-  // Clear previous movies
-  moviesEl.innerHTML = '';
+async function getGenres() {
+  const genres = await getMovieGenres().then(({ genres }) => genres);
 
-  data.forEach(movie => {
-    const movieEl = document.createElement('div');
-    movieEl.classList.add('movie');
-    movieEl.innerHTML = `
-      <div class="movie__cover-inner ">
-        <img
-          src="https://image.tmdb.org/t/p/w500${movie.poster_path}"
-          class="movie__cover"
-          alt="${movie.title}"
-        />
-        <div class="movie__cover--darkened"></div>
-      </div>
-      <div class="movie__info">
-        <div class='movie__info_wrapper'>
-        <div class="movie__title">${movie.title}</div>
-        <div class="movie__category">${movie.genre_ids}</div>
-      <div/>
-        <div class="movie__average movie__average--${getClassByRate(movie.vote_average)}">${movie.vote_average}</div>
-      </div>
-    `;
-    moviesEl.appendChild(movieEl);
+  return { genres };
+}
+
+
+function renderMarkupList(data) {
+  getGenres().then(({ genres }) => {
+    saveSerialized('genresList', genres);
+    if (data.results) {
+      data.results.forEach(film => {
+        const { genre_ids, release_date } = film;
+        genres.forEach(({ name, id }) => {
+          if (genre_ids.includes(id)) {
+            if (genre_ids.length > 2) {
+              genre_ids.splice(2, genre_ids.length - 1);
+            }
+            genre_ids.splice(genre_ids.indexOf(id), 1, name);
+          }
+          film.genre_names = genre_ids.join(', ');
+          if (film.release_date) {
+            film.release_date = release_date.slice(0, 4);
+          }
+        });
+      });
+    }
+    const markupList = createListMarkup(data.results);
+    if (cards) {
+      cards.innerHTML = markupList;
+    }
   });
 }
 
-function displayPagination() {
-  const paginationEl = document.querySelector('.pagination');
-  const pagesCount = Math.ceil(totalMovies / moviesPerPage);
-  const ulEl = document.createElement('ul');
-  ulEl.classList.add('pagination__list');
 
-  // Determine the maximum number of buttons to display
-  const maxButtons = 4;
-  const startPage = Math.max(1, currentPage - Math.floor(maxButtons / 2));
-  const endPage = Math.min(startPage + maxButtons - 1, pagesCount);
+ async function createListMarkup(data) {
+  const { genres: genreName } = await getGenres();
+  let movieArray = [];
 
-  for (let i = startPage; i <= endPage; i++) {
-    const liEl = document.createElement('li');
-    liEl.classList.add('pagination__item');
-    liEl.innerText = i;
-    if (i === currentPage) {
-      liEl.classList.add('pagination__item--active');
-    }
-  }
-  async function fetchTrendingMovies() {
-  try {
-    const response = await axios.get(`${BASE_URL}trending/movie/week?api_key=${KEY}`);
-    const movies = response.data.results;
-    for (const movie of movies) {
-      try {
-        const { data: movieDetails } = await axios.get(
-          `${BASE_URL}movie/${movie.id}?api_key=${KEY}`
-        );
-        const movieHtml = movieTemplate({ ...movie, ...movieDetails });
-        movieList.insertAdjacentHTML('beforeend', movieHtml);
-      } catch (error) {
-        console.error(error);
+  for (let i = 0; i < data.length; i++) {
+    const {
+      original_title,
+      genre_ids,
+      release_date,
+      poster_path,
+      vote_average,
+      title,
+      id,
+    } = data[i];
+
+    let genres = [];
+
+    for (let j = 0; j < genreName.length; j++) {
+      if (genre_ids.indexOf(genreName[j].id) !== -1) {
+        genres.push(genreName[j].name);
       }
-
     }
-  } catch (error) {
-    console.error(error);
+
+    const sliced = genres.slice(0, 2);
+    const slicedGenres = sliced.join(', ');
+    
+    let ratingStars = '';
+
+    const rating = Math.round(vote_average);
+
+    switch (rating) {
+      case 0:
+        ratingStars = `${emptyStar.repeat(5)}`;
+        break;
+      case 1:
+        ratingStars = `${halfStar}${emptyStar.repeat(4)}`;
+        break;
+      case 2:
+        ratingStars = `${fullStar}${emptyStar.repeat(4)}`;
+        break;
+      case 3:
+        ratingStars = `${fullStar}${halfStar}${emptyStar.repeat(3)}`;
+        break;
+      case 4:
+        ratingStars = `${fullStar.repeat(2)}${emptyStar.repeat(3)}`;
+        break;
+      case 5:
+        ratingStars = `${fullStar.repeat(2)}${halfStar}${emptyStar.repeat(
+          2
+        )}`;
+        break;
+      case 6:
+        ratingStars = `${fullStar.repeat(3)}${emptyStar.repeat(2)}`;
+        break;
+      case 7:
+        ratingStars = `${fullStar.repeat(3)}${halfStar}${emptyStar}`;
+        break;
+      case 8:
+        ratingStars = `${fullStar.repeat(4)}${emptyStar}`;
+        break;
+      case 9:
+        ratingStars = `${fullStar.repeat(4)}${halfStar}`;
+        break;
+      case 10:
+        ratingStars = `${fullStar.repeat(5)}`;
+        break;
+      default:
+        throw new Error('Invalid rating');
+    };
+    movieArray.push(`
+      <li class='cards-list__item hover-cursor' data-id='${id}'>
+        <img
+          class='cards-list__img'
+          src='${poster_path}'
+          alt='${original_title}'
+          width
+          loading='lazy'
+          data-id='${id}'
+        />
+        <div class='cards-list__wrap'>
+          <div class='cards-list__info'>
+            <h2 class='cards-list__title'>${title}</h2>
+            <div class='cards-list_second_line'>
+              <div class='cards-list__text'>
+                <p>${slicedGenres} | ${release_date}</p>
+              </div>
+               <div class='star-rate'>
+            ${ratingStars}
+          </div> 
+            </div>
+          </div>
+             
+        </div>
+      </li>
+    `);
+   
   }
-}
+
+  cards.insertAdjacentHTML('beforeend', movieArray.join(''));
+};
 
 
-async function searchMovies(event, currentPage = 1) {
-  event.preventDefault();
-  const searchTerm = searchInput.value;
-  const moviesPerPage = 10; // Количество фильмов на странице
+const cards = document.querySelector('#cards__list');
 
+const form = document.querySelector('.search__form');
+
+const loadSerialized = key => {
+    try {
+      const serializedState = localStorage.getItem(key);
+      return serializedState === null ? undefined : JSON.parse(serializedState);
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
+
+const container = document.getElementById('tui-pagination-container');
+
+const options = {
+  totalItems: loadSerialized('totalItems'),
+  itemsPerPage: 10,
+  visiblePages: 4,
+  page: 1,
+  centerAlign: false,
+  firstItemClassName: 'tui-first-child',
+  lastItemClassName: 'tui-last-child',
+  template: {
+    page: '<a href="#" class="tui-page-btn">{{page}}</a>',
+    currentPage:
+      '<strong class="tui-page-btn tui-is-selected">{{page}}</strong>',
+    moveButton:
+      '<a href="#" class="tui-page-btn tui-{{type}}">' +
+      '<span class="tui-ico-{{type}}"></span>' +
+      '</a>',
+    disabledMoveButton:
+      '<span class="tui-page-btn tui-is-disabled tui-{{type}}">' +
+      '<span class="tui-ico-{{type}}"></span>' +
+      '</span>',
+    moreButton:
+      '<a href="#" class="tui-page-btn tui-{{type}}-is-ellip">...</a>',
+  },
+};
+const pagination = new Pagination(container, options);
+
+
+async function getTrendData(page) {
   try {
-    const response = await axios.get(`${BASE_URL}search/movie?api_key=${KEY}&query=${searchTerm}&page=${currentPage}`);
-    const { results: movies, total_pages: totalPages } = response.data;
-
-    if (movies.length === 0) {
-      movieList.innerHTML = '<p>OOPS...We are very sorry!We don’t have any results due to your search.</p>';
-      pagination.innerHTML = '';
-    } else {
-      const start = (currentPage - 1) * moviesPerPage; // Индекс первого отображаемого фильма
-      const end = start + moviesPerPage; // Индекс последнего отображаемого фильма
-      const displayedMovies = movies.slice(start, end); // Отображаемые фильмы
-
-      movieList.innerHTML = '';
-      const promises = displayedMovies.map(async (movie) => {
-        try {
-          const { data: movieDetails } = await axios.get(
-            `${BASE_URL}movie/${movie.id}?api_key=${KEY}`
-          );
-          const movieHtml = movieTemplate({ ...movie, ...movieDetails });
-          movieList.insertAdjacentHTML('beforeend', movieHtml);
-        } catch (error) {
-          console.error(error);
-        }
-      });
-      await Promise.all(promises);
-
-      const paginationHtml = generatePagination(totalPages, currentPage);
-      pagination.innerHTML = paginationHtml;
-
-      pagination.addEventListener('click', function(event) {
-        if (event.target.tagName === 'A') {
-          const pageNumber = event.target.dataset.page;
-          searchMovies(event, pageNumber);
-        }
-      });
-
-      searchInput.value = '';
-    }
+    const { data } = await axios.get(
+      `${TREND_URL}?api_key=${KEY}&page=${page}`
+    );
+    return data;
   } catch (error) {
-    console.error(error);
+    console.error('Smth wrong with api get full trends' + error);
   }
 }
 
-
-
-  const searchForm = document.querySelector('.catalog__search form');
-  
-  searchForm.addEventListener('submit', searchMovies);
-
-  function movieTemplate(movie) {
-  return `<li>
-            <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}">
-            <h3>${movie.title}</h3>
-            <p>${movie.overview}</p>
-            <span>${movie.vote_average}</span>
-            <span>${movie.genres.slice(0, 2).map(genre => genre.name).join(', ')}</span>
-          </li>`;
-}
-
-  fetchTrendingMovies();
-
-function generatePagination(totalPages, currentPage) {
-  if (totalPages <= 1) {
-    return '';
-  }
-  let paginationHtml = '<div class="pagination">';
-  for (let i = 1; i <= totalPages; i++) {
-    if (i === currentPage) {
-      paginationHtml += `<span>${i}</span>`;
-    } else {
-      paginationHtml += `<a href="#" data-page="${i}">${i}</a>`;
-    }
-  }
-  paginationHtml += '</div>';
-  return paginationHtml;
-}
-
-const form = document.querySelector('form');
-const search = document.querySelector('.catalog__search');
-
-form.addEventListener('submit', e => {
-  e.preventDefault();
-
-  const searchKeyword = search.value;
-  if (searchKeyword) {
-    const apiSearchUrl = `${API_URL_SEARCH}${searchKeyword}&api_key=${KEY}`;
-    getMovies(apiSearchUrl);
-
-    search.value = '';
-  }
+getTrendData(searchPage).then((data) => {
+	renderMarkupList(data);
+	saveSerialized('totalItems', data.total_results);
+	saveSerialized("moviesData", data.results);
 });
+
+
+ if (form) {
+  form.addEventListener('submit', search);
 }
 
-renderModal();
+
+function search(event) {
+  event.preventDefault();
+  query = event.currentTarget.elements.search.value.toLowerCase().trim();
+  saveSerialized('query-pg', query);
+  if (query == '') {
+    form.reset();
+  } else {
+    form.reset();
+  }
+
+  fetchMovieSearcher(query, searchPage).then(data => {
+    moviesDataUpdate(data);
+    if (data.results.length < 1 || query === '') {
+      form.reset();
+      query = '';
+      saveSerialized('query-pg', query);
+    } else {
+      searchFilms = false;
+      totalItems = data.total_results;
+      pagination._options.totalItems = totalItems;
+
+      renderMarkupList(data);
+
+      form.reset();
+      pagination.reset();
+    }
+  });
+}
+
+
+pagination.on('afterMove', event => {
+  const currentPage = event.page;
+  if (searchFilms) {
+    getTrendData(currentPage).then(data => {
+      renderMarkupList(data), saveSerialized('moviesData', data.results);
+    });
+  } else {
+    fetchMovieSearcher(query, currentPage).then(data => {
+      moviesDataUpdate(data);
+      if (data.results.length < 1 || query === '') {
+        form.reset();
+        query = '';
+        saveSerialized('query-pg', query);
+      } else {
+        searchFilms = false;
+        renderMarkupList(data);
+        form.reset();
+      }
+    });
+  }
+})
+
