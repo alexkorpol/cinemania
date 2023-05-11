@@ -91,7 +91,16 @@ function renderMovieInLibrary(movie) {
       throw new Error('Invalid rating');
   }
   console.log(library.length);
-  if (library.length < 1) {
+  if (!library.length) {
+    const markUp = `  <div class="libr-content__container">
+    <p class="libr-content__text">
+      OOPS... <br>
+      We are very sorry! <br>
+      You don’t have any movies at your library.
+    </p>
+  </div>
+  <a class="libr-btn" href="./catalog.html">Search movie</a>`;
+    librContent.innerHTML = markUp;
     return;
   }
   const genresName = genres
