@@ -88,7 +88,6 @@ function renderMarkupList(data) {
 async function createListMarkup(data) {
   const { genres: genreName } = await getGenres();
   let movieArray = [];
-  console.log(data)
 
   for (let i = 0; i < data.length; i++) {
     const {
@@ -164,7 +163,6 @@ async function createListMarkup(data) {
           loading='lazy'
           data-id='${id}'
         />
-        <div class='cards-list__wrap'>
           <div class='cards-list__info'>
             <h2 class='cards-list__title'>${title}</h2>
             <div class='cards-list_second_line'>
@@ -176,8 +174,6 @@ async function createListMarkup(data) {
           </div> 
             </div>
           </div>
-             
-        </div>
       </li>
     `);
   }
@@ -193,6 +189,7 @@ const form = document.querySelector('.search__form');
 const loadSerialized = key => {
   try {
     const serializedState = localStorage.getItem(key);
+    console.log(serializedState)
     return serializedState === null ? undefined : JSON.parse(serializedState);
   } catch (error) {
     console.error(error.message);
@@ -202,7 +199,7 @@ const loadSerialized = key => {
 const container = document.getElementById('tui-pagination-container');
 
 const options = {
-  totalItems: loadSerialized('totalItems'),
+  totalItems: loadSerialized('totalItems')-10000,
   itemsPerPage: 10,
   visiblePages: 4,
   page: 1,
@@ -275,6 +272,8 @@ function search(event) {
       searchFilms = false;
       totalItems = data.total_results;
       pagination._options.totalItems = totalItems;
+      // searchErrorMessage.classList.add('visually-hidden');///////////////////глянуть
+      // container.classList.remove('visually-hidden')
 
       renderMarkupList(data);
 
