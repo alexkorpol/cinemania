@@ -101,7 +101,6 @@ header {
   padding: 2px;
   background: linear-gradient(141.22deg, #ffc226 9.4%, #f84119 91.91%);
   border-radius: 50px;
-  cursor: pointer;
 
   @include tablet {
     width: 54px;
@@ -152,7 +151,6 @@ header {
   height: 12px;
   background-image: url('../img/btn-ball.svg');
   background-size: cover;
-  cursor: pointer;
   @include tablet {
     left: 36px;
     width: 16px;
@@ -230,7 +228,6 @@ header {
   color: $not-accent;
   background-color: transparent;
   border: none;
-  cursor: pointer;
   @include transition(color);
   &:hover,
   &:focus {
