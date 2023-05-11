@@ -2,18 +2,15 @@
 
 let LightSwitcher = document.querySelector('.switcher');
 let isLight = localStorage.getItem('isLight');
-const isLightTheme = document.body.classList.contains('light');
 
 if (isLight === 'true') {
   document.body.classList.add('light');
-  localStorage.setItem('switcher', 'false') ;
 }
-
 
 LightSwitcher.onclick = function () {
   document.body.classList.toggle('light');
   isLight = document.body.classList.contains('light');
-  localStorage.setItem('isLight', "isLight");
+  localStorage.setItem('isLight', isLight);
 };
 
 
