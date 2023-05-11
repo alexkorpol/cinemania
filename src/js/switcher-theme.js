@@ -13,6 +13,9 @@ LightSwitcher.onclick = function () {
   localStorage.setItem('isLight', isLight);
 };
 
+
+
+
 //* C U R R E N T   P A G E
 
 // Отримати URL поточної сторінки
