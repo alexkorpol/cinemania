@@ -88,7 +88,6 @@ function renderMarkupList(data) {
 async function createListMarkup(data) {
   const { genres: genreName } = await getGenres();
   let movieArray = [];
-  console.log(data)
 
   for (let i = 0; i < data.length; i++) {
     const {
@@ -190,6 +189,7 @@ const form = document.querySelector('.search__form');
 const loadSerialized = key => {
   try {
     const serializedState = localStorage.getItem(key);
+    console.log(serializedState)
     return serializedState === null ? undefined : JSON.parse(serializedState);
   } catch (error) {
     console.error(error.message);
@@ -199,7 +199,7 @@ const loadSerialized = key => {
 const container = document.getElementById('tui-pagination-container');
 
 const options = {
-  totalItems: loadSerialized('totalItems'),
+  totalItems: loadSerialized('totalItems')-10000,
   itemsPerPage: 10,
   visiblePages: 4,
   page: 1,
