@@ -37,119 +37,137 @@ const halfStar = `<svg class="star" width="18" height="18" viewBox="0 0 18 18" f
 </linearGradient>
 </defs>
 </svg>`;
-// ВІДМАЛЬОВУЄ
-const url = `${BASE_URL}/movie/{movie_id}?api_key=${KEY}&language=en-US&page=9`;
-const libraryButton = document.querySelector('.libr-btn');
+const myLibrary = document.querySelector('.my-library');
 const libraryContainer = document.querySelector('.my-library__list');
-function renderMovieInLibrary(movie) {
-  const {
-    original_title,
-    poster_path,
-    id,
-    vote_average,
-    genres,
-    release_date,
-  } = movie;
-  const librContent = document.querySelector('.libr-content');
-  let ratingStars = '';
-  const rating = Math.round(vote_average);
-  switch (rating) {
-    case 0:
-      ratingStars = `${emptyStar.repeat(5)}`;
-      break;
-    case 1:
-      ratingStars = `${halfStar}${emptyStar.repeat(4)}`;
-      break;
-    case 2:
-      ratingStars = `${fullStar}${emptyStar.repeat(4)}`;
-      break;
-    case 3:
-      ratingStars = `${fullStar}${halfStar}${emptyStar.repeat(3)}`;
-      break;
-    case 4:
-      ratingStars = `${fullStar.repeat(2)}${emptyStar.repeat(3)}`;
-      break;
-    case 5:
-      ratingStars = `${fullStar.repeat(2)}${halfStar}${emptyStar.repeat(2)}`;
-      break;
-    case 6:
-      ratingStars = `${fullStar.repeat(3)}${emptyStar.repeat(2)}`;
-      break;
-    case 7:
-      ratingStars = `${fullStar.repeat(3)}${halfStar}${emptyStar}`;
-      break;
-    case 8:
-      ratingStars = `${fullStar.repeat(4)}${emptyStar}`;
-      break;
-    case 9:
-      ratingStars = `${fullStar.repeat(4)}${halfStar}`;
-      break;
-    case 10:
-      ratingStars = `${fullStar.repeat(5)}`;
-      break;
-    default:
-      throw new Error('Invalid rating');
-  }
-  console.log(library.length);
-  if (!library.length) {
-    const markUp = `  <div class="libr-content__container">
-    <p class="libr-content__text">
-      OOPS... <br>
-      We are very sorry! <br>
-      You don’t have any movies at your library.
-    </p>
-  </div>
-  <a class="libr-btn" href="./catalog.html">Search movie</a>`;
-    librContent.innerHTML = markUp;
-    return;
-  }
-  const genresName = genres
-    .map(genre => genre.name)
-    .slice(0, 2)
-    .join(', ');
-  const dateChopped = release_date.slice(0, 4);
-  const movieMarkup = `
-    <li class="my-library__item">
-        <div class="my-library__thumb">
-          <img class="my-library__img" data-id=${id} src="https://image.tmdb.org/t/p/original/${poster_path}" alt="${original_title}">
-        </div>
-        <div class="my-library__info">
-          <strong class="my-library__title">${original_title}</strong>
-          <span class="my-library__genres">${genresName}</span>
-          <span class="my-library__sign"> | </span>
-          <span class="my-library__release">${dateChopped}</span>
-          <div class="my-library__rating">${ratingStars}</div>
-        </div>
-    </li>`;
-  librContent.innerHTML = '';
-  libraryContainer.insertAdjacentHTML('beforeend', movieMarkup);
-}
-// Отримати масив фільмів з локального сховища
-const library = JSON.parse(localStorage.getItem('movieLibrary')) || [];
-// Пройтись по кожному фільму в бібліотеці та відмалювати його
-library.forEach(movie => {
-  console.log(movie);
-  renderMovieInLibrary(movie);
-});
+const COLLECTION_LIMIT = 9; // set the limit for number of collections to show at once
+const collectionList = document.querySelector('.my-library__list');
+let startIndex = 0; // initialize the starting index
+const librContent = document.querySelector('.libr-content');
 async function getModalByClick(movie_id) {
   const url = `${BASE_URL}/movie/${movie_id}?api_key=${KEY}&language=en-US`;
   const response = await axios.get(url);
   renderModal(response.data);
 }
-libraryContainer.addEventListener('click', evt => {
-  const id = evt.target.dataset.id;
+setTimeout(() => {
+  libraryContainer.addEventListener('click', evt => {
+    const id = evt.target.dataset.id;
+    const modal = document.querySelector('.modal-weekly');
+    const modalPoster = document.querySelector('.modal-weekly__poster');
+    modal.classList.remove('is-hidden');
+    document.addEventListener('keydown', onClose);
+    modal.addEventListener('click', onClose);
+    setTimeout(() => {
+      const addButton = document.querySelector('.button-send');
+      addButton.textContent = 'Remove from my library';
+    }, 250);
+    const closeButton = document.querySelector('.close');
+    closeButton.addEventListener('click', () => {
+      modal.classList.add('is-hidden');
+      modalPoster.innerHTML = '';
+      document.removeEventListener('keydown', onClose);
+      modal.removeEventListener('click', onClose);
+    });
+    getModalByClick(id);
+  });
+}, 200);
+function onClose(evt) {
   const modal = document.querySelector('.modal-weekly');
   const modalPoster = document.querySelector('.modal-weekly__poster');
-  modal.classList.remove('is-hidden');
-  setTimeout(() => {
-    const addButton = document.querySelector('.button-send');
-    console.log(addButton);
-    addButton.textContent = 'Remove from my library';
-  }, 150);
-  const closeButton = document.querySelector('.close');
-  closeButton.addEventListener('click', () => {
+  if (evt.target === modal || evt.code === 'Escape') {
     modal.classList.add('is-hidden');
     modalPoster.innerHTML = '';
+    document.removeEventListener('keydown', onClose);
+    modal.removeEventListener('click', onClose);
+  }
+}
+function loadCollections() {
+  const collections = JSON.parse(localStorage.getItem('movieLibrary')) || []; // get the collections from localStorage
+  const endIndex = Math.min(startIndex + COLLECTION_LIMIT, collections.length); // calculate the end index for the current batch
+  const visibleCollections = collections.slice(startIndex, endIndex); // get the visible collections for the current batch
+
+  // loop through the visible collections and create the HTML for each collection
+  visibleCollections.forEach(collection => {
+    let ratingStars = '';
+    const rating = Math.round(collection.vote_average);
+    switch (rating) {
+      case 0:
+        ratingStars = `${emptyStar.repeat(5)}`;
+        break;
+      case 1:
+        ratingStars = `${halfStar}${emptyStar.repeat(4)}`;
+        break;
+      case 2:
+        ratingStars = `${fullStar}${emptyStar.repeat(4)}`;
+        break;
+      case 3:
+        ratingStars = `${fullStar}${halfStar}${emptyStar.repeat(3)}`;
+        break;
+      case 4:
+        ratingStars = `${fullStar.repeat(2)}${emptyStar.repeat(3)}`;
+        break;
+      case 5:
+        ratingStars = `${fullStar.repeat(2)}${halfStar}${emptyStar.repeat(2)}`;
+        break;
+      case 6:
+        ratingStars = `${fullStar.repeat(3)}${emptyStar.repeat(2)}`;
+        break;
+      case 7:
+        ratingStars = `${fullStar.repeat(3)}${halfStar}${emptyStar}`;
+        break;
+      case 8:
+        ratingStars = `${fullStar.repeat(4)}${emptyStar}`;
+        break;
+      case 9:
+        ratingStars = `${fullStar.repeat(4)}${halfStar}`;
+        break;
+      case 10:
+        ratingStars = `${fullStar.repeat(5)}`;
+        break;
+      default:
+        throw new Error('Invalid rating');
+    }
+    const genresName = collection.genres
+      .map(genre => genre.name)
+      .slice(0, 2)
+      .join(', ');
+    const dateChopped = collection.release_date.slice(0, 4);
+    const collectionItem = document.createElement('li');
+    collectionItem.classList.add('my-library__item');
+    collectionItem.innerHTML = `
+      <div class="my-library__thumb">
+          <img class="my-library__img" data-id=${collection.id} src="https://image.tmdb.org/t/p/original/${collection.poster_path}" alt="${collection.original_title}">
+        </div>
+        <div class="my-library__info">
+          <strong class="my-library__title">${collection.original_title}</strong>
+          <span class="my-library__genres">${genresName}</span>
+          <span class="my-library__sign"> | </span>
+          <span class="my-library__release">${dateChopped}</span>
+          <div class="my-library__rating">${ratingStars}</div>
+        </div>
+    `;
+    collectionList.appendChild(collectionItem);
   });
-  getModalByClick(id);
-});
+  if (collections.length < 1) {
+    const librContent = document.querySelector('.libr-content');
+    librContent.classList.remove('is-hidden');
+    myLibrary.remove();
+    return;
+  }
+  if (endIndex < collections.length) {
+    // if there are more collections to load, show the "Load More" button
+    const loadMoreButton = document.createElement('button');
+    loadMoreButton.classList.add('load-more');
+    loadMoreButton.innerText = 'Load More';
+    collectionList.after(loadMoreButton);
+    loadMoreButton.addEventListener('click', loadMoreCollections);
+  }
+}
+
+function loadMoreCollections() {
+  const loadMoreButton = document.querySelector('.load-more');
+  loadMoreButton.remove(); // remove the "Load More" button
+  startIndex += COLLECTION_LIMIT; // update the starting index for the next batch
+  loadCollections(); // load the next batch of collections
+}
+
+loadCollections();

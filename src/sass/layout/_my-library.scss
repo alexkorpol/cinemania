@@ -171,7 +171,7 @@
 
 /////////////////////////////////////// Embed cards from localStorage
 ////////////////////////////////////
-#is-hidden.libr-content {
+.libr-content.is-hidden {
   display: none;
   opacity: 0;
   appearance: none;
@@ -182,14 +182,14 @@
   width: 320px;
   margin-left: auto;
   margin-right: auto;
-  padding: 40px 20px;
+  padding: 40px 20px 10px;
   @include tablet {
     width: 768px;
-    padding: 92px 32px 60px;
+    padding: 92px 32px 30px;
   }
   @include desktop {
     width: 1280px;
-    padding: 117px 32px 96px;
+    padding: 117px 32px 66px;
   }
   &__list {
     @include tablet {
@@ -244,7 +244,6 @@
   &__info {
     margin-top: auto;
     bottom: 12;
-    z-index: 75;
     left: 12;
     display: inline-block;
     width: 100%;
@@ -299,5 +298,38 @@
       width: 106px;
       height: 18px;
     }
+  }
+}
+.load-more {
+  justify-content: center;
+  width: 106px;
+  margin-top: 24px;
+  position: relative;
+  cursor: pointer;
+  height: 38px;
+  background: linear-gradient(141.22deg, #ffc226 9.4%, #f84119 91.91%);
+  border-radius: 74px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: calc(14px / 12px);
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #111111;
+  margin-left: auto;
+  margin-right: auto;
+  @include tablet {
+    width: 115px;
+    height: 40px;
+    font-size: 14px;
+    line-height: calc(16px / 14px);
+    margin-top: 40px;
+  }
+  @include desktop {
+    width: 134px;
+    height: 52px;
+    font-size: 18px;
+    margin-top: 40px;
+    line-height: clac(28px / 18px);
   }
 }

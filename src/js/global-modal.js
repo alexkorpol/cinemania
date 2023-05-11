@@ -10,8 +10,7 @@ export async function renderModal(movie) {
   } = await movie;
   const modalPoster = document.querySelector('.modal-weekly__poster');
   const genreName = genres ? genres.map(genre => genre.name) : [];
-  // const genreName = genres.map(genre => genre.name);
-  const genresList = genreName.slice(0, 2);
+  const genresList = genreName.slice(0, 2).join(' ');
   const modalMarkup = `
     <div class="modal-weekly__thumb">
       <img src="https://image.tmdb.org/t/p/original/${poster_path}" alt=${original_title} class="modal-weekly__img">
@@ -45,7 +44,7 @@ export function addToLibrary(movie) {
   const existingIndex = library.indexOf(existingMovie);
   const addButton = document.querySelector('.button-send');
   if (existingMovie) {
-    console.log('Фільм вже присутній в бібліотеці');
+    console.log('Film was deleted');
     library.splice(existingIndex, 1);
     localStorage.setItem('movieLibrary', JSON.stringify(library));
     setTimeout(() => {
@@ -57,7 +56,6 @@ export function addToLibrary(movie) {
   }
   setTimeout(() => {
     const addButton = document.querySelector('.button-send');
-    console.log(addButton);
     addButton.textContent = 'Remove from my library';
   }, 150);
   // Додати фільм до масиву
@@ -66,5 +64,5 @@ export function addToLibrary(movie) {
   // Зберегти оновлений масив у локальне сховище
   localStorage.setItem('movieLibrary', JSON.stringify(library));
 
-  console.log('Фільм додано до бібліотеки');
+  console.log('Film embeded into library');
 }

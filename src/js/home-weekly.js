@@ -82,7 +82,7 @@ async function renderMovieCard(cards) {
             }
           })
           .map(genre => genre.name);
-        const sliced = genres.slice(0, 2);
+        const sliced = genres.slice(0, 2).join(', ');
         genre_ids = sliced;
         const chopped = release_date.slice(0, 4);
         let ratingStars = '';
@@ -170,10 +170,20 @@ homeCards.addEventListener('click', async evt => {
   const id = evt.target.dataset.id;
   const movie = await getDetailFilm(id);
   renderModal(movie);
-  closeButton.addEventListener('click', () => {
+  document.addEventListener('keydown', onClose);
+  modal.addEventListener('click', onClose);
+});
+closeButton.addEventListener('click', () => {
+  modal.classList.add('is-hidden');
+  modalPoster.innerHTML = '';
+  document.removeEventListener('keydown', onClose);
+  modal.removeEventListener('click', onClose);
+});
+function onClose(evt) {
+  if (evt.target === modal || evt.code === 'Escape') {
     modal.classList.add('is-hidden');
     modalPoster.innerHTML = '';
-  });
-});
-
-
+    document.removeEventListener('keydown', onClose);
+    modal.removeEventListener('click', onClose);
+  }
+}
