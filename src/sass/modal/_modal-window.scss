@@ -6,7 +6,7 @@
   width: 100vw;
   height: 100vh;
   opacity: 1;
-  z-index: 1;
+  z-index: 99;
   overflow: auto;
 
   &.is-hidden {
@@ -17,7 +17,7 @@
 }
 
 .modal__container {
-  height: 100vh; 
+  height: 90vh;
   overflow: auto;
   z-index: 99;
   position: absolute;
@@ -33,6 +33,7 @@
   padding: 52px 16px;
   border-radius: 16px;
   width: 280px;
+  max-height: 847px;
 
   @include tablet {
     display: flex;
@@ -192,7 +193,7 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
-    -webkit-line-clamp: 8;
+    -webkit-line-clamp: 4;
     @include tablet {
       margin-botton: 24px;
       -webkit-line-clamp: 5;
