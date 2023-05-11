@@ -1,60 +1,170 @@
-export async function renderModal(movie) {
-  const {
-    poster_path,
-    original_title,
-    vote_average,
-    vote_count,
-    popularity,
-    genres,
-    overview,
-  } = await movie;
-  const modalPoster = document.querySelector('.modal-weekly__poster');
-  const genreName = genres ? genres.map(genre => genre.name) : [];
-  // const genreName = genres.map(genre => genre.name);
-  const genresList = genreName.slice(0, 2);
-  const modalMarkup = `
-    <div class="modal-weekly__thumb">
-      <img src="https://image.tmdb.org/t/p/original/${poster_path}" alt=${original_title} class="modal-weekly__img">
-    </div>
-    <div class="modal-weekly__info">
-      <h2 class="modal-weekly__title">${original_title}</h2>
-      <ul class="modal-weekly__list">
-      <li class="modal-weekly__list-item"><p class="modal-weekly__list-vote">Vote / Votes</p><span class="modal-weekly__list-values"><span class="modal-weekly__list-evalue">${vote_average}</span><span class="modal-weekly__list-sign"> / </span><span class="modal-weekly__list-evalue">${vote_count}</span></span></li>
-      <li class="modal-weekly__list-item"><p class="modal-weekly__list-popularity">Popularity</p><span class="modal-weekly__list-count">${popularity}</span></li>
-      <li class="modal-weekly__list-item"><p class="modal-weekly__list-genre">Genre</p><span class="modal-weekly__list-genres">${genresList}</span></li>
-      </ul>
-      <strong class="modal-weekly__about">About</strong>
-      <p class="modal-weekly__description">${overview}</p>
-      <button type="button" class="button-send">Add to my library</button>
-    </div>`;
-  modalPoster.insertAdjacentHTML('beforeend', modalMarkup);
+import { IMG_BASE_URL, IMG_W400 } from './api-key';
+import { getSecondMovieById } from './api';
+import {
+  addMovieToLibrary,
+  removeMovieFromLibrary,
+  getMovieFromLibrary,
+  renderLibraryData,
+} from './library';
 
-  setTimeout(() => {
-    const closeButton = document.querySelector('.close');
-    const addButton = document.querySelector('.button-send');
-    addButton.addEventListener('click', () => {
-      addToLibrary(movie);
-    });
-  }, 0);
+const refs = {
+  backdrop: document.querySelector('.backdrop'),
+  openModal: document.querySelector('.films'),
+  cardList: document.querySelector('.films'),
+  libraryList: document.querySelector('.library-list'),
+  modalCont: document.querySelector('.modal__container'),
+  FilmBtn: document.querySelector('.film__button'),
+  closeModal: document.querySelector('.modal__close-btn'),
+  cardsfilm: document.querySelector('.cards-film'),
+};
+
+let posterPath = '';
+let genresList = [];
+let filmMarkup = '';
+let filmBtn;
+let selectedMovieId;
+
+if (refs.cardList) {
+  refs.cardList.addEventListener('click', createModal);
 }
-function addToLibrary(movie) {
-  // Отримати масив фільмів з локального сховища
-  const library = JSON.parse(localStorage.getItem('movieLibrary')) || [];
-  // Перевірити, чи фільм вже присутній в бібліотеці
-  const existingMovie = library.find(item => item.id === movie.id);
-  const existingIndex = library.indexOf(existingMovie);
-  if (existingMovie) {
-    console.log('Фільм вже присутній в бібліотеці');
-    library.splice(existingIndex, 1);
-    localStorage.setItem('movieLibrary', JSON.stringify(library));
-    return;
+
+function createModal(event) {
+  const selectedMovie = event.target.closest('li');
+  selectedMovieId = Number(selectedMovie.getAttribute('data-id'));
+  refs.closeModal.addEventListener('click', closeModalDescr);
+
+  createMarkup(selectedMovieId);
+
+  openModal();
+}
+
+//modal
+function openModal(e) {
+  refs.backdrop.classList.remove('is-hidden');
+  refs.modalCont.classList.remove('is-hidden');
+  document.body.style.overflow = 'hidden';
+  document.addEventListener('keydown', onEscBtnPress);
+  document.addEventListener('click', onBackdropClick);
+}
+
+function AddFilmToLibrary() {
+  const filmsSecId = filmBtn.dataset.id;
+  if (getMovieFromLibrary(selectedMovieId)) {
+    removeMovieFromLibrary(selectedMovieId);
+    filmBtn.innerHTML = 'Add to Library';
+  } else {
+    addMovieToLibrary(selectedMovieId);
+    filmBtn.innerHTML = 'Remove from Library';
   }
+}
 
-  // Додати фільм до масиву
-  library.push(movie);
+// Verefy LS
+function changeBtnLibrary(filmsId, filmBtn) {
+  if (getMovieFromLibrary(filmsId)) {
+    filmBtn.innerHTML = 'Remove from Library';
+  } else {
+    filmBtn.innerHTML = 'Add to Library';
+  }
+}
 
-  // Зберегти оновлений масив у локальне сховище
-  localStorage.setItem('movieLibrary', JSON.stringify(library));
+// Add markup  movie
+async function createMarkup(filmID) {
+  const film = getSecondMovieById(filmID);
+  genresList = [];
+  refs.cardsfilm.innerHTML = '';
+  film.then(data => {
+    const genres = data.genres;
 
-  console.log('Фільм додано до бібліотеки');
+    genres.forEach(genre => {
+      genresList.push(` ${genre.name}`);
+    });
+    filmMarkup = createFilmMarkup(data);
+    refs.cardsfilm.innerHTML = filmMarkup;
+    // save the link to the button
+    filmBtn = document.querySelector('.film__button');
+    filmBtn.addEventListener('click', AddFilmToLibrary);
+    changeBtnLibrary(selectedMovieId, filmBtn);
+  });
+}
+
+//  ESC modal
+function onEscBtnPress(e) {
+  if (e.code === 'Escape') {
+    closeModalDescr();
+  }
+}
+
+// moda back
+function onBackdropClick(e) {
+  if (e.target === refs.backdrop) {
+    closeModalDescr();
+  }
+}
+
+// close modal
+function closeModalDescr(e) {
+  refs.backdrop.classList.add('is-hidden');
+  refs.modalCont.classList.add('is-hidden');
+  document.body.style.overflow = 'scroll';
+  document.removeEventListener('keydown', onEscBtnPress);
+  document.removeEventListener('click', onBackdropClick);
+  document.removeEventListener('click', AddFilmToLibrary);
+  if (refs.libraryList) {
+    renderLibraryData();
+    refs.cardList = document.querySelector('.films');
+    if (refs.cardList) refs.cardList.addEventListener('click', createModal);
+  }
+}
+
+// render mark
+function createFilmMarkup(data) {
+  if (data) {
+    const {
+      original_title,
+      id,
+      vote_average,
+      poster_path,
+      overview,
+      popularity,
+      vote_count,
+    } = data;
+
+    if (poster_path) {
+      posterPath = `${IMG_BASE_URL}${IMG_W400}${poster_path}`;
+    }
+
+    return `<div class='film-wrap' data-id='${id}'>
+          <ul class='film-list'>
+          <li class='film-list__img'>
+            <img
+              src='${posterPath}'
+              alt='${original_title}'
+              loading='lazy'
+            />
+            </li>
+            <li class='film-list__info'>            
+                <h2 class='film-list__title'>${original_title}</h2>
+                <div class="film-list__wood">
+                  <div class="film-list__sub--title">
+                    <p>Vote / Votes</p>
+                    <p>Popularity</p>
+                    <p class='film-list__sub--title'>Genre</p>
+                  </div>
+                  <div  class="film-list__title--wood">
+                    <p class='film-list__text--average'><span  class='film-list__average'>${vote_average}</span>  /  <span  class='film-list__average'>${vote_count}</span></p>
+                    <p class='film-list__last--text'>${popularity}</p>
+                    <p class='film-list__last--text'>${genresList}</p>
+                  </div>
+                </div>
+                <div class='film-list__about'>
+                <p class='film-list__title--about'>ABOUT</p>
+                <p class='film-list__text--about'>${overview}</p>
+                 </div>
+                 <div class="film__button-position">
+                 <button type="button" class="film__button">Add to my library</button>
+             </div>
+            </li>
+          </ul>
+      </div>`;
+  }
 }
