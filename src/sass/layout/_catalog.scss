@@ -52,8 +52,6 @@
   height: 406px;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   border-radius: 10px;
-  cursor: pointer;
-
   z-index: 0;
 }
 
@@ -344,7 +342,6 @@
   width: 40px;
   height: 40px;
   margin-left: auto;
-  cursor: pointer;
   background: linear-gradient(141.22deg, #FFC226 9.4%, #F84119 91.91%);
   border: none;
   border-radius: 50%;

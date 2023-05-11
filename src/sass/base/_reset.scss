@@ -21,9 +21,9 @@ img {
   height: auto;
 }
 
-.link, a {
+.link,
+a {
   text-decoration: none;
-  cursor: pointer;
 }
 
 .list {
@@ -31,6 +31,5 @@ img {
 }
 
 button {
-  cursor: pointer;
   outline: none;
 }
