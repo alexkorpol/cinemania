@@ -1,96 +1,75 @@
 import axios from 'axios';
-import { KEY } from './api-key';
-import { renderModal } from './global-modal';
-const emptyStar = `<svg class="star" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M16.875 7.3125H10.8281L9 1.6875L7.17188 7.3125H1.125L6.04688 10.6875L4.14844 16.3125L9 12.7969L13.8516 16.3125L11.9531 10.6875L16.875 7.3125Z" stroke="url(#paint0_linear_405_766)" stroke-linejoin="round"/>
-<defs>
-<linearGradient id="paint0_linear_405_766" x1="3.375" y1="2.625" x2="13.5" y2="16.5" gradientUnits="userSpaceOnUse">
-<stop stop-color="#F84119"/>
-<stop offset="1" stop-color="#F89F19" stop-opacity="0.68"/>
-</linearGradient>
-</defs>
-</svg>`;
+import { IMG_BASE_URL, BASE_URL, IMG_W400, KEY } from './api-key';
+import { emptyStar, fullStar, halfStar } from './star';
 
-const fullStar = `<svg class="star" width="18" height="18" viewBox="0 0 18 18" fill="rgba(248, 65, 25, 1)" xmlns="http://www.w3.org/2000/svg">
-<path d="M16.875 7.3125H10.8281L9 1.6875L7.17188 7.3125H1.125L6.04688 10.6875L4.14844 16.3125L9 12.7969L13.8516 16.3125L11.9531 10.6875L16.875 7.3125Z" stroke="url(#paint0_linear_405_766)" stroke-linejoin="round"/>
-<defs>
-<linearGradient id="paint0_linear_405_766" x1="3.375" y1="2.625" x2="13.5" y2="16.5" gradientUnits="userSpaceOnUse">
-<stop stop-color="#F84119"/>
-<stop offset="1" stop-color="#F89F19" stop-opacity="0.68"/>
-</linearGradient>
-</defs>
-</svg>`;
+const galleryList = document.querySelector('.gallery-weekly__list');
 
-const halfStar = `<svg class="star" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M16.875 7.3125H10.8281L9 1.6875L7.17188 7.3125H1.125L6.04688 10.6875L4.14844 16.3125L9 12.7969L13.8516 16.3125L11.9531 10.6875L16.875 7.3125Z" stroke="url(#paint0_linear_148_6991)" stroke-linejoin="round"/>
-<path d="M9 1.6875V12.7969L4.14844 16.3125L6.04688 10.6875L1.125 7.3125H7.17188L9 1.6875Z" fill="url(#paint1_linear_148_6991)"/>
-<defs>
-<linearGradient id="paint0_linear_148_6991" x1="3.04877" y1="2.73251" x2="13.478" y2="16.7124" gradientUnits="userSpaceOnUse">
-<stop stop-color="#F84119"/>
-<stop offset="1" stop-color="#F89F19" stop-opacity="0.68"/>
-</linearGradient>
-<linearGradient id="paint1_linear_148_6991" x1="2.08688" y1="2.73251" x2="12.1506" y2="9.47748" gradientUnits="userSpaceOnUse">
-<stop stop-color="#F84119"/>
-<stop offset="1" stop-color="#F89F19" stop-opacity="0.68"/>
-</linearGradient>
-</defs>
-</svg>`;
-const homeCards = document.querySelector('.home-weekly__cards');
-const modal = document.querySelector('.modal-weekly');
-// modal.classList.add('is-hidden');
-const modalOverlay = document.querySelector('.modal-weekly__overlay');
-const modalPoster = document.querySelector('.modal-weekly__poster');
-const closeButton = document.querySelector('.close');
-const BASE_URL = 'https://api.themoviedb.org/3/';
-async function getMovies() {
-  const PATH = '/trending/movie/week?';
-  const totalPages = 1000;
-  const randomPage = Math.floor(Math.random() * (totalPages - 1) + 1);
-  const response = await axios.get(
-    `${BASE_URL}${PATH}api_key=${KEY}&page=${randomPage}`
-  );
-  let movies = response.data.results;
-  const minLength = Math.floor(Math.random() * (17 - 1) + 1);
-  const maxLength = minLength + 3;
-  const results = movies.slice(minLength, maxLength);
-  return results;
+function getTrendData() {
+  const URL =
+    'https://api.themoviedb.org/3/trending/movie/week?api_key=249f222afb1002186f4d88b2b5418b55';
+
+  return axios.get(URL).then(data => {
+    return data.data;
+  });
 }
-async function getGenres() {
-  const response = await axios.get(
-    `${BASE_URL}genre/movie/list?api_key=${KEY}&language=en-US`
+
+async function getMovieGenres() {
+  const { data } = await axios.get(
+    `${BASE_URL}/genre/movie/list?api_key=${KEY}`
   );
-  return response.data.genres;
+  return data;
 }
-async function renderMovieCard(cards) {
-  const responseGenres = getGenres();
-  const genreName = await responseGenres;
-  let movieArray = cards
+
+export async function getGenres() {
+  const genres = await getMovieGenres().then(({ genres }) => genres);
+
+  return { genres };
+}
+
+function renderMarkup(results) {
+  getGenres().then(({ genres }) => {
+    if (results) {
+      results.forEach(film => {
+        const { genre_ids, release_date } = film;
+        genres.forEach(({ name, id }) => {
+          if (genre_ids.includes(id)) {
+            if (genre_ids.length > 2) {
+              genre_ids.splice(2, genre_ids.length - 1);
+            }
+            genre_ids.splice(genre_ids.indexOf(id), 1, name);
+          }
+          film.genre_names = genre_ids.join(', ');
+          if (film.release_date) {
+            film.release_date = release_date.slice(0, 4);
+          }
+        });
+      });
+      const markupList = createMarkup(results);
+      if (galleryList) {
+        galleryList.innerHTML = markupList;
+      }
+    }
+  });
+}
+
+function createMarkup(results) {
+  return results
+    .slice(0, 3)
     .map(
       ({
         original_title,
-        genre_ids,
         release_date,
+        genre_ids,
         poster_path,
         vote_average,
-        title,
         id,
       }) => {
-        const genres = genreName
-          .filter(genre => {
-            if (genre_ids.indexOf(genre.id) !== -1) {
-              return genre;
-            }
-          })
-          .map(genre => genre.name);
-        const sliced = genres.slice(0, 2);
-        genre_ids = sliced;
-        const chopped = release_date.slice(0, 4);
-        let ratingStars = '';
+        let posterIMG = ``;
+        if (poster_path) {
+          posterIMG = `${IMG_BASE_URL}${IMG_W400}${poster_path}`;
+        }
 
-        // if (!vote_average) {
-        //   ratingStars = `${emptyStar.repeat(5)}`;
-        //   return `<div>${ratingStars}</div>`;
-        // }
+        let ratingStars = '';
 
         const rating = Math.round(vote_average);
 
@@ -133,47 +112,26 @@ async function renderMovieCard(cards) {
           default:
             throw new Error('Invalid rating');
         }
-        const markUp = `<div class="card-weekly" data-id=${id}>
-          <div class="card-weekly__thumb">
-          <img src="https://image.tmdb.org/t/p/original/${poster_path}" data-id=${id} class="card-weekly__image" alt=${original_title}>
-          </div>
-          <div class="card-weekly__info">
-            <strong class="card-weekly__title">${title}</strong>
-            <div class="card-weekly__description"><span class="card-weekly__genre">${genre_ids} </span><span class="card-weekly__sign"> | </span><span class="card-weekly__release"> ${chopped}</span>
-            <div class="rating-star">${ratingStars}</div>
+        return ` <li class='gallery-weekly__list-elem hover-cursor' data-id='${id}'>           
+        <img class='gallery-weekly__image' src="${posterIMG}" alt="${original_title}" loading="lazy" data-id='${id}'>
+       <div class='gallery-weekly__all-info'> 
+        <div class="gallery-weekly__info">
+            <h3 class= 'gallery-weekly__title'>${original_title}</h3>
+            <div class='cards-list_second_line'>
+              <div class='cards-list__text'>
+                <p>${genre_ids} | ${release_date}</p>
+              </div>
             </div>
-            
-          </div>
-          </div>      
-        </div>`;
-
-        return markUp;
+        </div>
+        <div class='star-rate'>
+                ${ratingStars}
+        </div>
+      </div>
+    </li>`;
       }
     )
     .join('');
-  homeCards.insertAdjacentHTML('beforeend', movieArray);
 }
-async function callCards() {
-  const response = getMovies();
-  renderMovieCard(await response);
-}
-callCards();
-async function getDetailFilm(movie_id) {
-  const response = await axios.get(
-    `${BASE_URL}movie/${movie_id}?api_key=${KEY}&language=en-US`
-  );
-  return response.data;
-}
-
-homeCards.addEventListener('click', async evt => {
-  modal.classList.remove('is-hidden');
-  const id = evt.target.dataset.id;
-  const movie = await getDetailFilm(id);
-  renderModal(movie);
-  closeButton.addEventListener('click', () => {
-    modal.classList.add('is-hidden');
-    modalPoster.innerHTML = '';
-  });
+export const getWeeklyTrends = getTrendData().then(({ results }) => {
+  return renderMarkup(results);
 });
-
-
