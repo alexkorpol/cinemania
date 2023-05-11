@@ -59,18 +59,15 @@ img {
   }
 }
 
-.hero-wrap__content {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 2;
-}
-
 .background-image img {
   width: 100%;
 }
 
 .hero-wrap__content {
+   position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
   padding: 40px 10px 28px 20px;
   @include tablet {
     padding: 36px 300px 36px 20px;
@@ -203,4 +200,8 @@ img {
   color: $accent;
   background: $text-dark-background;
   border: 1px solid $accent;
+}
+
+.light { 
+  color: white;
 }
