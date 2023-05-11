@@ -82,7 +82,7 @@ img {
 
 .title {
   @include font(700, 32, 1.18, null);
-@include centerAlingn();
+  @include centerAlingn();
   color: $text-dark-background;
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   padding-bottom: 12px;
@@ -101,23 +101,23 @@ img {
 
 .start-rate__hero {
   margin-top: 12px;
-    margin-bottom: 21px;
-    margin-left: auto;
-    font-size: 18px;
+  margin-bottom: 21px;
+  margin-left: auto;
+  font-size: 18px;
 
-@include tablet {
-  margin-top: 14px;
-  margin-bottom: 22px;
-  font-size: 22px;
-  line-height: 1.2;
+  @include tablet {
+    margin-top: 14px;
+    margin-bottom: 22px;
+    font-size: 22px;
+    line-height: 1.2;
   }
 
-@include desktop {
-  margin-top: 18px;
-  margin-bottom: 30px;
-  font-size: 24px;
-  line-height: 1.2;
- }
+  @include desktop {
+    margin-top: 18px;
+    margin-bottom: 30px;
+    font-size: 24px;
+    line-height: 1.2;
+  }
 }
 
 // .catalog__stars-wrap {
@@ -144,9 +144,6 @@ img {
 //     font-size: 16px;
 //   }
 // }
-
-
-
 
 .catalog__rating-active {
   position: absolute;
