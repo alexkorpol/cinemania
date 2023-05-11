@@ -1,7 +1,5 @@
 import axios from 'axios';
-import { KEY,BASE_URL } from './api-key';
-
-
+import { KEY, BASE_URL } from './api-key';
 
 async function getRandomMovie() {
   const maxPages = 1; // maximum number of pages with movies in API
@@ -30,7 +28,8 @@ async function displayRandomMovie() {
       return genre ? genre.name : '';
     })
     .join(', ');
-
+  movie.genre_ids = genreNames;
+  console.log(movie);
   const movieCard = `
     <div class="container movie-card ">
     <h2 class="movie-card-title">upcoming this mounth</h2>

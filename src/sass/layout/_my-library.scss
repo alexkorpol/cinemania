@@ -16,7 +16,7 @@
       #0e0e0e 25.78%,
       rgba(14, 14, 14, 0) 60.07%
     ),
-    url('../img/library-hero/library-mobile.jpg');
+    url(../img/library-hero/library-mobile.jpg);
 
   @include retina {
     background-image: linear-gradient(
@@ -24,7 +24,7 @@
         #0e0e0e 25.78%,
         rgba(14, 14, 14, 0) 60.07%
       ),
-      url('../img/library-hero/library-mobile-2x.jpg');
+      url(../img/library-hero/library-mobile-2x.jpg);
   }
 
   @include tablet {
@@ -37,7 +37,7 @@
         #0e0e0e 25.78%,
         rgba(14, 14, 14, 0) 60.07%
       ),
-      url('../img/library-hero/library-tablet.jpg');
+      url(../img/library-hero/library-tablet.jpg);
 
     @include retina {
       background-image: linear-gradient(
@@ -45,7 +45,7 @@
           #0e0e0e 25.78%,
           rgba(14, 14, 14, 0) 60.07%
         ),
-        url('../img/library-hero/library-tablet-2x.jpg');
+        url(../img/library-hero/library-tablet-2x.jpg);
     }
   }
 
@@ -59,7 +59,7 @@
         #0e0e0e 25.78%,
         rgba(14, 14, 14, 0) 60.07%
       ),
-      url('../img/library-hero/library-desktop.jpg');
+      url(../img/library-hero/library-desktop.jpg);
 
     @include retina {
       background-image: linear-gradient(
@@ -67,7 +67,7 @@
           #0e0e0e 25.78%,
           rgba(14, 14, 14, 0) 60.07%
         ),
-        url('../img/library-hero/library-desktop-2x.jpg');
+        url(../img/library-hero/library-desktop-2x.jpg);
     }
   }
 }
@@ -171,13 +171,13 @@
 
 /////////////////////////////////////// Embed cards from localStorage
 ////////////////////////////////////
-#is-hidden.libr-content {
-  display: none;
-  opacity: 0;
-  appearance: none;
-  visibility: hidden;
-  pointer-events: none;
-}
+// #is-hidden.libr-content {
+//   display: none;
+//   opacity: 0;
+//   appearance: none;
+//   visibility: hidden;
+//   pointer-events: none;
+// }
 .my-library {
   width: 320px;
   margin-left: auto;
@@ -198,8 +198,12 @@
       row-gap: 28px;
       column-gap: 16px;
     }
+    @include desktop {
+      row-gap: 32px;
+    }
   }
   &__item {
+    cursor: pointer;
     width: 280px;
     height: 406px;
     position: relative;
@@ -216,7 +220,7 @@
       flex-basis: calc(100% / 3);
     }
     @include desktop {
-      width: 394px;
+      min-width: 394px;
       height: 574px;
     }
   }
@@ -231,7 +235,7 @@
       rgba(0, 0, 0, 0) 63%,
       rgba(0, 0, 0, 0.9) 92%
     );
-    z-index: 50;
+    position: absolute;
     border-radius: 5px;
     height: 100%;
     width: 100%;
@@ -240,6 +244,7 @@
   &__info {
     margin-top: auto;
     bottom: 12;
+    z-index: 75;
     left: 12;
     display: inline-block;
     width: 100%;
@@ -256,6 +261,10 @@
       @include tablet {
         line-height: calc(18px / 12px);
       }
+      @include desktop {
+        font-size: 20px;
+        line-height: calc(24px / 20px);
+      }
     }
   }
   &__title {
@@ -269,6 +278,10 @@
     @include tablet {
       line-height: calc(18px / 12px);
     }
+    @include desktop {
+      font-size: 20px;
+      line-height: calc(24px / 20px);
+    }
   }
   &__rating {
     display: flex;
@@ -281,6 +294,10 @@
     @include tablet {
       width: 66px;
       height: 10px;
+    }
+    @include desktop {
+      width: 106px;
+      height: 18px;
     }
   }
 }

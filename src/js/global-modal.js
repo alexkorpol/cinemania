@@ -37,19 +37,29 @@ export async function renderModal(movie) {
     });
   }, 0);
 }
-function addToLibrary(movie) {
+export function addToLibrary(movie) {
   // Отримати масив фільмів з локального сховища
   const library = JSON.parse(localStorage.getItem('movieLibrary')) || [];
   // Перевірити, чи фільм вже присутній в бібліотеці
   const existingMovie = library.find(item => item.id === movie.id);
   const existingIndex = library.indexOf(existingMovie);
+  const addButton = document.querySelector('.button-send');
   if (existingMovie) {
     console.log('Фільм вже присутній в бібліотеці');
     library.splice(existingIndex, 1);
     localStorage.setItem('movieLibrary', JSON.stringify(library));
+    setTimeout(() => {
+      const addButton = document.querySelector('.button-send');
+      console.log(addButton);
+      addButton.textContent = 'Add to my library';
+    }, 150);
     return;
   }
-
+  setTimeout(() => {
+    const addButton = document.querySelector('.button-send');
+    console.log(addButton);
+    addButton.textContent = 'Remove from my library';
+  }, 150);
   // Додати фільм до масиву
   library.push(movie);
 

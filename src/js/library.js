@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { KEY } from './api-key';
-import { renderModal } from './global-modal';
+import { renderModal, addToLibrary } from './global-modal';
+import { BASE_URL } from './api-key';
+import { openModal } from './render_footer_modal';
 const emptyStar = `<svg class="star" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M16.875 7.3125H10.8281L9 1.6875L7.17188 7.3125H1.125L6.04688 10.6875L4.14844 16.3125L9 12.7969L13.8516 16.3125L11.9531 10.6875L16.875 7.3125Z" stroke="url(#paint0_linear_405_766)" stroke-linejoin="round"/>
 <defs>
@@ -36,18 +38,19 @@ const halfStar = `<svg class="star" width="18" height="18" viewBox="0 0 18 18" f
 </defs>
 </svg>`;
 // ВІДМАЛЬОВУЄ
+const url = `${BASE_URL}/movie/{movie_id}?api_key=${KEY}&language=en-US&page=9`;
 const libraryButton = document.querySelector('.libr-btn');
+const libraryContainer = document.querySelector('.my-library__list');
 function renderMovieInLibrary(movie) {
   const {
     original_title,
     poster_path,
+    id,
     vote_average,
     genres,
     release_date,
-    id,
   } = movie;
   const librContent = document.querySelector('.libr-content');
-  const libraryContainer = document.querySelector('.my-library__list');
   let ratingStars = '';
   const rating = Math.round(vote_average);
   switch (rating) {
@@ -87,6 +90,7 @@ function renderMovieInLibrary(movie) {
     default:
       throw new Error('Invalid rating');
   }
+  console.log(library.length);
   if (library.length < 1) {
     return;
   }
@@ -98,7 +102,7 @@ function renderMovieInLibrary(movie) {
   const movieMarkup = `
     <li class="my-library__item">
         <div class="my-library__thumb">
-          <img class="my-library__img" src="https://image.tmdb.org/t/p/original/${poster_path}" alt="${original_title}">
+          <img class="my-library__img" data-id=${id} src="https://image.tmdb.org/t/p/original/${poster_path}" alt="${original_title}">
         </div>
         <div class="my-library__info">
           <strong class="my-library__title">${original_title}</strong>
@@ -111,11 +115,32 @@ function renderMovieInLibrary(movie) {
   librContent.innerHTML = '';
   libraryContainer.insertAdjacentHTML('beforeend', movieMarkup);
 }
-
 // Отримати масив фільмів з локального сховища
 const library = JSON.parse(localStorage.getItem('movieLibrary')) || [];
-console.log(library);
 // Пройтись по кожному фільму в бібліотеці та відмалювати його
 library.forEach(movie => {
+  console.log(movie);
   renderMovieInLibrary(movie);
+});
+async function getModalByClick(movie_id) {
+  const url = `${BASE_URL}/movie/${movie_id}?api_key=${KEY}&language=en-US`;
+  const response = await axios.get(url);
+  renderModal(response.data);
+}
+libraryContainer.addEventListener('click', evt => {
+  const id = evt.target.dataset.id;
+  const modal = document.querySelector('.modal-weekly');
+  const modalPoster = document.querySelector('.modal-weekly__poster');
+  modal.classList.remove('is-hidden');
+  setTimeout(() => {
+    const addButton = document.querySelector('.button-send');
+    console.log(addButton);
+    addButton.textContent = 'Remove from my library';
+  }, 150);
+  const closeButton = document.querySelector('.close');
+  closeButton.addEventListener('click', () => {
+    modal.classList.add('is-hidden');
+    modalPoster.innerHTML = '';
+  });
+  getModalByClick(id);
 });
