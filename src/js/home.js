@@ -33,7 +33,7 @@ async function displayRandomMovie() {
 
   const movieCard = `
     <div class="container movie-card ">
-    <h2 class="movie-card-title">upcoming this mounth</h2>
+    <h2 class="movie-card-title">upcoming this month</h2>
 <div class="mo">
       <div class="movie-card__image">
       <img src="https://image.tmdb.org/t/p/original/${movie.backdrop_path}" class="card__picture" alt="${movie.title}">
