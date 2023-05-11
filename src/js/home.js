@@ -1,70 +1,122 @@
-import axios from 'axios';
-import { KEY,BASE_URL } from './api-key';
+import { KEY,UPCOMING_URL } from './api-key';
+import { addMovieToLibrary } from './library';
 
 
 
-async function getRandomMovie() {
-  const maxPages = 1; // maximum number of pages with movies in API
-  const randomPage = Math.floor(Math.random() * maxPages) + 1;
-  const url = `${BASE_URL}/movie/upcoming?api_key=${KEY}&page=${randomPage}`;
-  const response = await axios.get(url);
-  const randomMovie =
-    response.data.results[
-      Math.floor(Math.random() * response.data.results.length)
-    ];
-  return randomMovie;
+
+const upcomingBlock = document.querySelector('.container__upcoming');
+
+// FETCH FOR UPCOMIG MOVIES
+
+function fetchUpcomingMovies() {
+  return fetch(`${UPCOMING_URL}?api_key=${KEY}&language=en-US&page=1`).then(
+    movieData => {
+      if (!movieData.ok) {
+        throw new Error(movieData.status);
+      }
+      return movieData.json();
+    }
+  );
 }
 
-async function getGenres() {
-  const url = `${BASE_URL}/genre/movie/list?api_key=${KEY}`;
-  const response = await axios.get(url);
-  return response.data.genres;
+function onClickRemind(event) {
+  const movieId = event.target.dataset.movieid;
+  addMovieToLibrary(movieId);
 }
 
-async function displayRandomMovie() {
-  const movie = await getRandomMovie();
-  const genres = await getGenres();
-  const genreNames = movie.genre_ids
-    .map(id => {
-      const genre = genres.find(g => g.id === id);
-      return genre ? genre.name : '';
-    })
-    .join(', ');
+async function getFetchedMovies() {
+  try {
+    const data = await fetchUpcomingMovies();
+    const returnedResult = data.results;
+    if (returnedResult.length >= 1) {
+      const randomMovie =
+        returnedResult[Math.floor(Math.random() * returnedResult.length)];
+      const genreNames = await getGenresById(randomMovie.genre_ids);
+      const createdMarkup = await renderMarkup({ ...randomMovie, genreNames });
+      upcomingBlock.insertAdjacentHTML('beforeend', createdMarkup);
+      document
+        .querySelector('.upcoming__remindme--btn')
+        .addEventListener('click', onClickRemind);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+getFetchedMovies();
 
-  const movieCard = `
-    <div class="container movie-card ">
-    <h2 class="movie-card-title">upcoming this month</h2>
-<div class="mo">
-      <div class="movie-card__image">
-      <img src="https://image.tmdb.org/t/p/original/${movie.backdrop_path}" class="card__picture" alt="${movie.title}">
+async function renderMarkup({
+  id,
+  poster_path,
+  backdrop_path,
+  title,
+  overview,
+  popularity,
+  vote_average,
+  vote_count,
+  release_date,
+  genre_ids,
+}) {
+  const genreNames = await getGenresById(genre_ids);
+
+  return `
+    
+ <div class="upcoming__card">
+ <div class="upcoming__thumb">
+      
+      <picture class='upcoming__poster'>
+      <source srcset="https://image.tmdb.org/t/p/original/${backdrop_path}" media="(min-width: 1200px)" class='upcoming__poster-desktop' />
+      <source srcset="https://image.tmdb.org/t/p/original/${backdrop_path}" media="(min-width: 768px)" class='upcoming__poster-tablet' />
+      <source srcset="https://image.tmdb.org/t/p/original/${poster_path}" media="(min-width: 320px)" />
+      <img src="https://image.tmdb.org/t/p/original/${poster_path}" alt="Movie Poster" style='width: 805px'/>
+    </picture>
       </div>
-      <div class="movie-card__content">
-      <h2 class="movie-title">${movie.title}</h2>
-      <div class="movie-card__mo">
-      <div>
-      <p class="movie-date">Release date: <span> ${movie.release_date} </span></p>
-      <p class="movie-vote">Vote/Votes: <span class="movie-vote__span">${movie.vote_average}</span>/<span>${movie.vote_count} </span></p>
       </div>
-      <div>
-      <p class="movie-popularity">Popularity:<span> ${movie.popularity} </span></p>
-      <p class="movie-genre">Genre:<span> ${genreNames} </span></p>
-      </div>
-      </div>
-      <p class="movie-about"> ABOUT </p>
-      <span class="movie-about__descr"> ${movie.overview}</span>
-      <button type="button" class="button-remind">Remind me</button>
-      </div>
-    </div>
-    </div>
-  `;
-  const section = document.querySelector('.movie-container');
-  section.innerHTML = movieCard;
+
+<div class="upcoming__info">
+            <h2 class="upcoming__info--title">${title}</h2>
+            <div class="upcoming__movie">
+                <div class="upcoming__info--left">
+                    <div class="upcoming__info--release">
+                        <p class="upcoming__text"> <span class ="upcoming__light--black">Release date</span> <span class="upcoming__info--release--date">${release_date}</span></p>
+                    </div>
+                    <div class="upcoming__info--vote">
+                        <p class="upcoming__text"><span class ="upcoming__light--black">Vote/Votes</span>
+                        <div class="upcoming__info--votes"><span class="upcoming__info--white">${vote_average}</span> <span
+                                class="slash">/</span>
+                            <span class="upcoming__info--white">
+                               ${vote_count}</span>
+                        </div>
+                        </p>
+                    </div>
+                </div>
+                <div class="upcoming__info--right">
+                    <div class="upcoming__info--pop">
+                        <p class="upcoming__text"> <span class ="upcoming__light--black">Popularity</span> <span class="upcoming__info--pop--range">${popularity}</span> </p>
+                    </div>
+                    <div class="upcoming__info--genre">
+                        <p class="upcoming__text"><span class ="upcoming__light--black">Genre</span> <span class="upcoming__info--genre--kind">${genreNames}</span> </p>
+                    </div>
+                </div>
+            </div>
+            <h2 class="upcoming__info--about">ABOUT</h2>
+
+            <p class="upcoming__info--description">${overview}</p>
+            <button class="upcoming__remindme--btn" data-movieid=${id}  type="button">Add to Library</button>
+        </div>
+
+   
+     `;
 }
 
-async function callMovieCard() {
-  const response = getRandomMovie();
-  displayRandomMovie((await response).data);
-}
-callMovieCard();
+async function getGenresById(genreIds) {
+  const BASE_URL = `https://api.themoviedb.org/3/genre/movie/list`;
+  const response = await fetch(`${BASE_URL}?api_key=${KEY}&language=en-US`);
+  const data = await response.json();
 
-// LOCAL
+  const genreNames = genreIds.map(genreId => {
+    const genre = data.genres.find(genre => genre.id === genreId);
+    return genre.name;
+  });
+
+  return genreNames.join(', ');
+}
