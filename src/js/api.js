@@ -21,3 +21,34 @@ export async function getVideos(movie_id) {
     })
     .catch(error => {});
 }
+
+// Фетч фильма по его ID
+export async function getMovieById(id) {
+  try {
+    const { data } = await axios.get(`${ID_URL}${id}?api_key=${KEY}`);
+
+    const result = {
+      ...data,
+      year: createYear(data),
+      customGenres: createGenresFromID(data),
+    };
+
+    return result;
+  } catch (error) {
+    console.error('Smth wrong with api ID fetch' + error);
+  }
+}
+
+export const getSecondMovieById = async id => {
+  try {
+    const { data } = await axios.get(
+      `https://api.themoviedb.org/3/movie/${id}?api_key=${KEY}`
+    );
+    const result = {
+      ...data,
+    };
+    return result;
+  } catch (error) {
+    console.error('Smth wrong with api ID fetch' + error);
+  }
+};
