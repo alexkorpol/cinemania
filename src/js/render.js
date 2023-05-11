@@ -1,12 +1,12 @@
 import axios from 'axios';
 import { cards } from './refs';
 import { saveLocSt } from './storage';
-import { IMG_BASE_URL, BASE_URL, IMG_W400, API_KEY } from './api-key';
+import { IMG_BASE_URL, BASE_URL, IMG_W400, KEY } from './api-key';
 import { emptyStar, fullStar, halfStar } from './star';
 
 export async function getMovieGenres() {
   const { data } = await axios.get(
-    `${BASE_URL}/genre/movie/list?api_key=${API_KEY}`
+    `${BASE_URL}/genre/movie/list?api_key=${KEY}`
   );
   return data;
 }
