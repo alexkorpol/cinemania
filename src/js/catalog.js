@@ -11,6 +11,7 @@ const modal = document.querySelector('.modal-weekly');
 const closeButton = document.querySelector('.close');
 const modalPoster = document.querySelector('.modal-weekly__poster');
 const searchErrorMessage = document.querySelector('.cards__message');
+const searchInputEl = document.querySelector('.search__form--input');
 
 
 let searchPage = 1;
@@ -189,7 +190,6 @@ const form = document.querySelector('.search__form');
 const loadSerialized = key => {
   try {
     const serializedState = localStorage.getItem(key);
-    console.log(serializedState)
     return serializedState === null ? undefined : JSON.parse(serializedState);
   } catch (error) {
     console.error(error.message);
@@ -262,12 +262,12 @@ function search(event) {
   fetchMovieSearcher(query, searchPage).then(data => {
     moviesDataUpdate(data);
     if (data.results.length < 1 || query === '') {
-      form.reset();
       query = '';
       saveSerialized('query-pg', query);
       cards.innerHTML="";
       searchErrorMessage.classList.remove('visually-hidden');
-      container.classList.add('visually-hidden')
+      container.classList.add('visually-hidden');
+      form.reset();
     } else {
       searchFilms = false;
       totalItems = data.total_results;
