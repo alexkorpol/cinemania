@@ -10,6 +10,7 @@ const SEARCH_URL = `${BASE_URL}/search/movie`;
 const modal = document.querySelector('.modal-weekly');
 const closeButton = document.querySelector('.close');
 const modalPoster = document.querySelector('.modal-weekly__poster');
+const searchErrorMessage = document.querySelector('.cards__message');
 
 
 let searchPage = 1;
@@ -87,6 +88,7 @@ function renderMarkupList(data) {
 async function createListMarkup(data) {
   const { genres: genreName } = await getGenres();
   let movieArray = [];
+  console.log(data)
 
   for (let i = 0; i < data.length; i++) {
     const {
@@ -150,6 +152,8 @@ async function createListMarkup(data) {
       default:
         throw new Error('Invalid rating');
     }
+
+
     movieArray.push(`
       <li class='cards-list__item hover-cursor' data-id='${id}'>
         <img
@@ -232,6 +236,7 @@ async function getTrendData(page) {
     return data;
   } catch (error) {
     console.error(error);
+    
   }
 }
 
@@ -255,12 +260,17 @@ function search(event) {
     form.reset();
   }
 
+  console.log(query)
+
   fetchMovieSearcher(query, searchPage).then(data => {
     moviesDataUpdate(data);
     if (data.results.length < 1 || query === '') {
       form.reset();
       query = '';
       saveSerialized('query-pg', query);
+      cards.innerHTML="";
+      searchErrorMessage.classList.remove('visually-hidden');
+      container.classList.add('visually-hidden')
     } else {
       searchFilms = false;
       totalItems = data.total_results;
