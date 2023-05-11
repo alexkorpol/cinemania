@@ -7,6 +7,7 @@
   }
 
   .movie-card-title {
+      font-family: Roboto;
     color: #fff;
     width: 194px;
     font-size: 16px;
@@ -17,7 +18,7 @@
   }
 
   .card__picture {
-
+      background-size: contain;
     margin-bottom: 20px;
 
 object-fit: cover;
@@ -124,6 +125,7 @@ object-fit: cover;
   }
 
   .movie-card-title {
+    font-family: Roboto;
     color: #fff;
     width: 291px;
     font-size: 24px;
@@ -135,6 +137,7 @@ object-fit: cover;
 
   .card__picture {
   max-width: 704px;
+  background-size: contain;
     height: auto;
     margin-bottom: 32px;
     width: 704px;
@@ -242,6 +245,10 @@ object-fit: cover;
   }
 }
 
+
+
+
+
 @media screen and (min-width: 1200px) {
   .movie-card {
     display: flex;
@@ -253,8 +260,8 @@ object-fit: cover;
   .mo {
     display: flex;
   }
-
   .movie-card-title {
+    font-family: Roboto;
     color: #fff;
     width: 339px;
     font-size: 28px;
@@ -269,6 +276,7 @@ object-fit: cover;
   }
 
   .card__picture {
+      background-size: contain;
     max-width: 805px;
     height: auto;
     // margin-bottom: 32px;
@@ -375,4 +383,14 @@ object-fit: cover;
     display: flex;
     flex-direction: column;
   }
+
+//   .movie-card__one {
+// justify-content: space-between;
+//   display: flex;
+
+//   }
+//     .movie-card__two {
+//       justify-content: space-between;
+//         display: flex;
+//     }
 }

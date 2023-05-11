@@ -3,6 +3,9 @@ import { KEY,BASE_URL } from './api-key';
 
 
 
+
+const library = []; // array to store movie cards
+
 async function getRandomMovie() {
   const maxPages = 1; // maximum number of pages with movies in API
   const randomPage = Math.floor(Math.random() * maxPages) + 1;
@@ -33,7 +36,7 @@ async function displayRandomMovie() {
 
   const movieCard = `
     <div class="container movie-card ">
-    <h2 class="movie-card-title">upcoming this month</h2>
+    <h2 class="movie-card-title">upcoming this mounth</h2>
 <div class="mo">
       <div class="movie-card__image">
       <img src="https://image.tmdb.org/t/p/original/${movie.backdrop_path}" class="card__picture" alt="${movie.title}">
@@ -41,11 +44,11 @@ async function displayRandomMovie() {
       <div class="movie-card__content">
       <h2 class="movie-title">${movie.title}</h2>
       <div class="movie-card__mo">
-      <div>
+      <div class="movie-card__one">
       <p class="movie-date">Release date: <span> ${movie.release_date} </span></p>
       <p class="movie-vote">Vote/Votes: <span class="movie-vote__span">${movie.vote_average}</span>/<span>${movie.vote_count} </span></p>
       </div>
-      <div>
+      <div class="movie-card__two">
       <p class="movie-popularity">Popularity:<span> ${movie.popularity} </span></p>
       <p class="movie-genre">Genre:<span> ${genreNames} </span></p>
       </div>
@@ -59,6 +62,21 @@ async function displayRandomMovie() {
   `;
   const section = document.querySelector('.movie-container');
   section.innerHTML = movieCard;
+
+  const btn = document.querySelector('.button-remind');
+btn.addEventListener('click', () => {
+  const index = library.findIndex(m => m.id === movie.id);
+  if (index === -1) {
+    library.push(movie);
+    btn.textContent = 'Remove movie';
+    console.log('Movie added to library:', movie);
+  } else {
+    library.splice(index, 1);
+    btn.textContent = 'Remind me';
+    console.log('Movie removed from library:', movie);
+  }
+  localStorage.setItem('movieLibrary', JSON.stringify(library));
+});
 }
 
 async function callMovieCard() {
@@ -66,5 +84,3 @@ async function callMovieCard() {
   displayRandomMovie((await response).data);
 }
 callMovieCard();
-
-// LOCAL
