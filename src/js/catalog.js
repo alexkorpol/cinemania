@@ -164,7 +164,6 @@ async function createListMarkup(data) {
           loading='lazy'
           data-id='${id}'
         />
-        <div class='cards-list__wrap'>
           <div class='cards-list__info'>
             <h2 class='cards-list__title'>${title}</h2>
             <div class='cards-list_second_line'>
@@ -176,8 +175,6 @@ async function createListMarkup(data) {
           </div> 
             </div>
           </div>
-             
-        </div>
       </li>
     `);
   }
@@ -275,6 +272,8 @@ function search(event) {
       searchFilms = false;
       totalItems = data.total_results;
       pagination._options.totalItems = totalItems;
+      // searchErrorMessage.classList.add('visually-hidden');///////////////////глянуть
+      // container.classList.remove('visually-hidden')
 
       renderMarkupList(data);
 
