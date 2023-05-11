@@ -17,7 +17,8 @@
 }
 
 .modal__container {
-  overflow-x: auto;
+  height: 100vh; 
+  overflow: auto;
   z-index: 99;
   position: absolute;
   top: 50%;
@@ -26,31 +27,29 @@
   transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
 
   box-shadow: 1px 1px 14px 4px rgba(255, 107, 8, 0.42);
-  background-color: black;
+  background-color: $text-light-background;
   @include font(500, 24, 1.2, null);
   color: $text-secondary-color;
-  max-height: 100vh;
-  padding: 52px 16px 52px 16px;
+  padding: 52px 16px;
   border-radius: 16px;
-  min-width: 280px;
-  height: 847px;
+  width: 280px;
 
   @include tablet {
     display: flex;
-    margin: auto;
     width: 704px;
     height: 488px;
-    padding: 40px 36px 40px 36px;
+    padding: 44px;
   }
   @include desktop {
-    display: flex;
-    min-width: 846px;
+    width: 846px;
     height: 598px;
+    padding: 60px;
   }
 }
 
 .film-list {
   @include centerFlex();
+  gap: 30px;
   flex-wrap: wrap;
   @include tablet {
     justify-content: space-between;
@@ -58,11 +57,13 @@
     flex-wrap: nowrap;
     gap: 16px;
   }
+  @include desktop {
+    gap: 20px;
+  }
 
   & .film-list__img {
     width: 248px;
     height: 315px;
-    margin-bottom: 22px;
     @include tablet {
       width: 294px;
       height: 400px;
@@ -73,8 +74,6 @@
     }
 
     & img {
-      margin-right: auto;
-      margin-left: auto;
       border-radius: 5px;
       width: 100%;
       height: 100%;
@@ -82,42 +81,33 @@
       background-position: center;
       background-size: cover;
       background-image: url(../img/err-modal/err-mod-dsct-2x-min.png);
-
-      @include tablet {
-        width: 100%;
-        height: 100%;
-        background-image: url(../img/err-modal/err-mod-dsct-2x-min.png);
-      }
+      object-fit: cover;
       @include desktop {
-        width: 100%;
-        height: 100%;
         box-shadow: 1px 1px 24px 2px rgba(1, 1, 1, 0.45);
-        background-image: url(../img/err-modal/err-mod-dsct-2x-min.png);
       }
     }
   }
 }
 
 .film-list__info {
+  width: 248px;
   @include tablet {
-    width: 294px;
-    height: 400px;
+    width: 301px;
   }
   @include desktop {
-    width: 375px;
-    height: 478px;
+    width: 331px;
   }
   & .film-list__title {
+    display: inline-block;
     @include font(500, 20, 1.2, null);
     margin-bottom: 29px;
-    color: $text-secondary-color;
+    color: $text-dark-background;
 
     @include tablet {
       @include font(500, 24, 1.2, null);
       margin-bottom: 26px;
     }
     @include desktop {
-      @include font(500, 24, 1.2, null);
       margin-bottom: 28px;
     }
   }
@@ -126,24 +116,20 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: 12px;
-    gap: 30px;
-    & .film-list__sub--title {
-      width: 100px;
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      @include font(500, 14, 1.2, null);
-      color: $text-secondary-color;
+    margin-bottom: 20px;
 
-      @include tablet {
-        width: 100px;
-        justify-content: flex-start;
-      }
+    & .film-list__sub--title {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      width: 100px;
+      @include font(500, 14, 1.2, null);
+      color: $not-accent;
       @include desktop {
         @include font(500, 16, 1.2, null);
       }
     }
+
     & .film-list__title--wood {
       width: 120px;
       display: flex;
@@ -152,10 +138,6 @@
       @include font(500, 14, 1.2, null);
       color: $text-secondary-color;
 
-      @include tablet {
-        width: 150px;
-        justify-content: flex-start;
-      }
       @include desktop {
         @include font(500, 16, 1.2, null);
       }
@@ -164,8 +146,7 @@
     & .film-list__text--average {
       width: 120px;
       display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
+      gap: 7px;
       @include font(500, 12, 1.2, null);
       color: $text-secondary-color;
 
@@ -174,69 +155,57 @@
         @include font(500, 14, 1.2, null);
       }
       & .film-list__average {
-        background: $text-secondary-color;
+        background: $text-dark-background;
         border-radius: 5px;
-        color: black;
+        color: $text-light-background;
         padding: 1px 8px;
       }
     }
 
     & .film-list__last--text {
-      border-radius: 5px;
       @include font(500, 14, 1.2, null);
       color: $text-secondary-color;
 
       @include desktop {
-        width: 100%;
         @include font(500, 16, 1.2, null);
       }
-    }
-  }
-
-  & .film-list__about {
-    display: flex;
-    flex-wrap: wrap;
-    & .film-list__text-about {
-      min-width: 248px;
-      padding: 0;
     }
   }
 
   & .film-list__title--about {
     @include font(500, 14, 1.2, null);
     margin-bottom: 12px;
-    color: $text-secondary-color;
-
+    color: $not-accent;
+    @include tablet {
+      margin-bottom: 16px;
+    }
     @include desktop {
       @include font(500, 16, 1.2, null);
     }
   }
 
   & .film-list__text--about {
-    @include font(400, 12, 1.2, null);
+    @include font(400, 12, 1.67, null);
     color: $text-secondary-color;
-
+    margin-bottom: 20px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 8;
+    @include tablet {
+      margin-botton: 24px;
+      -webkit-line-clamp: 5;
+    }
     @include desktop {
-      @include font(400, 14, 1.2, null);
+      @include font(400, 14, 1.43, null);
+      -webkit-line-clamp: 10;
     }
   }
 }
 
-.film__button-position {
-  margin-top: 16px;
-  @include tablet {
-    margin-top: 24px;
-    bottom: 10px;
-    right: 220px;
-  }
-  @include desktop {
-    bottom: 60px;
-    right: 255px;
-  }
-}
 .film__button {
   text-align: center;
-  border: none;
   border-radius: 74px;
   width: 140px;
   height: 38px;
@@ -247,6 +216,7 @@
   border: 1px solid $accent;
   @include tablet {
     @include font(500, 12, 1.2, null);
+    height: 40px;
   }
   &:hover,
   &:focus {
@@ -261,19 +231,27 @@
   align-self: flex-start;
   position: absolute;
   width: 40px;
-  height: 25px;
-  top: 5px;
-  right: 5px;
+  height: 40px;
+  top: 12px;
+  right: 16px;
   border: none;
   background: transparent;
-  box-sizing: border-box;
-  transition: color 300ms cubic-bezier(0.38, 0.53, 0.8, 0.71);
+  transition: color 200ms cubic-bezier(0.38, 0.53, 0.8, 0.71);
   fill: $text-secondary-color;
+  cursor: pointer;
 
   &:hover,
   &:focus {
     fill: $accent;
     border-color: $accent;
+  }
+  @include tablet {
+    top: 24px;
+    right: 24px;
+  }
+  @include desktop {
+    top: 40px;
+    right: 40px;
   }
 }
 .visually-hidden {
