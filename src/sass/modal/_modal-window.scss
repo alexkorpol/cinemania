@@ -1,0 +1,295 @@
+.backdrop {
+  position: fixed;
+  background-color: rgba(24, 23, 23, 0.767);
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  opacity: 1;
+  z-index: 1;
+  overflow: auto;
+
+  &.is-hidden {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 1000ms linear, visibility 300ms linear;
+  }
+}
+
+.modal__container {
+  overflow-x: auto;
+  z-index: 99;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  box-shadow: 1px 1px 14px 4px rgba(255, 107, 8, 0.42);
+  background-color: black;
+  @include font(500, 24, 1.2, null);
+  color: $text-secondary-color;
+  max-height: 100vh;
+  padding: 52px 16px 52px 16px;
+  border-radius: 16px;
+  min-width: 280px;
+  height: 847px;
+
+  @include tablet {
+    display: flex;
+    margin: auto;
+    width: 704px;
+    height: 488px;
+    padding: 40px 36px 40px 36px;
+  }
+  @include desktop {
+    display: flex;
+    min-width: 846px;
+    height: 598px;
+  }
+}
+
+.film-list {
+  @include centerFlex();
+  flex-wrap: wrap;
+  @include tablet {
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+    gap: 16px;
+  }
+
+  & .film-list__img {
+    width: 248px;
+    height: 315px;
+    margin-bottom: 22px;
+    @include tablet {
+      width: 294px;
+      height: 400px;
+    }
+    @include desktop {
+      width: 375px;
+      height: 478px;
+    }
+
+    & img {
+      margin-right: auto;
+      margin-left: auto;
+      border-radius: 5px;
+      width: 100%;
+      height: 100%;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+      background-image: url(../img/err-modal/err-mod-dsct-2x-min.png);
+
+      @include tablet {
+        width: 100%;
+        height: 100%;
+        background-image: url(../img/err-modal/err-mod-dsct-2x-min.png);
+      }
+      @include desktop {
+        width: 100%;
+        height: 100%;
+        box-shadow: 1px 1px 24px 2px rgba(1, 1, 1, 0.45);
+        background-image: url(../img/err-modal/err-mod-dsct-2x-min.png);
+      }
+    }
+  }
+}
+
+.film-list__info {
+  @include tablet {
+    width: 294px;
+    height: 400px;
+  }
+  @include desktop {
+    width: 375px;
+    height: 478px;
+  }
+  & .film-list__title {
+    @include font(500, 20, 1.2, null);
+    margin-bottom: 29px;
+    color: $text-secondary-color;
+
+    @include tablet {
+      @include font(500, 24, 1.2, null);
+      margin-bottom: 26px;
+    }
+    @include desktop {
+      @include font(500, 24, 1.2, null);
+      margin-bottom: 28px;
+    }
+  }
+
+  & .film-list__wood {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+    gap: 30px;
+    & .film-list__sub--title {
+      width: 100px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      @include font(500, 14, 1.2, null);
+      color: $text-secondary-color;
+
+      @include tablet {
+        width: 100px;
+        justify-content: flex-start;
+      }
+      @include desktop {
+        @include font(500, 16, 1.2, null);
+      }
+    }
+    & .film-list__title--wood {
+      width: 120px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      @include font(500, 14, 1.2, null);
+      color: $text-secondary-color;
+
+      @include tablet {
+        width: 150px;
+        justify-content: flex-start;
+      }
+      @include desktop {
+        @include font(500, 16, 1.2, null);
+      }
+    }
+
+    & .film-list__text--average {
+      width: 120px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      @include font(500, 12, 1.2, null);
+      color: $text-secondary-color;
+
+      @include desktop {
+        width: 140px;
+        @include font(500, 14, 1.2, null);
+      }
+      & .film-list__average {
+        background: $text-secondary-color;
+        border-radius: 5px;
+        color: black;
+        padding: 1px 8px;
+      }
+    }
+
+    & .film-list__last--text {
+      border-radius: 5px;
+      @include font(500, 14, 1.2, null);
+      color: $text-secondary-color;
+
+      @include desktop {
+        width: 100%;
+        @include font(500, 16, 1.2, null);
+      }
+    }
+  }
+
+  & .film-list__about {
+    display: flex;
+    flex-wrap: wrap;
+    & .film-list__text-about {
+      min-width: 248px;
+      padding: 0;
+    }
+  }
+
+  & .film-list__title--about {
+    @include font(500, 14, 1.2, null);
+    margin-bottom: 12px;
+    color: $text-secondary-color;
+
+    @include desktop {
+      @include font(500, 16, 1.2, null);
+    }
+  }
+
+  & .film-list__text--about {
+    @include font(400, 12, 1.2, null);
+    color: $text-secondary-color;
+
+    @include desktop {
+      @include font(400, 14, 1.2, null);
+    }
+  }
+}
+
+.film__button-position {
+  margin-top: 16px;
+  @include tablet {
+    margin-top: 24px;
+    bottom: 10px;
+    right: 220px;
+  }
+  @include desktop {
+    bottom: 60px;
+    right: 255px;
+  }
+}
+.film__button {
+  text-align: center;
+  border: none;
+  border-radius: 74px;
+  width: 140px;
+  height: 38px;
+  @include font(500, 12, 1.4, null);
+  cursor: pointer;
+  color: $text-secondary-color;
+  background: transparent;
+  border: 1px solid $accent;
+  @include tablet {
+    @include font(500, 12, 1.2, null);
+  }
+  &:hover,
+  &:focus {
+    background-color: $text-secondary-color;
+    color: $accent;
+    border: 1px solid $text-secondary-color;
+  }
+}
+
+.modal__close-btn {
+  @include centerFlex();
+  align-self: flex-start;
+  position: absolute;
+  width: 40px;
+  height: 25px;
+  top: 5px;
+  right: 5px;
+  border: none;
+  background: transparent;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: color 300ms cubic-bezier(0.38, 0.53, 0.8, 0.71);
+  fill: $text-secondary-color;
+
+  &:hover,
+  &:focus {
+    fill: $accent;
+    border-color: $accent;
+  }
+}
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
