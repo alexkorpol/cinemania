@@ -219,7 +219,7 @@ const options = {
       '<span class="tui-ico-{{type}}"></span>' +
       '</span>',
     moreButton:
-      '<a href="#" class="tui-page-btn tui-{{type}}-is-ellip">...</a>',
+      '<a href="#" class="tui-page-btn tui-{{type}}-is-ellip  visually-hidden">...</a>',
   },
 };
 const pagination = new Pagination(container, options);
@@ -272,8 +272,7 @@ function search(event) {
       searchFilms = false;
       totalItems = data.total_results;
       pagination._options.totalItems = totalItems;
-      // searchErrorMessage.classList.add('visually-hidden');///////////////////глянуть
-      // container.classList.remove('visually-hidden')
+      
 
       renderMarkupList(data);
 
