@@ -219,7 +219,7 @@ const options = {
       '<span class="tui-ico-{{type}}"></span>' +
       '</span>',
     moreButton:
-      '<a href="#" class="tui-page-btn tui-{{type}}-is-ellip visually-hidden">...</a>',
+      '<a href="#" class="tui-page-btn tui-{{type}}-is-ellip  visually-hidden">...</a>',
   },
 };
 const pagination = new Pagination(container, options);
