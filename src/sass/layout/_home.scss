@@ -110,13 +110,17 @@
   margin-top: 16px;
   margin-bottom: 20px;
   max-width: 100%;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
   @include tablet {
     max-width: 100%;
   }
-
   @include desktop {
     max-width: 100%;
+    -webkit-line-clamp: 3;
   }
 }
 

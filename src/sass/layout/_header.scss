@@ -101,6 +101,7 @@ header {
   padding: 2px;
   background: linear-gradient(141.22deg, #ffc226 9.4%, #f84119 91.91%);
   border-radius: 50px;
+  cursor: pointer;
 
   @include tablet {
     width: 54px;
