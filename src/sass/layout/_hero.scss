@@ -1,3 +1,4 @@
+
 .thumb {
   position: relative;
 }
@@ -42,33 +43,16 @@ img {
   }
 }
 
-.black {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 1;
-  opacity: 0;
-  @include tablet {
-    opacity: 1;
-    width: 768px;
-    height: 432px;
-  }
-  @include desktop {
-    width: 1280px;
-    height: 720px;
-  }
-}
-
 .background-image img {
   width: 100%;
 }
 
 .hero-wrap__content {
-   position: absolute;
+  position: absolute;
   top: 0;
   left: 0;
   z-index: 1;
-  
+
   padding: 15px 10px 8px 20px;
   @include tablet {
     padding: 36px 300px 36px 20px;
@@ -81,7 +65,7 @@ img {
 .title {
   width: 100%;
   @include font(700, 28, 1.18, null);
-@include centerAlingn();
+  @include centerAlingn();
   color: $text-dark-background;
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   padding-bottom: 12px;
@@ -99,24 +83,23 @@ img {
 }
 
 .start-rate__hero {
-  
-    margin-bottom: 21px;
-    margin-left: auto;
-    font-size: 18px;
+  margin-bottom: 21px;
+  margin-left: auto;
+  font-size: 18px;
 
-@include tablet {
-  margin-top: 14px;
-  margin-bottom: 22px;
-  font-size: 22px;
-  line-height: 1.2;
+  @include tablet {
+    margin-top: 14px;
+    margin-bottom: 22px;
+    font-size: 22px;
+    line-height: 1.2;
   }
 
-@include desktop {
-  margin-top: 18px;
-  margin-bottom: 30px;
-  font-size: 24px;
-  line-height: 1.2;
- }
+  @include desktop {
+    margin-top: 18px;
+    margin-bottom: 30px;
+    font-size: 24px;
+    line-height: 1.2;
+  }
 }
 
 // .catalog__stars-wrap {
@@ -144,9 +127,6 @@ img {
 //   }
 // }
 
-
-
-
 .catalog__rating-active {
   position: absolute;
   width: 0%;
@@ -167,12 +147,10 @@ img {
 }
 
 .description {
-  
   margin-bottom: 20px;
   @include centerAlingn();
   @include font(400, 13, 1.14, null);
   color: $text-dark-background;
-  
 
   @include tablet {
     width: 260px;
@@ -205,6 +183,6 @@ img {
   border: 1px solid $accent;
 }
 
-.light { 
+.light {
   color: white;
 }

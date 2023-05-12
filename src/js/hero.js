@@ -2,24 +2,7 @@ import { getDayTrending, getVideos } from './api.js';
 import * as basicLightbox from 'basiclightbox';
 import { emptyStar, fullStar, halfStar } from './star';
 
-import black from '../img/hero-mask-dark/dark-hero-desktop.png';
-import white from '../img/hero-mask-light/light-hero-desktop.png';
-
-
-
 const hero = document.querySelector('.hero');
-const LightSwitcher = document.querySelector('.switcher');
-
-LightSwitcher.addEventListener('click', switchPhoto);
-
-function switchPhoto() {
-  const blackImage = document.querySelector('.black');
-  const currentImageSrc = blackImage.getAttribute('src');
-  const newImageSrc = currentImageSrc === black ? white : black;
-  blackImage.setAttribute('src', newImageSrc);
-
-  localStorage.setItem('imageColor', newImageSrc);
-}
 
 async function displayTrendingMovie() {
   try {
@@ -65,47 +48,47 @@ async function displayTrendingMovie() {
 }
 
 function createTrendingMarkup(movieOfDay) {
-    let ratingStars = '';
+  let ratingStars = '';
 
-    const rating = Math.round(movieOfDay.vote_average);
+  const rating = Math.round(movieOfDay.vote_average);
 
-    switch (rating) {
-      case 0:
-        ratingStars = `${emptyStar.repeat(5)}`;
-        break;
-      case 1:
-        ratingStars = `${halfStar}${emptyStar.repeat(4)}`;
-        break;
-      case 2:
-        ratingStars = `${fullStar}${emptyStar.repeat(4)}`;
-        break;
-      case 3:
-        ratingStars = `${fullStar}${halfStar}${emptyStar.repeat(3)}`;
-        break;
-      case 4:
-        ratingStars = `${fullStar.repeat(2)}${emptyStar.repeat(3)}`;
-        break;
-      case 5:
-        ratingStars = `${fullStar.repeat(2)}${halfStar}${emptyStar.repeat(2)}`;
-        break;
-      case 6:
-        ratingStars = `${fullStar.repeat(3)}${emptyStar.repeat(2)}`;
-        break;
-      case 7:
-        ratingStars = `${fullStar.repeat(3)}${halfStar}${emptyStar}`;
-        break;
-      case 8:
-        ratingStars = `${fullStar.repeat(4)}${emptyStar}`;
-        break;
-      case 9:
-        ratingStars = `${fullStar.repeat(4)}${halfStar}`;
-        break;
-      case 10:
-        ratingStars = `${fullStar.repeat(5)}`;
-        break;
-      default:
-        throw new Error('Invalid rating');
-    }
+  switch (rating) {
+    case 0:
+      ratingStars = `${emptyStar.repeat(5)}`;
+      break;
+    case 1:
+      ratingStars = `${halfStar}${emptyStar.repeat(4)}`;
+      break;
+    case 2:
+      ratingStars = `${fullStar}${emptyStar.repeat(4)}`;
+      break;
+    case 3:
+      ratingStars = `${fullStar}${halfStar}${emptyStar.repeat(3)}`;
+      break;
+    case 4:
+      ratingStars = `${fullStar.repeat(2)}${emptyStar.repeat(3)}`;
+      break;
+    case 5:
+      ratingStars = `${fullStar.repeat(2)}${halfStar}${emptyStar.repeat(2)}`;
+      break;
+    case 6:
+      ratingStars = `${fullStar.repeat(3)}${emptyStar.repeat(2)}`;
+      break;
+    case 7:
+      ratingStars = `${fullStar.repeat(3)}${halfStar}${emptyStar}`;
+      break;
+    case 8:
+      ratingStars = `${fullStar.repeat(4)}${emptyStar}`;
+      break;
+    case 9:
+      ratingStars = `${fullStar.repeat(4)}${halfStar}`;
+      break;
+    case 10:
+      ratingStars = `${fullStar.repeat(5)}`;
+      break;
+    default:
+      throw new Error('Invalid rating');
+  }
   const markup = `
     <div class="hero-wrap">
       <div class="thumb">
@@ -113,7 +96,6 @@ function createTrendingMarkup(movieOfDay) {
           <img src="https://image.tmdb.org/t/p/original${
             movieOfDay.backdrop_path
           }" alt="Hero image" class="backend" loading="lazy" />
-          <img src="${black}" class="black" loading="lazy" />
         </div>
         <div class="hero-wrap__content">
           <h1 class="title">${movieOfDay.title || movieOfDay.name}</h1>
@@ -126,7 +108,7 @@ function createTrendingMarkup(movieOfDay) {
       </div>
     </div>
   `;
-  
+
   hero.innerHTML = markup;
 }
 
