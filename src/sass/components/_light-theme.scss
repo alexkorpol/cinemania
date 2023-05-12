@@ -53,21 +53,21 @@ body.light {
 //* HERO
 
 body.light {
-  .hero__background {
-    @media screen and (min-width: 768px) {
-      background-image: url('../img/hero-mask-light/light-hero-tablet.png');
-      @include retina {
-        background-image: url('../img/hero-mask-light/light-hero-tablet-2x.png');
-      }
-    }
+  // .hero__background {
+  //   @media screen and (min-width: 768px) {
+  //     background-image: url('../img/hero-mask-light/light-hero-tablet.png');
+  //     @include retina {
+  //       background-image: url('../img/hero-mask-light/light-hero-tablet-2x.png');
+  //     }
+  //   }
 
-    @media screen and (min-width: 1200px) {
-      background-image: url('../img/hero-mask-light/light-hero-desktop.png');
-      @include retina {
-        background-image: url('../img/hero-mask-light/light-hero-desktop-2x.png');
-      }
-    }
-  }
+  //   @media screen and (min-width: 1200px) {
+  //     background-image: url('../img/hero-mask-light/light-hero-desktop.png');
+  //     @include retina {
+  //       background-image: url('../img/hero-mask-light/light-hero-desktop-2x.png');
+  //     }
+  //   }
+  // }
   .title {
     color: $text-dark-background;
     @include tablet {
@@ -84,95 +84,140 @@ body.light {
 
 // * HOME WEEKLY
 body.light {
-  .home-weekly {
-    background-color: #ffffff;
-    &__title {
-      color: #111111;
-    }
-  }
-  .modal-weekly {
-    &__overlay {
-      background-color: #ffffff;
-    }
-    &__list-vote,
-    &__list-popularity,
-    &__list-genre {
-      color: #111111;
-    }
-    &__list-count {
-      color: #111111;
-    }
-    &__list-genres {
-      color: #111111;
-    }
-    &__list-evalue {
-      background: #F8F8F8;
-      color: #111111;
-    }
-    &__about {
-      color: #111111;
-    }
-    &__description {
-      color: #282828;
-    }
-    &__title {
-      color: #111111;
-    }
-  }
-  .close {
-    &__icon {
-      fill: #282828;
-    }
-  }
-
-  .button-send {
-    color: #111111;
-    border-color: #f87719;
+  .weekly-trends {
+    color: $text-light-background;
   }
 }
 
 // * HOME WEEKLY MODAL
+body.light {
+  .modal__container {
+    background-color: $text-dark-background;
+    color: $text-light-background;
+  }
+  .film-list__info {
+    & .film-list__title {
+      color: $text-light-background;
+    }
+    & .film-list__wood {
+      & .film-list__sub--title {
+        color: $text-light-background;
+      }
+      & .film-list__title--wood {
+        color: $text-light-background;
+      }
+      & .film-list__text--average {
+        color: $text-light-background;
+        & .film-list__average {
+          background: $text-secondary-color;
+          color: $text-secondary-light;
+        }
+      }
+      & .film-list__last--text {
+        color: $text-light-background;
+      }
+    }
+    & .film-list__title--about {
+      color: $text-light-background;
+    }
+
+    & .film-list__text--about {
+      color: $text-secondary-light;
+    }
+  }
+
+  .film__button {
+    color: $text-light-background;
+    background: transparent;
+    border: 1px solid $accent;
+    &:hover,
+    &:focus {
+      background-color:$text-light-background;
+      color: $accent;
+      border: 1px solid $text-light-background;
+    }
+  }
+
+  .modal__close-btn {
+    fill: $text-secondary-light;
+    &:hover,
+    &:focus {
+      fill: $accent;
+      border-color: $accent;
+    }
+  }
+}
+
 // * HOME
 body.light {
-  .movie-card {
-    background-color: $text-dark-background;
+  .upcoming__title {
+    @media screen and (min-width: 320px) {
+      color: $text-light-background;
+    }
   }
-  .movie-card-title {
+  .upcoming__info--title {
     color: $text-light-background;
+
   }
-  .movie-title {
-    color: $text-light-background;
-  }
-  .movie-date,
-  .movie-vote,
-  .movie-popularity,
-  .movie-genre {
-    color: $text-light-background;
-  }
-  .movie-about {
+
+  .upcoming__info--about {
     color: $text-light-background;
   }
 
-  .movie-vote span {
-    background-color: $text-secondary-color;
-  }
-  .movie-popularity span {
+  .upcoming__text {
     color: $text-light-background;
   }
 
-  .movie-genre span {
-    color: $text-light-background;
-  }
-
-  .movie-about__descr {
+  .upcoming__info--description {
     color: $text-secondary-light;
+  }
+
+  .upcoming__info--pop--range {
+    @media screen and (min-width: 320px) {
+      color: $text-light-background;
+    }
+  }
+
+  .upcoming__info--white {
+    color: $text-light-background;
+    background: $text-secondary-color;
+  }
+
+  .slash {
+    color: $text-light-background;
+  }
+
+  .upcoming__info--genre--kind {
+    color: $text-light-background;
+  }
+
+  .upcoming__remindme--btn {
+    @media screen and (min-width: 320px) {
+      color: $text-light-background;
+      background: $linear-button;
+    }
+    &:hover {
+      background: transparent;
+      color:$accent;
+    }
   }
 }
 
 // * MY LIBRARY
 body.light {
-  .libr-content__text {
+  .my-libr {
+    max-width: 1280px;
+    margin-left:auto;
+    margin-right:auto;
+  margin-bottom: 40px;
+  }
+  .library-text__oops {
     color: $text-light-background;
+  }
+
+  .btn-library__link:hover {
+    background-color: $text-secondary-color;
+    color: $accent;
   }
 }
 
@@ -183,30 +228,109 @@ body.light {
   }
   .search__form--input {
     border: 1px solid #595959;
-    &:focus {
-      &::placeholder {
-        color: transparent;
-      }
-      box-shadow: 0 0 20px #f87719;
-    }
   }
   .search__form--button {
     background: linear-gradient(141.22deg, #ffc226 9.4%, #f84119 91.91%);
-    color: #111111;
+    color: $text-light-background;
     &:hover {
-      border: 2px solid #f87719;
+      border: 1px solid #f87719;
       background: transparent;
       color: #f87719;
     }
   }
-  .tui-page-btn {
-    border: 1px solid #595959;
-    color: #595959;
+  .search__form--icon {
+    fill: transparent;
   }
-  .tui-page-btn.tui-is-selected {
+
+  /////////pagination////////////////
+.tui-page-btn {
+  border: 1px solid #595959;
+  color: #595959;
+}
+
+.tui-page-btn:hover,
+.tui-page-btn:focus {
+  color: #f87719;
+  border: 1px solid #f87719;
+}
+
+.tui-page-btn.tui-is-selected {
+  color: white;
+  border: none;
+  background: linear-gradient(141.22deg, #ffc226 9.4%, #f84119 91.91%);
+}
+
+@media (max-width: 767px) {
+  .tui-page-btn.tui-first {
+    fill: white;
+    background-image: url('../img/catalog-pagination/left-arrow_mobil.png');
+  }
+}
+// pavlo
+
+@media (min-width: 768px) {
+  .tui-page-btn.tui-first {
     border: none;
-    color: #282828;
+    background-image: url('../img/catalog-pagination/left-arrow.png');
   }
+}
+// PAvlo
+@media (max-width: 767px) {
+  .tui-page-btn.tui-last {
+    fill: #b7b7b7;
+    background-image: url('../img/catalog-pagination/right-arrow_mobil.png');
+    border: none;
+  }
+}
+@media (min-width: 768px) {
+  .tui-page-btn.tui-last {
+    border: none;
+    fill: #b7b7b7;
+    background-image: url('../img/catalog-pagination/right-arrow.png');
+  }
+}
+
+.tui-page-btn.tui-prev-is-ellip.tui-first-child,
+.tui-page-btn.tui-next-is-ellip.tui-last-child {
+  border: none;
+}
+
+@media (max-width: 767px) {
+  .tui-page-btn.tui-next {
+    fill: #b7b7b7;
+    background-image: url('../img/catalog-pagination/right-arrow_mobil.png');
+    border: none;
+  }
+}
+@media (min-width: 768px) {
+  .tui-page-btn.tui-next {
+    fill: #b7b7b7;
+    background-image: url('../img/catalog-pagination/right-arrow.png');
+    border: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .tui-prev {
+    fill: #b7b7b7;
+    background-image: url('../img/catalog-pagination/left-arrow_mobil.png');
+    border: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .tui-page-btn.tui-prev {
+    fill: #b7b7b7;
+    background-image: url('../img/catalog-pagination/left-arrow.png');
+    border: none;
+  }
+}
+
+.tui-next-is-ellip,
+.tui-prev-is-ellip {
+  fill: #b7b7b7;
+  border: none;
+}
 }
 
 //* FOOTER
@@ -214,4 +338,28 @@ body.light {
   .footer--copyright {
     color: #595959;
   }
+}
+
+//* WATCH-ERR
+body.light {
+.notification-trailer-fail {
+  background-color: $text-dark-background;
+}
+.btn-close {
+  // background-image: url('../img/sprite.svg#icon-x-button');
+  background-color: transparent;
+  color: $text-light-background;
+}
+
+.btn-close--svg {
+  width: 24px;
+  height: 24px;
+}
+.notification-trailer-fail-text {
+  color: $text-light-background;
+}
+.iframe {
+  box-shadow: 1px 1px 14px 4px rgba(255, 107, 8, 0.42);
+  border-radius: 16px;
+}
 }

@@ -13,7 +13,7 @@
   border: none;
   transform: translateY(30%);
   transition: transform 1s ease-in-out, opacity 1s ease-in-out;
-
+  cursor: pointer;
   @include tablet {
     // right: 30px;
   }
