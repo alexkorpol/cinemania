@@ -61,10 +61,10 @@ async function renderMarkup({
  <div class="upcoming__thumb">
       
       <picture class='upcoming__poster'>
-      <source srcset="https://image.tmdb.org/t/p/original/${backdrop_path}" media="(min-width: 1200px)" class='upcoming__poster-desktop' />
-      <source srcset="https://image.tmdb.org/t/p/original/${backdrop_path}" media="(min-width: 768px)" class='upcoming__poster-tablet' />
-      <source srcset="https://image.tmdb.org/t/p/original/${poster_path}" media="(min-width: 320px)" />
-      <img src="https://image.tmdb.org/t/p/original/${poster_path}" alt="Movie Poster" style='width: 805px'/>
+      <source srcset="https://image.tmdb.org/t/p/original/${backdrop_path}" media="(min-width: 1200px)" class='upcoming__poster-desktop' loading="lazy"/>
+      <source srcset="https://image.tmdb.org/t/p/original/${backdrop_path}" media="(min-width: 768px)" class='upcoming__poster-tablet' loading="lazy"/>
+      <source srcset="https://image.tmdb.org/t/p/original/${poster_path}" media="(min-width: 320px)" loading="lazy"/>
+      <img src="https://image.tmdb.org/t/p/original/${poster_path}" alt="Movie Poster" style='width: 805px' loading="lazy"/>
     </picture>
       </div>
       </div>
