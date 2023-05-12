@@ -116,7 +116,7 @@ function createMarkup(results) {
         <img class='gallery-weekly__image' src="${posterIMG}" alt="${original_title}" loading="lazy" data-id='${id}'>
        <div class='gallery-weekly__all-info'> 
         <div class="gallery-weekly__info">
-            <h3 class= 'gallery-weekly__title'>${original_title}</h3>
+            <h2 class= 'gallery-weekly__title'>${original_title}</h2>
             <div class='cards-list_second_line'>
               <div class='cards-list__text'>
                 <p>${genre_ids} | ${release_date}</p>
@@ -124,8 +124,8 @@ function createMarkup(results) {
             </div>
         </div>
         <div class='star-rate'>
-                ${ratingStars}
-        </div>
+        ${ratingStars}
+</div>
       </div>
     </li>`;
       }

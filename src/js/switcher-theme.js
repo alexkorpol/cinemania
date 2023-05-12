@@ -13,25 +13,21 @@ LightSwitcher.onclick = function () {
   localStorage.setItem('isLight', isLight);
 };
 
-
-
-
 //* C U R R E N T   P A G E
 
 // Отримати URL поточної сторінки
 var currentUrl = window.location.href;
 
 // Отримати всі елементи посилань у списку
-var navLinks = document.querySelectorAll('.header__nav-link, .mobile-menu__link');
+var navLinks = document.querySelectorAll(
+  '.header__nav-link, .mobile-menu__link'
+);
 
 // Пройтись по кожному елементу посилання
-navLinks.forEach(function(link) {
+navLinks.forEach(function (link) {
   // Перевірити, чи співпадає URL посилання з поточним URL
   if (link.href === currentUrl) {
     // Додати клас до елементу посилання
     link.classList.add('link__current');
   }
 });
-
-
-console.log('gff');
