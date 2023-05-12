@@ -8,10 +8,10 @@ const BASE_URL = 'https://api.themoviedb.org/3';
 const TREND_URL = `${BASE_URL}/trending/movie/week`;
 const SEARCH_URL = `${BASE_URL}/search/movie`;
 const modal = document.querySelector('.modal-weekly');
-const closeButton = document.querySelector('.close');
+const closeButton = document.querySelector('.modal__close-btn');
 const modalPoster = document.querySelector('.modal-weekly__poster');
 const searchErrorMessage = document.querySelector('.cards__message');
-const searchInputEl = document.querySelector('.search__form--input');
+
 
 
 let searchPage = 1;
