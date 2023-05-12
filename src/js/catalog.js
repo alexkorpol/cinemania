@@ -58,6 +58,8 @@ async function getGenres() {
   return { genres };
 }
 
+
+
 function renderMarkupList(data) {
   getGenres().then(({ genres }) => {
     saveSerialized('genresList', genres);
@@ -78,109 +80,116 @@ function renderMarkupList(data) {
         });
       });
     }
-    const markupList = createListMarkup(data.results);
-    if (cards) {
-      cards.innerHTML = markupList;
-    }
+    const markupListPromise = createListMarkup(data.results);
+    markupListPromise.then(markupList => {
+      if (cards) {
+        cards.innerHTML = markupList;
+      }
+    });
   });
 }
 
 
+
 async function createListMarkup(data) {
-  const { genres: genreName } = await getGenres();
-  let movieArray = [];
+  try {
+    const { genres: genreName } = await getGenres();
+    let movieArray = [];
 
-  for (let i = 0; i < data.length; i++) {
-    const {
-      original_title,
-      genre_ids,
-      release_date,
-      poster_path,
-      vote_average,
-      title,
-      id,
-    } = data[i];
-    let genres = [];
+    for (let i = 0; i < data.length; i++) {
+      const {
+        original_title,
+        genre_ids,
+        release_date,
+        poster_path,
+        vote_average,
+        title,
+        id,
+      } = data[i];
+      let genres = [];
 
-    for (let j = 0; j < genreName.length; j++) {
-      if (genre_ids.indexOf(genreName[j].id) !== -1) {
-        genres.push(genreName[j].name);
+      for (let j = 0; j < genreName.length; j++) {
+        if (genre_ids.indexOf(genreName[j].id) !== -1) {
+          genres.push(genreName[j].name);
+        }
       }
-    }
 
-    const sliced = genres.slice(0, 2);
-    const slicedGenres = sliced.join(', ');
+      const sliced = genres.slice(0, 2);
+      const slicedGenres = sliced.join(', ');
 
-    let ratingStars = '';
+      let ratingStars = '';
 
-    const rating = Math.round(vote_average);
+      const rating = Math.round(vote_average);
 
-    switch (rating) {
-      case 0:
-        ratingStars = `${emptyStar.repeat(5)}`;
-        break;
-      case 1:
-        ratingStars = `${halfStar}${emptyStar.repeat(4)}`;
-        break;
-      case 2:
-        ratingStars = `${fullStar}${emptyStar.repeat(4)}`;
-        break;
-      case 3:
-        ratingStars = `${fullStar}${halfStar}${emptyStar.repeat(3)}`;
-        break;
-      case 4:
-        ratingStars = `${fullStar.repeat(2)}${emptyStar.repeat(3)}`;
-        break;
-      case 5:
-        ratingStars = `${fullStar.repeat(2)}${halfStar}${emptyStar.repeat(2)}`;
-        break;
-      case 6:
-        ratingStars = `${fullStar.repeat(3)}${emptyStar.repeat(2)}`;
-        break;
-      case 7:
-        ratingStars = `${fullStar.repeat(3)}${halfStar}${emptyStar}`;
-        break;
-      case 8:
-        ratingStars = `${fullStar.repeat(4)}${emptyStar}`;
-        break;
-      case 9:
-        ratingStars = `${fullStar.repeat(4)}${halfStar}`;
-        break;
-      case 10:
-        ratingStars = `${fullStar.repeat(5)}`;
-        break;
-      default:
-        throw new Error('Invalid rating');
-    }
+      switch (rating) {
+        case 0:
+          ratingStars = `${emptyStar.repeat(5)}`;
+          break;
+        case 1:
+          ratingStars = `${halfStar}${emptyStar.repeat(4)}`;
+          break;
+        case 2:
+          ratingStars = `${fullStar}${emptyStar.repeat(4)}`;
+          break;
+        case 3:
+          ratingStars = `${fullStar}${halfStar}${emptyStar.repeat(3)}`;
+          break;
+        case 4:
+          ratingStars = `${fullStar.repeat(2)}${emptyStar.repeat(3)}`;
+          break;
+        case 5:
+          ratingStars = `${fullStar.repeat(2)}${halfStar}${emptyStar.repeat(2)}`;
+          break;
+        case 6:
+          ratingStars = `${fullStar.repeat(3)}${emptyStar.repeat(2)}`;
+          break;
+        case 7:
+          ratingStars = `${fullStar.repeat(3)}${halfStar}${emptyStar}`;
+          break;
+        case 8:
+          ratingStars = `${fullStar.repeat(4)}${emptyStar}`;
+          break;
+        case 9:
+          ratingStars = `${fullStar.repeat(4)}${halfStar}`;
+          break;
+        case 10:
+          ratingStars = `${fullStar.repeat(5)}`;
+          break;
+        default:
+          throw new Error('Invalid rating');
+      }
 
 
-    movieArray.push(`
-      <li class='cards-list__item hover-cursor' data-id='${id}'>
-        <img
-          class='cards-list__img'
-          src='https://image.tmdb.org/t/p/w500${poster_path}'
-          alt='${original_title}'
-          width
-          loading='lazy'
-          data-id='${id}'
-        />
-          <div class='cards-list__info'>
-            <h2 class='cards-list__title'>${title}</h2>
-            <div class='cards-list_second_line'>
-              <div class='cards-list__text'>
-                <p>${genre_ids} | ${release_date}</p>
+      movieArray.push(`
+        <li class='cards-list__item hover-cursor' data-id='${id}'>
+          <img
+            class='cards-list__img'
+            src='https://image.tmdb.org/t/p/w500${poster_path}'
+            alt='${original_title}'
+            width
+            loading='lazy'
+            data-id='${id}'
+          />
+            <div class='cards-list__info'>
+              <h2 class='cards-list__title'>${title}</h2>
+              <div class='cards-list_second_line'>
+                <div class='cards-list__text'>
+                  <p>${genre_ids} | ${release_date}</p>
+                </div>
+                <div class='star-rate'>
+                ${ratingStars}
+              </div> 
               </div>
-              <div class='star-rate'>
-              ${ratingStars}
-            </div> 
             </div>
-          </div>
-      </li>
-    `);
+        </li>
+      `);
+    }
+
+    return movieArray.join('');
+  } catch (error) {
+    console.error(error);
+    return '';
   }
-
-  cards.insertAdjacentHTML('afterbegin', movieArray.join(''));
-
 }
 
 const cards = document.querySelector('#cards__list');
