@@ -112,8 +112,8 @@ function createTrendingMarkup(movieOfDay) {
         <div class="background-image">
           <img src="https://image.tmdb.org/t/p/original${
             movieOfDay.backdrop_path
-          }" alt="Hero image" class="backend" />
-          <img src="${black}" class="black" />
+          }" alt="Hero image" class="backend" loading="lazy" />
+          <img src="${black}" class="black" loading="lazy" />
         </div>
         <div class="hero-wrap__content">
           <h1 class="title">${movieOfDay.title || movieOfDay.name}</h1>

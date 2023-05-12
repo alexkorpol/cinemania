@@ -166,7 +166,6 @@ async function createListMarkup(data) {
             class='cards-list__img'
             src='https://image.tmdb.org/t/p/w500${poster_path}'
             alt='${original_title}'
-            width
             loading='lazy'
             data-id='${id}'
           />
