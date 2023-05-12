@@ -132,7 +132,7 @@ body.light {
     border: 1px solid $accent;
     &:hover,
     &:focus {
-      background-color:$text-light-background;
+      background-color: $text-light-background;
       color: $accent;
       border: 1px solid $text-light-background;
     }
@@ -157,7 +157,6 @@ body.light {
   }
   .upcoming__info--title {
     color: $text-light-background;
-
   }
 
   .upcoming__info--about {
@@ -198,7 +197,7 @@ body.light {
     }
     &:hover {
       background: transparent;
-      color:$accent;
+      color: $accent;
     }
   }
 }
@@ -207,9 +206,9 @@ body.light {
 body.light {
   .my-libr {
     max-width: 1280px;
-    margin-left:auto;
-    margin-right:auto;
-  margin-bottom: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 40px;
   }
   .library-text__oops {
     color: $text-light-background;
@@ -243,42 +242,67 @@ body.light {
   }
 
   /////////pagination////////////////
-.tui-page-btn {
-  border: 1px solid #595959;
-  color: #595959;
-}
+  .tui-page-btn {
+    border: 1px solid #595959;
+    color: #595959;
+    background: transparent;
+  }
 
-.tui-page-btn:hover,
-.tui-page-btn:focus {
-  color: #f87719;
-  border: 1px solid #f87719;
-}
+  .tui-page-btn:hover,
+  .tui-page-btn:focus {
+    color: #f87719;
+    border: 1px solid #f87719;
+  }
 
-.tui-page-btn.tui-is-selected {
-  color: white;
-  border: none;
-  background: linear-gradient(141.22deg, #ffc226 9.4%, #f84119 91.91%);
-}
+  .tui-page-btn.tui-is-selected {
+    color: white;
+    border: none;
+    background: linear-gradient(141.22deg, #ffc226 9.4%, #f84119 91.91%);
+  }
 
+ 
 @media (max-width: 767px) {
   .tui-page-btn.tui-first {
     fill: white;
-    background-image: url('../img/catalog-pagination/left-arrow_mobil.png');
+    margin: 0;
+    border: none;
+    background-image: url('../img/catalog-pagination/left-arrow_mobil--light.png');
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
   }
 }
 // pavlo
 
 @media (min-width: 768px) {
   .tui-page-btn.tui-first {
+    margin: 0;
     border: none;
-    background-image: url('../img/catalog-pagination/left-arrow.png');
+    background-image: url('../img/catalog-pagination/left-arrow--light.png');
+    background-repeat: no-repeat;
+    background-position: 50%;
+
+    border: none;
+  }
+}
+
+// PAvlo
+@media (max-width: 767px) {
+  .tui-page-btn {
+    width: 24px;
+    height: 24px;
+    font-size: 10px;
+    line-height: 10px;
+    display: flex;
+    align-items: center;
   }
 }
 // PAvlo
 @media (max-width: 767px) {
   .tui-page-btn.tui-last {
     fill: #b7b7b7;
-    background-image: url('../img/catalog-pagination/right-arrow_mobil.png');
+    background-image: url('../img/catalog-pagination/right-arrow_mobil--light.png');
+    background-position: 50%;
+    background-repeat: no-repeat;
     border: none;
   }
 }
@@ -286,7 +310,9 @@ body.light {
   .tui-page-btn.tui-last {
     border: none;
     fill: #b7b7b7;
-    background-image: url('../img/catalog-pagination/right-arrow.png');
+    background-image: url('../img/catalog-pagination/right-arrow--light.png');
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
   }
 }
 
@@ -298,14 +324,18 @@ body.light {
 @media (max-width: 767px) {
   .tui-page-btn.tui-next {
     fill: #b7b7b7;
-    background-image: url('../img/catalog-pagination/right-arrow_mobil.png');
+    background-image: url('../img/catalog-pagination/right-arrow_mobil--light.png');
+    background-position: 50%;
+    background-repeat: no-repeat;
     border: none;
   }
 }
 @media (min-width: 768px) {
   .tui-page-btn.tui-next {
     fill: #b7b7b7;
-    background-image: url('../img/catalog-pagination/right-arrow.png');
+    background-image: url('../img/catalog-pagination/right-arrow--light.png');
+    background-position: 50%;
+    background-repeat: no-repeat;
     border: none;
   }
 }
@@ -313,7 +343,9 @@ body.light {
 @media (max-width: 767px) {
   .tui-prev {
     fill: #b7b7b7;
-    background-image: url('../img/catalog-pagination/left-arrow_mobil.png');
+    background-image: url('../img/catalog-pagination/left-arrow_mobil--light.png');
+    background-position: 50%;
+    background-repeat: no-repeat;
     border: none;
   }
 }
@@ -321,7 +353,9 @@ body.light {
 @media (min-width: 768px) {
   .tui-page-btn.tui-prev {
     fill: #b7b7b7;
-    background-image: url('../img/catalog-pagination/left-arrow.png');
+    background-image: url('../img/catalog-pagination/left-arrow--light.png');
+    background-position: 50%;
+    background-repeat: no-repeat;
     border: none;
   }
 }
@@ -330,6 +364,8 @@ body.light {
 .tui-prev-is-ellip {
   fill: #b7b7b7;
   border: none;
+  align-items: flex-end;
+  width: 10px;
 }
 }
 
@@ -342,24 +378,24 @@ body.light {
 
 //* WATCH-ERR
 body.light {
-.notification-trailer-fail {
-  background-color: $text-dark-background;
-}
-.btn-close {
-  // background-image: url('../img/sprite.svg#icon-x-button');
-  background-color: transparent;
-  color: $text-light-background;
-}
+  .notification-trailer-fail {
+    background-color: $text-dark-background;
+  }
+  .btn-close {
+    // background-image: url('../img/sprite.svg#icon-x-button');
+    background-color: transparent;
+    color: $text-light-background;
+  }
 
-.btn-close--svg {
-  width: 24px;
-  height: 24px;
-}
-.notification-trailer-fail-text {
-  color: $text-light-background;
-}
-.iframe {
-  box-shadow: 1px 1px 14px 4px rgba(255, 107, 8, 0.42);
-  border-radius: 16px;
-}
+  .btn-close--svg {
+    width: 24px;
+    height: 24px;
+  }
+  .notification-trailer-fail-text {
+    color: $text-light-background;
+  }
+  .iframe {
+    box-shadow: 1px 1px 14px 4px rgba(255, 107, 8, 0.42);
+    border-radius: 16px;
+  }
 }
