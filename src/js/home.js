@@ -1,8 +1,5 @@
-import { KEY,UPCOMING_URL } from './api-key';
+import { KEY, UPCOMING_URL } from './api-key';
 import { addMovieToLibrary } from './library';
-
-
-
 
 const upcomingBlock = document.querySelector('.container__upcoming');
 

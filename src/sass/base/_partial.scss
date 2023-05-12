@@ -13,15 +13,15 @@ body {
   padding: 0 20px;
 
   @include mobile {
-    min-width: 320px;
+    max-width: 320px;
   }
 
   @include tablet {
-    min-width: 768px;
+    max-width: 768px;
     padding: 0 32px;
   }
 
   @include desktop {
-    min-width: 1280px;
+    max-width: 1280px;
   }
 }
