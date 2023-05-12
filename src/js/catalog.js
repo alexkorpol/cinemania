@@ -170,9 +170,9 @@ async function createListMarkup(data) {
               <div class='cards-list__text'>
                 <p>${genre_ids} | ${release_date}</p>
               </div>
-               <div class='star-rate'>
-            ${ratingStars}
-          </div> 
+              <div class='star-rate'>
+              ${ratingStars}
+            </div> 
             </div>
           </div>
       </li>

@@ -123,11 +123,12 @@ export function createListMarkup(data) {
                   <div class='cards-list__text'>
                     <p>${genre_names} | ${release_date}</p>
                 </div>
-              </div>
-              </div>
-              <div class='star-rate'>
+                <div class='star-rate'>
                 ${ratingStars}
-              </div>     
+              </div> 
+              </div>
+              </div>
+                
             </div>
             </li>
             `;
